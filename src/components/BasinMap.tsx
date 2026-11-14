@@ -123,7 +123,7 @@ export default function BasinMap(p: Props) {
       style: mapStyle(),
       center: [121.086, 14.651],
       zoom: 12.7,
-      attributionControl: { compact: true },
+      attributionControl: { compact: false },
     });
     const comparison = new maplibregl.Map({
       container: upper.current,
@@ -241,9 +241,20 @@ export default function BasinMap(p: Props) {
           type: "line",
           source: "closures",
           paint: {
-            "line-color": "#bb6741",
-            "line-width": 1.5,
-            "line-opacity": 0.7,
+            "line-color": "#83566e",
+            "line-width": 1.2,
+            "line-opacity": 0.45,
+          },
+        });
+        map.addSource("unknown-closures", { type: "geojson", data: EMPTY });
+        map.addLayer({
+          id: "unknown-closures",
+          type: "line",
+          source: "unknown-closures",
+          paint: {
+            "line-color": "#414743",
+            "line-width": 2.2,
+            "line-dasharray": [2, 2],
           },
         });
         map.addSource("routes", { type: "geojson", data: EMPTY });
@@ -460,26 +471,34 @@ export default function BasinMap(p: Props) {
           },
         });
     }
-    const closures: FeatureCollection = {
+    const closureCollection = (
+      collection:
+        NonNullable<RouteResponse["scenarioSummary"]>["closures"] | undefined,
+    ): FeatureCollection => ({
       type: "FeatureCollection",
-      features: (p.route?.scenarioSummary?.closures.features ?? []).map(
-        (feature) => ({
-          ...feature,
-          geometry: {
-            type: "MultiLineString",
-            coordinates: feature.geometry.coordinates.map((line) =>
-              line.map((coordinate) => [...coordinate]),
-            ),
-          },
-        }),
-      ),
-    };
+      features: (collection?.features ?? []).map((feature) => ({
+        ...feature,
+        geometry: {
+          type: "MultiLineString",
+          coordinates: feature.geometry.coordinates.map((line) =>
+            line.map((coordinate) => [...coordinate]),
+          ),
+        },
+      })),
+    });
+    const closures = closureCollection(p.route?.scenarioSummary?.closures);
+    const unknownClosures = closureCollection(
+      p.route?.scenarioSummary?.unknownClosures,
+    );
     maps.current.forEach((map) => {
       (map.getSource("routes") as GeoJSONSource).setData({
         type: "FeatureCollection",
         features,
       });
       (map.getSource("closures") as GeoJSONSource).setData(closures);
+      (map.getSource("unknown-closures") as GeoJSONSource).setData(
+        unknownClosures,
+      );
     });
   }, [ready, p.route]);
   useEffect(() => {
@@ -595,30 +614,44 @@ export default function BasinMap(p: Props) {
           Fit route
         </button>
       </div>
-      <div className="map-legend">
+      <div className="map-legend" aria-label="Map legend">
         {p.radar && (
-          <>
+          <div className="radar-legend">
             <span>γ⁰ VV / dB</span>
             <div className="radar-ramp" />
-            <span>−25</span>
-            <span>+5</span>
-          </>
+            <div className="ramp-values">
+              <span>−25</span>
+              <span>+5</span>
+            </div>
+          </div>
         )}
-        {p.route && (
+        {p.route?.baseline.feature && (
           <p>
-            <b className="baseline-key" />
-            Baseline path{" "}
-            {p.route.scenarioRoute && (
-              <>
-                <b className="scenario-key" />
-                Scenario
-              </>
-            )}
+            <b className="baseline-key" aria-hidden="true" />
+            Baseline path
+          </p>
+        )}
+        {p.route?.scenarioRoute?.feature && (
+          <p>
+            <b className="scenario-key" aria-hidden="true" />
+            Scenario path
+          </p>
+        )}
+        {!!p.route?.scenarioSummary?.closures.features.length && (
+          <p>
+            <b className="closure-key" aria-hidden="true" />
+            Modeled depth &gt; 0.30 m
+          </p>
+        )}
+        {!!p.route?.scenarioSummary?.unknownClosures.features.length && (
+          <p>
+            <b className="unknown-key" aria-hidden="true" />
+            Unknown DSM · excluded
           </p>
         )}
         {p.scenario && (
           <p>
-            <i />
+            <i aria-hidden="true" />
             Scenario water above adjusted DSM
           </p>
         )}

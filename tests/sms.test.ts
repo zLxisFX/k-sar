@@ -16,7 +16,7 @@ test("the acknowledgement is exactly 145 GSM-7 characters and septets", () => {
 test("GSM extension characters use two septets; Unicode is never silently recoded", () => {
   assert.equal(gsm7Septets("[]{}^~\\|€\f"), 20);
   assert.equal(gsm7Septets("ÑéΔ"), 3);
-  assert.equal(gsm7Septets("Tumana 🌧"), null);
+  assert.equal(gsm7Septets("Tumana \u{1f327}"), null);
   assert.equal(gsm7Septets("“Tumana”"), null);
   assert.equal(simulateSms("FLOOD " + "^".repeat(70)).accepted, false);
   assert.equal(simulateSms("FLOOD " + "A".repeat(139)).accepted, true);
@@ -24,7 +24,7 @@ test("GSM extension characters use two septets; Unicode is never silently recode
 });
 
 test("invalid or multiple-line requests cannot produce an acknowledgement", () => {
-  for (const input of ["", "FLOOD", "FLOOD   ", "HELP Tumana", "FLOOD Tumana\nTRAUMA Marikina", "FLOOD 😀"]) {
+  for (const input of ["", "FLOOD", "FLOOD   ", "HELP Tumana", "FLOOD Tumana\nTRAUMA Marikina", "FLOOD \u{1f600}"]) {
     assert.equal(simulateSms(input).accepted, false);
   }
   assert.deepEqual(simulateSms("  flood Tumana  "), simulateSms("FLOOD Tumana"));

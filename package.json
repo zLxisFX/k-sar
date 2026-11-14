@@ -5,9 +5,13 @@
   "type": "module",
   "license": "Apache-2.0",
   "engines": {
-    "node": "^22.18.0 || >=24.0.0"
+    "node": "26.x"
   },
   "scripts": {
+    "prepare:assets": "node scripts/copy-map-worker.mjs && node scripts/copy-public-data.mjs",
+    "predev": "npm run prepare:assets",
+    "prebuild": "npm run prepare:assets",
+    "prestart": "npm run prepare:assets",
     "dev": "next dev --hostname 127.0.0.1",
     "build": "next build",
     "start": "next start --hostname 127.0.0.1",

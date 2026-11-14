@@ -163,10 +163,6 @@ h3 {
 .basin-name {
   font-size: 13px;
 }
-.header-context {
-  color: var(--muted);
-  font-size: 12px;
-}
 .instrument-header nav {
   margin-left: auto;
   display: flex;
@@ -338,17 +334,6 @@ h3 {
   flex: 0 0 8px;
   background: #28829f;
   margin: 0 4px;
-}
-.map-instruction {
-  position: absolute;
-  left: 50%;
-  bottom: 8px;
-  transform: translateX(-50%);
-  background: #fffef4d9;
-  padding: 3px 7px;
-  font-size: 10px;
-  white-space: nowrap;
-  pointer-events: none;
 }
 .map-status {
   position: absolute;
@@ -615,10 +600,6 @@ h3 {
   stroke-width: 1;
   stroke-dasharray: 3 3;
 }
-.chart-help {
-  font-size: 9px;
-  color: var(--muted);
-}
 dialog {
   border: 1px solid #9bad9c;
   background: #f8faf3;
@@ -710,9 +691,6 @@ dialog::backdrop {
   margin-left: auto;
   font-size: 10px;
 }
-.scene-number {
-  display: none;
-}
 .browse-image {
   display: block;
   background: #080c09;
@@ -800,9 +778,6 @@ dialog::backdrop {
   .instrument-header {
     gap: 15px;
     padding: 0 15px;
-  }
-  .header-context {
-    display: none;
   }
   .instrument-body {
     grid-template-columns: minmax(0, 1fr) 320px;
@@ -912,9 +887,6 @@ dialog::backdrop {
   }
   .ramp-values {
     grid-column: 2;
-  }
-  .map-instruction {
-    display: none;
   }
   .profile-strip {
     padding: 10px;

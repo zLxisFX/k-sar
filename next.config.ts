@@ -3,7 +3,10 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   outputFileTracingIncludes: {
-    "/data/*": ["./data/sentinel-1/*.tif", "./data/sentinel-1/manifest.json", "./data/transect/reference.json", "./data/nasa/nisar/**/*.json", "./data/nasa/nisar/*.geojson", "./data/nasa/nisar/browse/*.png"],
+    "/api/route": ["./data/network/graph.json.gz", "./data/network/hospitals.geojson", "./data/network/manifest.json"],
+  },
+  outputFileTracingExcludes: {
+    "/api/route": ["./public/data/**/*", "./data/network/roads-display.geojson", "./data/network/waterways.geojson", "./data/network/benchmark-current.json", "./data/network/*NOTICE*", "./data/network/odbl-1.0.html", "./data/network/source-*.json", "./data/network/waterways-provenance.json"],
   },
 };
 

@@ -13,3 +13,6 @@ Thumbs.db
 __pycache__/
 *.py[cod]
 /public/maplibre/
+/public/data/
+
+.vercel

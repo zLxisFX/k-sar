@@ -1,4 +1,5 @@
 import { computeRoute, getRoutingCatalog, parseRouteRequest } from "../../../server/routing-loader.ts";
+import { jsonStreamResponse } from "../../../server/json-response.ts";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -15,7 +16,7 @@ export async function POST(request: Request) {
     const text = await request.text();
     if (text.length > 4096) return Response.json({ error: "Route request is too large." }, { status: 413 });
     const input = parseRouteRequest(JSON.parse(text));
-    return Response.json(await computeRoute(input), { headers: { "Cache-Control": "no-store" } });
+    return jsonStreamResponse(await computeRoute(input), request);
   } catch (error) {
     const invalid = error instanceof RangeError || error instanceof SyntaxError;
     return Response.json({ error: invalid ? error.message : "Route computation is unavailable. No route safety is implied." }, { status: invalid ? 400 : 503 });

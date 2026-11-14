@@ -294,7 +294,6 @@ export default function ResearchWorkspace(p: Props) {
         >
           {p.studyArea.name}
         </span>
-        <span className="header-context">Radar, surface & road network</span>
         <nav>
           <button onClick={() => setModal("sources")}>Sources</button>
           <button onClick={() => setModal("sms")}>SMS prototype</button>
@@ -491,16 +490,18 @@ export default function ResearchWorkspace(p: Props) {
             )}
             {route && (
               <dl className="route-comparison">
-                <div>
-                  <dt>Baseline</dt>
-                  <dd>
-                    {route.baseline.status === "NETWORK_PATH"
-                      ? `${number((route.baseline.lengthM ?? 0) / 1000, 3)} km`
-                      : route.baseline.status
-                          .replaceAll("_", " ")
-                          .toLowerCase()}
-                  </dd>
-                </div>
+                {scenarioOn && (
+                  <div>
+                    <dt>Baseline</dt>
+                    <dd>
+                      {route.baseline.status === "NETWORK_PATH"
+                        ? `${number((route.baseline.lengthM ?? 0) / 1000, 3)} km`
+                        : route.baseline.status
+                            .replaceAll("_", " ")
+                            .toLowerCase()}
+                    </dd>
+                  </div>
+                )}
                 {scenarioOn && (
                   <div>
                     <dt>Scenario</dt>
@@ -520,8 +521,8 @@ export default function ResearchWorkspace(p: Props) {
                   </dd>
                 </div>
                 <div>
-                  <dt>Endpoint offsets</dt>
-                  <dd>
+                  <dt>Road snap · origin / hospital</dt>
+                  <dd title="Distance from each selected location to its nearest road node.">
                     {number(result?.snapStartM, 0)} /{" "}
                     {number(result?.snapEndM, 0)} m
                   </dd>
@@ -764,9 +765,8 @@ export default function ResearchWorkspace(p: Props) {
         )}
         {modal === "sms" && (
           <>
-            <p>
-              Enter a triage category and location to inspect a local GSM-7
-              response.
+            <p id="sms-format">
+              Enter FLOOD, DIALYSIS or TRAUMA followed by a location.
             </p>
             <form
               onSubmit={(e) => {
@@ -777,6 +777,7 @@ export default function ResearchWorkspace(p: Props) {
               <label className="field-label">
                 Request
                 <input
+                  aria-describedby="sms-format"
                   value={smsInput}
                   onChange={(e) => {
                     setSmsInput(e.target.value);

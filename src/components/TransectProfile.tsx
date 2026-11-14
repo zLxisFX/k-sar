@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import type { KeyboardEvent, PointerEvent } from "react";
 import type { TransectSample } from "@/domain/research";
 import { correctedElevation } from "@/domain/elevation";
@@ -21,6 +21,7 @@ export default function TransectProfile({
   onSelect: (index: number) => void;
 }) {
   const svgRef = useRef<SVGSVGElement>(null);
+  const helpId = useId();
   const [size, setSize] = useState({ width: 920, height: 180 });
   useEffect(() => {
     const element = svgRef.current;
@@ -130,6 +131,7 @@ export default function TransectProfile({
         role="slider"
         tabIndex={0}
         aria-label="Inspect transect sample"
+        aria-describedby={helpId}
         aria-valuemin={1}
         aria-valuemax={samples.length}
         aria-valuenow={(activeIndex ?? 0) + 1}
@@ -188,9 +190,9 @@ export default function TransectProfile({
           </text>
         ))}
       </svg>
-      <p className="chart-help">
-        Point or click to inspect. Keyboard: arrow keys move one sample; Home
-        and End move to the endpoints.
+      <p className="sr-only" id={helpId}>
+        Hover or tap a sample. Arrow keys move one sample; Home and End select
+        the endpoints.
       </p>
     </div>
   );

@@ -67,7 +67,7 @@ function mapStyle(): StyleSpecification {
         tiles: ["https://tile.openstreetmap.org/{z}/{x}/{y}.png"],
         tileSize: 256,
         attribution:
-          '<a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">© OpenStreetMap contributors</a>',
+          '<a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">&copy; OpenStreetMap contributors</a>',
       },
     },
     layers: [
@@ -655,9 +655,6 @@ export default function BasinMap(p: Props) {
             Scenario water above adjusted DSM
           </p>
         )}
-      </div>
-      <div className="map-instruction">
-        Click the map to inspect a raster cell
       </div>
     </div>
   );

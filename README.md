@@ -2,6 +2,8 @@
 
 A research workspace for radar observations and surface-elevation scenarios in the Marikina–Pasig basin, Philippines.
 
+[Open the live workspace](https://k-sar.vercel.app).
+
 ## Current scope
 
 Three sources are inspectable in the app:
@@ -16,7 +18,7 @@ The routing service operates on a local OpenStreetMap graph; its paths are resea
 
 ## Development
 
-Use Node.js 22.18+ in the 22.x series or Node.js 24+, npm, and Python 3.11+. Development was checked with Node.js 26.7.0 and Python 3.13. Package versions are exact and the lockfile is committed. NASA import and verification tools use Python's standard library; the committed data allows offline verification. Rebuilding the road import from the original GraphML additionally needs OSMnx, NumPy, Shapely, pyproj and rasterio in the original research environment.
+Use Node.js 26.x, npm, and Python 3.11+. Development was checked with Node.js 26.7.0 and Python 3.13. Package versions are exact and the lockfile is committed. NASA import and verification tools use Python's standard library; the committed data allows offline verification. Rebuilding the road import from the original GraphML additionally needs OSMnx, NumPy, Shapely, pyproj and rasterio in the original research environment.
 
 ```sh
 npm ci
@@ -33,11 +35,17 @@ npm run build
 
 `npm start` serves the production build. Development and production servers bind to the local loopback address by default.
 
-`npm ci` also copies the pinned MapLibre worker modules into `public/maplibre/`. The radar, terrain, network and NASA reference files are served locally. The OpenStreetMap background tiles require a network connection; they are contextual cartography, not a historical flood map.
+`npm ci` also copies the pinned MapLibre worker modules into `public/maplibre/`. Before development, build and start, `prepare:assets` publishes an explicit list of 34 source files into `public/data/` and verifies their bytes. Both generated directories are ignored by Git. The OpenStreetMap background tiles require a network connection; they are contextual cartography, not a historical flood map.
+
+## Production deployment
+
+From a Vercel-linked checkout, deploy with `npx vercel@65.16.0 --prod`. `vercel.json` requires `npm run build`, including asset preparation. The large TIFFs and GeoJSONs are static files; the routing function bundles only its graph, hospital features and manifest. Route results retain the same JSON structure and stream as plain JSON. Vercel handles transport compression; application-level gzip would double-encode the response. Streaming avoids the buffered-response size limit without reducing data precision.
+
+The CLI deploys the current checkout. Push the reviewed commit before the final deployment; this workflow does not depend on a GitHub auto-deployment integration. Credentials and Vercel's local project files are ignored by Git.
 
 ## Structure
 
-- `src/app/` contains the page, styles, routing endpoint and an allowlisted data-download route.
+- `src/app/` contains the page, styles and routing endpoint.
 - `src/components/` contains the map workstation, NASA reference viewer and river profile.
 - `src/domain/` contains the raster decoder, coordinate sampling, elevation equations, graph search, SMS encoding and session serialization. Raster transforms use `x = columnX × column + rowX × row + originX` and `y = columnY × column + rowY × row + originY`.
 - `data/` contains the source TIFFs, NASA reference bundle, transect, hashes, provenance and license documents.

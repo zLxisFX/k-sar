@@ -1,0 +1,281 @@
+{
+  "schemaVersion": 1,
+  "measuredAt": "2026-11-14T07:23:12.000Z",
+  "timestampSource": "https://cmr.earthdata.nasa.gov/search/collections.json?page_size=1",
+  "httpDate": "Sat, 14 Nov 2026 07:23:12 GMT",
+  "hostRecordedAt": "2026-11-13T23:23:12.020Z",
+  "clockNote": "Host clock is offset; measuredAt uses provider HTTPS response Date after benchmark.",
+  "algorithm": "Conventional A*; length-weighted directed multigraph, admissible scaled Euclidean heuristic in EPSG:32651",
+  "heuristicScale": 0.9984646610035147,
+  "timingScope": "A* graph search only, including search-array allocation and path reconstruction; excludes graph loading, node snapping, scenario preparation, geometry and HTTP.",
+  "runtime": {
+    "node": "v26.7.0",
+    "platform": "win32",
+    "architecture": "x64"
+  },
+  "graphSha256": "187a0e0fb4929b4ef5e092a76d43bcf76c179f622659887baa5c7497af7380b2",
+  "sourceGraphSha256": "4c4a8eb4138c1d8f452e92422a5f43860bdd1ee0f19763f0ac406f0dfaf3e7e4",
+  "records": [
+    {
+      "origin": {
+        "id": "tumana",
+        "name": "Tumana",
+        "coordinate": [
+          121.09593983925672,
+          14.6580158
+        ]
+      },
+      "destination": {
+        "id": "way/54025002",
+        "name": "Amang Rodriguez Memorial Medical Center",
+        "coordinate": [
+          121.09843898001795,
+          14.636064399999999
+        ],
+        "sourceUrl": "https://www.openstreetmap.org/way/54025002"
+      },
+      "scenario": null,
+      "status": "NETWORK_PATH",
+      "lengthM": 3726.297134241261,
+      "visitedNodes": 269,
+      "closedEdges": 0,
+      "unknownEdges": 0,
+      "excludedEdges": 0,
+      "runs": 30,
+      "warmupRuns": 10,
+      "medianSolveMs": 0.1653999999999769,
+      "minimumSolveMs": 0.14109999999999445,
+      "maximumSolveMs": 0.20580000000001064,
+      "samplesMs": [
+        0.18460000000004584,
+        0.16639999999995325,
+        0.16879999999997608,
+        0.16440000000000055,
+        0.19360000000000355,
+        0.1493000000000393,
+        0.17669999999998254,
+        0.1724999999999568,
+        0.17670000000003938,
+        0.17009999999999081,
+        0.14400000000000546,
+        0.14979999999997062,
+        0.1493000000000393,
+        0.18990000000002283,
+        0.16060000000004493,
+        0.18810000000001992,
+        0.14639999999997144,
+        0.15229999999996835,
+        0.16870000000000118,
+        0.14109999999999445,
+        0.15670000000000073,
+        0.15370000000001482,
+        0.1612999999999829,
+        0.17259999999998854,
+        0.157100000000014,
+        0.1671000000000049,
+        0.16399999999998727,
+        0.15160000000003038,
+        0.17180000000001883,
+        0.20580000000001064
+      ]
+    },
+    {
+      "origin": {
+        "id": "malanday",
+        "name": "Malanday",
+        "coordinate": [
+          121.09379427092635,
+          14.64796565
+        ]
+      },
+      "destination": {
+        "id": "way/54025002",
+        "name": "Amang Rodriguez Memorial Medical Center",
+        "coordinate": [
+          121.09843898001795,
+          14.636064399999999
+        ],
+        "sourceUrl": "https://www.openstreetmap.org/way/54025002"
+      },
+      "scenario": null,
+      "status": "NETWORK_PATH",
+      "lengthM": 2163.6244309361223,
+      "visitedNodes": 190,
+      "closedEdges": 0,
+      "unknownEdges": 0,
+      "excludedEdges": 0,
+      "runs": 30,
+      "warmupRuns": 10,
+      "medianSolveMs": 0.18205000000000382,
+      "minimumSolveMs": 0.1564999999999941,
+      "maximumSolveMs": 0.22280000000000655,
+      "samplesMs": [
+        0.182200000000023,
+        0.15899999999999181,
+        0.17380000000002838,
+        0.1705000000000041,
+        0.188699999999983,
+        0.1816000000000031,
+        0.16100000000000136,
+        0.16770000000002483,
+        0.17090000000001737,
+        0.18189999999998463,
+        0.16860000000002628,
+        0.15850000000000364,
+        0.1864999999999668,
+        0.1583999999999719,
+        0.16270000000002938,
+        0.17910000000000537,
+        0.1564999999999941,
+        0.21820000000002437,
+        0.19909999999998718,
+        0.19110000000000582,
+        0.1852999999999838,
+        0.20369999999996935,
+        0.19089999999999918,
+        0.19580000000001974,
+        0.19399999999995998,
+        0.19089999999999918,
+        0.22280000000000655,
+        0.1775000000000091,
+        0.19350000000002865,
+        0.19220000000001392
+      ]
+    },
+    {
+      "origin": {
+        "id": "tumana",
+        "name": "Tumana",
+        "coordinate": [
+          121.09593983925672,
+          14.6580158
+        ]
+      },
+      "destination": {
+        "id": "way/54025002",
+        "name": "Amang Rodriguez Memorial Medical Center",
+        "coordinate": [
+          121.09843898001795,
+          14.636064399999999
+        ],
+        "sourceUrl": "https://www.openstreetmap.org/way/54025002"
+      },
+      "scenario": {
+        "waterLevelM": 10,
+        "rateMmYear": -30,
+        "elapsedYears": 13
+      },
+      "status": "NETWORK_PATH",
+      "lengthM": 27875.63395980343,
+      "visitedNodes": 16850,
+      "closedEdges": 56568,
+      "unknownEdges": 6,
+      "excludedEdges": 56574,
+      "runs": 30,
+      "warmupRuns": 10,
+      "medianSolveMs": 3.7931000000000097,
+      "minimumSolveMs": 3.6405000000000314,
+      "maximumSolveMs": 4.199299999999994,
+      "samplesMs": [
+        4.092699999999979,
+        3.7209000000000287,
+        3.7597000000000094,
+        3.7912999999999784,
+        3.8466000000000236,
+        3.6923999999999637,
+        3.6405000000000314,
+        3.9844999999999686,
+        3.989599999999996,
+        3.7754000000000474,
+        4.02170000000001,
+        3.644200000000012,
+        3.6586999999999534,
+        3.8635999999999626,
+        3.7993999999999915,
+        3.8736000000000104,
+        3.9978000000000407,
+        3.7162999999999897,
+        3.6966999999999643,
+        3.9144000000000005,
+        3.9267000000000394,
+        3.764499999999998,
+        3.724199999999996,
+        3.7661999999999694,
+        3.833000000000027,
+        3.653099999999995,
+        3.716200000000015,
+        3.794900000000041,
+        3.932399999999973,
+        4.199299999999994
+      ]
+    },
+    {
+      "origin": {
+        "id": "tumana",
+        "name": "Tumana",
+        "coordinate": [
+          121.09593983925672,
+          14.6580158
+        ]
+      },
+      "destination": {
+        "id": "way/54025002",
+        "name": "Amang Rodriguez Memorial Medical Center",
+        "coordinate": [
+          121.09843898001795,
+          14.636064399999999
+        ],
+        "sourceUrl": "https://www.openstreetmap.org/way/54025002"
+      },
+      "scenario": {
+        "waterLevelM": 12,
+        "rateMmYear": -30,
+        "elapsedYears": 13
+      },
+      "status": "NO_PATH",
+      "lengthM": null,
+      "visitedNodes": 23126,
+      "closedEdges": 65199,
+      "unknownEdges": 6,
+      "excludedEdges": 65205,
+      "runs": 30,
+      "warmupRuns": 10,
+      "medianSolveMs": 5.107099999999946,
+      "minimumSolveMs": 4.706700000000069,
+      "maximumSolveMs": 7.593600000000038,
+      "samplesMs": [
+        5.0113999999999805,
+        5.107099999999946,
+        4.927199999999971,
+        4.8677000000000135,
+        4.81009999999992,
+        4.706700000000069,
+        5.049100000000067,
+        4.9763000000000375,
+        5.176800000000071,
+        5.261500000000069,
+        6.103400000000079,
+        5.360899999999901,
+        5.235699999999952,
+        5.238899999999944,
+        5.0978000000000065,
+        4.833600000000047,
+        5.4021000000000186,
+        5.107099999999946,
+        5.181899999999928,
+        5.079899999999952,
+        4.91739999999993,
+        5.246999999999957,
+        5.0575000000000045,
+        5.056699999999978,
+        5.488500000000045,
+        4.932999999999993,
+        6.4314999999999145,
+        6.59050000000002,
+        7.50139999999999,
+        7.593600000000038
+      ]
+    }
+  ],
+  "comparisonNote": "Fresh TypeScript measurements on this workstation. Historical Python A* medians 0.216/0.304 ms and single 22.2695 ms detour timing are not current benchmarks; old Dijkstra numbers use a different algorithm and are not a like-for-like comparison."
+}

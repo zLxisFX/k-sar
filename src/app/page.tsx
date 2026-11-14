@@ -22,7 +22,7 @@ export default async function Page() {
       <header className="masthead">
         <a className="wordmark" href="/" aria-label="K-SAR home">K-SAR</a>
         <span>{studyArea.name}</span>
-        <span className="version">Research workspace · Phase 1</span>
+        <span className="version">Research workspace</span>
       </header>
       <main>
         <div className="workspace-heading">

@@ -1,0 +1,3875 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.9965839,
+          14.5241939
+        ]
+      },
+      "properties": {
+        "name": "Protacio Hospital",
+        "osm_type": "node",
+        "osm_id": 25389198,
+        "source_url": "https://www.openstreetmap.org/node/25389198",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.9898193,
+          14.6122477
+        ]
+      },
+      "properties": {
+        "name": "UST Hospital Clinical Division",
+        "osm_type": "node",
+        "osm_id": 255051235,
+        "source_url": "https://www.openstreetmap.org/node/255051235",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.0397952,
+          14.721521
+        ]
+      },
+      "properties": {
+        "name": "Our Lady of Mercy Hospital",
+        "osm_type": "node",
+        "osm_id": 255059925,
+        "source_url": "https://www.openstreetmap.org/node/255059925",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.043441,
+          14.7303
+        ]
+      },
+      "properties": {
+        "name": "A. R. Bautista Children And General Hospital",
+        "osm_type": "node",
+        "osm_id": 255060717,
+        "source_url": "https://www.openstreetmap.org/node/255060717",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.9656248,
+          14.6931601
+        ]
+      },
+      "properties": {
+        "name": "St. John Hospital",
+        "osm_type": "node",
+        "osm_id": 255060785,
+        "source_url": "https://www.openstreetmap.org/node/255060785",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.070637,
+          14.7370013
+        ]
+      },
+      "properties": {
+        "name": "Casual General Hospital",
+        "osm_type": "node",
+        "osm_id": 255061867,
+        "source_url": "https://www.openstreetmap.org/node/255061867",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.0250945,
+          14.6599034
+        ]
+      },
+      "properties": {
+        "name": "J. P. Sioson General Hospital And Colleges",
+        "osm_type": "node",
+        "osm_id": 255063024,
+        "source_url": "https://www.openstreetmap.org/node/255063024",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.04251,
+          14.729371
+        ]
+      },
+      "properties": {
+        "name": "Fairview Polymedic Hospital",
+        "osm_type": "node",
+        "osm_id": 255066513,
+        "source_url": "https://www.openstreetmap.org/node/255066513",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.085128,
+          14.58352
+        ]
+      },
+      "properties": {
+        "name": "Mother Regina",
+        "osm_type": "node",
+        "osm_id": 255067973,
+        "source_url": "https://www.openstreetmap.org/node/255067973",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.0051496,
+          14.7188033
+        ]
+      },
+      "properties": {
+        "name": "Acebedo General Hospital",
+        "osm_type": "node",
+        "osm_id": 255070486,
+        "source_url": "https://www.openstreetmap.org/node/255070486",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.943161,
+          14.67563
+        ]
+      },
+      "properties": {
+        "name": "Tanchoco Clinic",
+        "osm_type": "node",
+        "osm_id": 255071671,
+        "source_url": "https://www.openstreetmap.org/node/255071671",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.981758,
+          14.64872
+        ]
+      },
+      "properties": {
+        "name": "Our Lady Of Grace Hospital",
+        "osm_type": "node",
+        "osm_id": 255071879,
+        "source_url": "https://www.openstreetmap.org/node/255071879",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.9580669,
+          14.7384585
+        ]
+      },
+      "properties": {
+        "name": "B A Hospital",
+        "osm_type": "node",
+        "osm_id": 589717017,
+        "source_url": "https://www.openstreetmap.org/node/589717017",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.023788,
+          14.501349
+        ]
+      },
+      "properties": {
+        "name": "Commcare, Inc.",
+        "osm_type": "node",
+        "osm_id": 643218009,
+        "source_url": "https://www.openstreetmap.org/node/643218009",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.9781047,
+          14.6328532
+        ]
+      },
+      "properties": {
+        "name": "Amisola Maternity Hospital",
+        "osm_type": "node",
+        "osm_id": 1279209740,
+        "source_url": "https://www.openstreetmap.org/node/1279209740",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.0861052,
+          14.5681954
+        ]
+      },
+      "properties": {
+        "name": "Alfonso Clinic",
+        "osm_type": "node",
+        "osm_id": 1998698325,
+        "source_url": "https://www.openstreetmap.org/node/1998698325",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.9777468,
+          14.6894963
+        ]
+      },
+      "properties": {
+        "name": "Valenzuela City Medical Center",
+        "osm_type": "node",
+        "osm_id": 2565829028,
+        "source_url": "https://www.openstreetmap.org/node/2565829028",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.9923296,
+          14.6080998
+        ]
+      },
+      "properties": {
+        "name": "Perpetual Succor Maternity Hospital",
+        "osm_type": "node",
+        "osm_id": 4916564521,
+        "source_url": "https://www.openstreetmap.org/node/4916564521",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.1326996,
+          14.5480689
+        ]
+      },
+      "properties": {
+        "name": "Crossroads Treatment and Rehabilitation Center",
+        "osm_type": "node",
+        "osm_id": 5416366377,
+        "source_url": "https://www.openstreetmap.org/node/5416366377",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.992672,
+          14.5728051
+        ]
+      },
+      "properties": {
+        "name": "Micah Clinic",
+        "osm_type": "node",
+        "osm_id": 5746203921,
+        "source_url": "https://www.openstreetmap.org/node/5746203921",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.990071,
+          14.6115031
+        ]
+      },
+      "properties": {
+        "name": "Ambulatory CPU Lingap Bata \u2013 UST Medical Social Service Dapartment",
+        "osm_type": "node",
+        "osm_id": 6011953702,
+        "source_url": "https://www.openstreetmap.org/node/6011953702",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.1522667,
+          14.6192564
+        ]
+      },
+      "properties": {
+        "name": "Fatima University Medical Center",
+        "osm_type": "node",
+        "osm_id": 6036095585,
+        "source_url": "https://www.openstreetmap.org/node/6036095585",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.1436702,
+          14.5740982
+        ]
+      },
+      "properties": {
+        "name": "manila east medical center",
+        "osm_type": "node",
+        "osm_id": 6192293786,
+        "source_url": "https://www.openstreetmap.org/node/6192293786",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.0246028,
+          14.6358797
+        ]
+      },
+      "properties": {
+        "name": "Philippine Medical Tests System",
+        "osm_type": "node",
+        "osm_id": 6351453988,
+        "source_url": "https://www.openstreetmap.org/node/6351453988",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.021062,
+          14.682847
+        ]
+      },
+      "properties": {
+        "name": "Vian Family Hospital II",
+        "osm_type": "node",
+        "osm_id": 7278748585,
+        "source_url": "https://www.openstreetmap.org/node/7278748585",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.981379,
+          14.6488967
+        ]
+      },
+      "properties": {
+        "name": "Our Lady of Grace Hospital",
+        "osm_type": "node",
+        "osm_id": 8424682317,
+        "source_url": "https://www.openstreetmap.org/node/8424682317",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.0396761,
+          14.7238749
+        ]
+      },
+      "properties": {
+        "name": "Queensberry",
+        "osm_type": "node",
+        "osm_id": 8720820470,
+        "source_url": "https://www.openstreetmap.org/node/8720820470",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.0066929,
+          14.719221
+        ]
+      },
+      "properties": {
+        "name": "Our Lady of Lourdes Hospital",
+        "osm_type": "node",
+        "osm_id": 8737517378,
+        "source_url": "https://www.openstreetmap.org/node/8737517378",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.016232,
+          14.600722
+        ]
+      },
+      "properties": {
+        "name": "Unciano Paramedical General Hospital",
+        "osm_type": "node",
+        "osm_id": 11082277450,
+        "source_url": "https://www.openstreetmap.org/node/11082277450",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.0230978,
+          14.5947342
+        ]
+      },
+      "properties": {
+        "name": "Our Lady of Lourdes Hospital",
+        "osm_type": "node",
+        "osm_id": 11082277452,
+        "source_url": "https://www.openstreetmap.org/node/11082277452",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.9525315,
+          14.6587471
+        ]
+      },
+      "properties": {
+        "name": "CSM Dental Clinic",
+        "osm_type": "node",
+        "osm_id": 12193991210,
+        "source_url": "https://www.openstreetmap.org/node/12193991210",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.9513335,
+          14.660274
+        ]
+      },
+      "properties": {
+        "name": "CB Dialysis Center",
+        "osm_type": "node",
+        "osm_id": 12194623363,
+        "source_url": "https://www.openstreetmap.org/node/12194623363",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.9967872,
+          14.747888
+        ]
+      },
+      "properties": {
+        "name": "Bignay Health Station",
+        "osm_type": "node",
+        "osm_id": 12496195998,
+        "source_url": "https://www.openstreetmap.org/node/12496195998",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.1324921,
+          14.7524776
+        ]
+      },
+      "properties": {
+        "name": "Northern Tagalog Regional Hospital",
+        "osm_type": "node",
+        "osm_id": 12839109900,
+        "source_url": "https://www.openstreetmap.org/node/12839109900",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.1097463,
+          14.6737853
+        ]
+      },
+      "properties": {
+        "name": "St. Mattheus Medical Hospital, Inc.",
+        "osm_type": "node",
+        "osm_id": 14073982156,
+        "source_url": "https://www.openstreetmap.org/node/14073982156",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.04585581226789,
+          14.6474563
+        ]
+      },
+      "properties": {
+        "name": "Lung Center of the Philippines",
+        "osm_type": "relation",
+        "osm_id": 84614,
+        "source_url": "https://www.openstreetmap.org/relation/84614",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.07104746223474,
+          14.6599827
+        ]
+      },
+      "properties": {
+        "name": "UP Health Service",
+        "osm_type": "relation",
+        "osm_id": 5768040,
+        "source_url": "https://www.openstreetmap.org/relation/5768040",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.98771373266409,
+          14.62642425
+        ]
+      },
+      "properties": {
+        "name": "Chinese General Hospital and Medical Center",
+        "osm_type": "relation",
+        "osm_id": 8222213,
+        "source_url": "https://www.openstreetmap.org/relation/8222213",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.04126742012451,
+          14.5816602
+        ]
+      },
+      "properties": {
+        "name": "National Center for Mental Health",
+        "osm_type": "relation",
+        "osm_id": 9449209,
+        "source_url": "https://www.openstreetmap.org/relation/9449209",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.98422151546252,
+          14.60619685
+        ]
+      },
+      "properties": {
+        "name": "Jose Fabella Memorial Hospital",
+        "osm_type": "relation",
+        "osm_id": 9935374,
+        "source_url": "https://www.openstreetmap.org/relation/9935374",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.11816691716682,
+          14.62454185
+        ]
+      },
+      "properties": {
+        "name": "Metro Antipolo Hospital and Medical Center",
+        "osm_type": "relation",
+        "osm_id": 10815266,
+        "source_url": "https://www.openstreetmap.org/relation/10815266",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.05181688508523,
+          14.615504999999999
+        ]
+      },
+      "properties": {
+        "name": "Camp Panopio Hospital",
+        "osm_type": "relation",
+        "osm_id": 12235444,
+        "source_url": "https://www.openstreetmap.org/relation/12235444",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.0744474243261,
+          14.561956599999998
+        ]
+      },
+      "properties": {
+        "name": "Pasig City Children's Hospital",
+        "osm_type": "relation",
+        "osm_id": 12541315,
+        "source_url": "https://www.openstreetmap.org/relation/12541315",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.02095479341142,
+          14.6203395
+        ]
+      },
+      "properties": {
+        "name": "National Children's Hospital",
+        "osm_type": "relation",
+        "osm_id": 14523456,
+        "source_url": "https://www.openstreetmap.org/relation/14523456",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.0178992737217,
+          14.661886800000001
+        ]
+      },
+      "properties": {
+        "name": "Quezon City General Hospital",
+        "osm_type": "relation",
+        "osm_id": 14582129,
+        "source_url": "https://www.openstreetmap.org/relation/14582129",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.00911729801223,
+          14.6670915
+        ]
+      },
+      "properties": {
+        "name": "Pascual General Hospital",
+        "osm_type": "relation",
+        "osm_id": 14604339,
+        "source_url": "https://www.openstreetmap.org/relation/14604339",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.02998209573346,
+          14.688486900000001
+        ]
+      },
+      "properties": {
+        "name": "Pacific Global Medical Center",
+        "osm_type": "relation",
+        "osm_id": 14612224,
+        "source_url": "https://www.openstreetmap.org/relation/14612224",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.03585051807651,
+          14.7220522
+        ]
+      },
+      "properties": {
+        "name": "Divine Heart",
+        "osm_type": "relation",
+        "osm_id": 14713258,
+        "source_url": "https://www.openstreetmap.org/relation/14713258",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.04722427276744,
+          14.646872949999999
+        ]
+      },
+      "properties": {
+        "name": "National Kidney and Transplant Institute",
+        "osm_type": "relation",
+        "osm_id": 14906319,
+        "source_url": "https://www.openstreetmap.org/relation/14906319",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.04010937901276,
+          14.753544250000001
+        ]
+      },
+      "properties": {
+        "name": "Camarin Doctors Hospital",
+        "osm_type": "relation",
+        "osm_id": 14909701,
+        "source_url": "https://www.openstreetmap.org/relation/14909701",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.04599162368896,
+          14.597435
+        ]
+      },
+      "properties": {
+        "name": "Cardinal Santos Medical Center",
+        "osm_type": "relation",
+        "osm_id": 15877676,
+        "source_url": "https://www.openstreetmap.org/relation/15877676",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.11631496455847,
+          14.576338
+        ]
+      },
+      "properties": {
+        "name": "Cainta Municipal Hospital Annex",
+        "osm_type": "relation",
+        "osm_id": 16107507,
+        "source_url": "https://www.openstreetmap.org/relation/16107507",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.95974252226696,
+          14.72665705
+        ]
+      },
+      "properties": {
+        "name": "Meycauayan Doctors Hospital",
+        "osm_type": "relation",
+        "osm_id": 16128987,
+        "source_url": "https://www.openstreetmap.org/relation/16128987",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.97784136543123,
+          14.6899682
+        ]
+      },
+      "properties": {
+        "name": "Valenzuela Medical Center",
+        "osm_type": "relation",
+        "osm_id": 16278221,
+        "source_url": "https://www.openstreetmap.org/relation/16278221",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.07263886699803,
+          14.6222079
+        ]
+      },
+      "properties": {
+        "name": "Quirino Memorial Medical Center",
+        "osm_type": "relation",
+        "osm_id": 16999339,
+        "source_url": "https://www.openstreetmap.org/relation/16999339",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.10394029699887,
+          14.634939750000001
+        ]
+      },
+      "properties": {
+        "name": "Marikina Valley Medical Center",
+        "osm_type": "relation",
+        "osm_id": 17734127,
+        "source_url": "https://www.openstreetmap.org/relation/17734127",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.09845799754895,
+          14.64915695
+        ]
+      },
+      "properties": {
+        "name": "P. Gonzales Memorial Hospital",
+        "osm_type": "relation",
+        "osm_id": 17757026,
+        "source_url": "https://www.openstreetmap.org/relation/17757026",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.95814151896101,
+          14.709198449999999
+        ]
+      },
+      "properties": {
+        "name": "Valenzuela City Emergency Hospital",
+        "osm_type": "relation",
+        "osm_id": 17828566,
+        "source_url": "https://www.openstreetmap.org/relation/17828566",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.0606404714226,
+          14.7313887
+        ]
+      },
+      "properties": {
+        "name": "Commonwealth Hospital and Medical Center",
+        "osm_type": "relation",
+        "osm_id": 17888343,
+        "source_url": "https://www.openstreetmap.org/relation/17888343",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.03438395861093,
+          14.700541900000001
+        ]
+      },
+      "properties": {
+        "name": "Novaliches District Hospital",
+        "osm_type": "relation",
+        "osm_id": 17896272,
+        "source_url": "https://www.openstreetmap.org/relation/17896272",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.03156731122468,
+          14.59892975
+        ]
+      },
+      "properties": {
+        "name": "Saint Martin de Porres Charity Hospital",
+        "osm_type": "relation",
+        "osm_id": 18157387,
+        "source_url": "https://www.openstreetmap.org/relation/18157387",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.13485330785377,
+          14.71464435
+        ]
+      },
+      "properties": {
+        "name": "Casimiro A. Ynares Sr. Memorial Hospital",
+        "osm_type": "relation",
+        "osm_id": 19958745,
+        "source_url": "https://www.openstreetmap.org/relation/19958745",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.99018077727234,
+          14.611281850000001
+        ]
+      },
+      "properties": {
+        "name": "University of Santo Tomas Hospital",
+        "osm_type": "relation",
+        "osm_id": 21076190,
+        "source_url": "https://www.openstreetmap.org/relation/21076190",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.12849747257488,
+          14.621015499999999
+        ]
+      },
+      "properties": {
+        "name": "Antipolo City Hospital System - Annex IV",
+        "osm_type": "relation",
+        "osm_id": 21602299,
+        "source_url": "https://www.openstreetmap.org/relation/21602299",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.04711019712286,
+          14.6472437
+        ]
+      },
+      "properties": {
+        "name": "National Kidney and Transplant Institute",
+        "osm_type": "way",
+        "osm_id": 25795096,
+        "source_url": "https://www.openstreetmap.org/way/25795096",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.07202522541544,
+          14.7056728
+        ]
+      },
+      "properties": {
+        "name": "Fairview General Hospital",
+        "osm_type": "way",
+        "osm_id": 25943731,
+        "source_url": "https://www.openstreetmap.org/way/25943731",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.06188753199831,
+          14.5463919
+        ]
+      },
+      "properties": {
+        "name": "Ospital ng Makati",
+        "osm_type": "way",
+        "osm_id": 28997817,
+        "source_url": "https://www.openstreetmap.org/way/28997817",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.1314528891186,
+          14.57097555
+        ]
+      },
+      "properties": {
+        "name": "Taytay Emergency Hospital",
+        "osm_type": "way",
+        "osm_id": 29042991,
+        "source_url": "https://www.openstreetmap.org/way/29042991",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.04813809093798,
+          14.555140900000001
+        ]
+      },
+      "properties": {
+        "name": "St. Luke's Medical Center Global City",
+        "osm_type": "way",
+        "osm_id": 29353952,
+        "source_url": "https://www.openstreetmap.org/way/29353952",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.0129782174921,
+          14.61764555
+        ]
+      },
+      "properties": {
+        "name": "Quezon Institute",
+        "osm_type": "way",
+        "osm_id": 32596622,
+        "source_url": "https://www.openstreetmap.org/way/32596622",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.02069768550724,
+          14.6066386
+        ]
+      },
+      "properties": {
+        "name": "University of the East - Ramon Magsaysay Memorial Medical Center",
+        "osm_type": "way",
+        "osm_id": 35567304,
+        "source_url": "https://www.openstreetmap.org/way/35567304",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.03883802580108,
+          14.709502350000001
+        ]
+      },
+      "properties": {
+        "name": "Novaliches General Hospital",
+        "osm_type": "way",
+        "osm_id": 46332952,
+        "source_url": "https://www.openstreetmap.org/way/46332952",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.01479675219323,
+          14.55933065
+        ]
+      },
+      "properties": {
+        "name": "Makati Medical Center",
+        "osm_type": "way",
+        "osm_id": 49333995,
+        "source_url": "https://www.openstreetmap.org/way/49333995",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.09843898001795,
+          14.636064399999999
+        ]
+      },
+      "properties": {
+        "name": "Amang Rodriguez Memorial Medical Center",
+        "osm_type": "way",
+        "osm_id": 54025002,
+        "source_url": "https://www.openstreetmap.org/way/54025002",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.0661287356536,
+          14.5639125
+        ]
+      },
+      "properties": {
+        "name": "Rizal Medical Center",
+        "osm_type": "way",
+        "osm_id": 76344014,
+        "source_url": "https://www.openstreetmap.org/way/76344014",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.00100112828336,
+          14.5493199
+        ]
+      },
+      "properties": {
+        "name": "Pasay City General Hospital",
+        "osm_type": "way",
+        "osm_id": 79312531,
+        "source_url": "https://www.openstreetmap.org/way/79312531",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.04998222096145,
+          14.5769466
+        ]
+      },
+      "properties": {
+        "name": "Victor R. Potenciano Medical Center",
+        "osm_type": "way",
+        "osm_id": 82707121,
+        "source_url": "https://www.openstreetmap.org/way/82707121",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.99523778394027,
+          14.55601755
+        ]
+      },
+      "properties": {
+        "name": "Adventist Medical Center Manila",
+        "osm_type": "way",
+        "osm_id": 84272189,
+        "source_url": "https://www.openstreetmap.org/way/84272189",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.05207200390964,
+          14.63481715
+        ]
+      },
+      "properties": {
+        "name": "Armed Forces of the Philippines Medical Center",
+        "osm_type": "way",
+        "osm_id": 85238912,
+        "source_url": "https://www.openstreetmap.org/way/85238912",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.9854583377907,
+          14.5823921
+        ]
+      },
+      "properties": {
+        "name": "Medical Center Manila",
+        "osm_type": "way",
+        "osm_id": 87741356,
+        "source_url": "https://www.openstreetmap.org/way/87741356",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.97763945839432,
+          14.5874737
+        ]
+      },
+      "properties": {
+        "name": "AMOSUP Seamen's Hospital",
+        "osm_type": "way",
+        "osm_id": 89564505,
+        "source_url": "https://www.openstreetmap.org/way/89564505",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.98286010778904,
+          14.5819835
+        ]
+      },
+      "properties": {
+        "name": "Manila Doctors Hospital",
+        "osm_type": "way",
+        "osm_id": 90139977,
+        "source_url": "https://www.openstreetmap.org/way/90139977",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.9857068955966,
+          14.577771
+        ]
+      },
+      "properties": {
+        "name": "Philippine General Hospital",
+        "osm_type": "way",
+        "osm_id": 90316401,
+        "source_url": "https://www.openstreetmap.org/way/90316401",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.04793075343855,
+          14.6419083
+        ]
+      },
+      "properties": {
+        "name": "East Avenue Medical Center",
+        "osm_type": "way",
+        "osm_id": 91187868,
+        "source_url": "https://www.openstreetmap.org/way/91187868",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.04843731991514,
+          14.64406945
+        ]
+      },
+      "properties": {
+        "name": "Philippine Heart Center",
+        "osm_type": "way",
+        "osm_id": 91187869,
+        "source_url": "https://www.openstreetmap.org/way/91187869",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.07265460539939,
+          14.6675874
+        ]
+      },
+      "properties": {
+        "name": "General Malvar Hospital",
+        "osm_type": "way",
+        "osm_id": 91599188,
+        "source_url": "https://www.openstreetmap.org/way/91599188",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.03978426339594,
+          14.65635385
+        ]
+      },
+      "properties": {
+        "name": "Veterans Memorial Medical Center",
+        "osm_type": "way",
+        "osm_id": 93806644,
+        "source_url": "https://www.openstreetmap.org/way/93806644",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.06671097736687,
+          14.66416375
+        ]
+      },
+      "properties": {
+        "name": "New Era General Hospital",
+        "osm_type": "way",
+        "osm_id": 96054542,
+        "source_url": "https://www.openstreetmap.org/way/96054542",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.0435192010518,
+          14.6467976
+        ]
+      },
+      "properties": {
+        "name": "Jose Fabella Memorial Hospital Annex",
+        "osm_type": "way",
+        "osm_id": 96336385,
+        "source_url": "https://www.openstreetmap.org/way/96336385",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.0034520053128,
+          14.62766885
+        ]
+      },
+      "properties": {
+        "name": "Philippine Orthopedic Hospital",
+        "osm_type": "way",
+        "osm_id": 97073768,
+        "source_url": "https://www.openstreetmap.org/way/97073768",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.00922099825863,
+          14.620549050000001
+        ]
+      },
+      "properties": {
+        "name": "Fe Del Mundo Medical Center",
+        "osm_type": "way",
+        "osm_id": 102682002,
+        "source_url": "https://www.openstreetmap.org/way/102682002",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.11094051460498,
+          14.651214249999999
+        ]
+      },
+      "properties": {
+        "name": "Garcia General Hospital",
+        "osm_type": "way",
+        "osm_id": 104371863,
+        "source_url": "https://www.openstreetmap.org/way/104371863",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.04780191680084,
+          14.5310181
+        ]
+      },
+      "properties": {
+        "name": "Fort Bonifacio General Hospital",
+        "osm_type": "way",
+        "osm_id": 113365744,
+        "source_url": "https://www.openstreetmap.org/way/113365744",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.98190367186609,
+          14.614062
+        ]
+      },
+      "properties": {
+        "name": "Jose R. Reyes Memorial Medical Center",
+        "osm_type": "way",
+        "osm_id": 115222320,
+        "source_url": "https://www.openstreetmap.org/way/115222320",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.10279632535148,
+          14.62450135
+        ]
+      },
+      "properties": {
+        "name": "Saint Anthony Medical Center",
+        "osm_type": "way",
+        "osm_id": 117630731,
+        "source_url": "https://www.openstreetmap.org/way/117630731",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.03372266716671,
+          14.668973650000002
+        ]
+      },
+      "properties": {
+        "name": "Metro North Medical Center and Hospital",
+        "osm_type": "way",
+        "osm_id": 117750356,
+        "source_url": "https://www.openstreetmap.org/way/117750356",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.11003289436698,
+          14.6394959
+        ]
+      },
+      "properties": {
+        "name": "SDS Medical Center",
+        "osm_type": "way",
+        "osm_id": 120779195,
+        "source_url": "https://www.openstreetmap.org/way/120779195",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.11721413305818,
+          14.64410685
+        ]
+      },
+      "properties": {
+        "name": "San Ramon Hospital",
+        "osm_type": "way",
+        "osm_id": 121189960,
+        "source_url": "https://www.openstreetmap.org/way/121189960",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.98643634730445,
+          14.5640135
+        ]
+      },
+      "properties": {
+        "name": "Ospital ng Maynila",
+        "osm_type": "way",
+        "osm_id": 122383431,
+        "source_url": "https://www.openstreetmap.org/way/122383431",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.09751340185943,
+          14.58991705
+        ]
+      },
+      "properties": {
+        "name": "Mission Hospital",
+        "osm_type": "way",
+        "osm_id": 123669713,
+        "source_url": "https://www.openstreetmap.org/way/123669713",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.99674485338036,
+          14.60785005
+        ]
+      },
+      "properties": {
+        "name": "Ospital ng Sampaloc",
+        "osm_type": "way",
+        "osm_id": 127202854,
+        "source_url": "https://www.openstreetmap.org/way/127202854",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.02244418095599,
+          14.595017649999999
+        ]
+      },
+      "properties": {
+        "name": "Our Lady of Lourdes Hospital",
+        "osm_type": "way",
+        "osm_id": 131706185,
+        "source_url": "https://www.openstreetmap.org/way/131706185",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.98256733187718,
+          14.67262955
+        ]
+      },
+      "properties": {
+        "name": "Calalang General Hospital",
+        "osm_type": "way",
+        "osm_id": 134643140,
+        "source_url": "https://www.openstreetmap.org/way/134643140",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.06405943943506,
+          14.612387049999999
+        ]
+      },
+      "properties": {
+        "name": "CGEA Station Hospital",
+        "osm_type": "way",
+        "osm_id": 136816020,
+        "source_url": "https://www.openstreetmap.org/way/136816020",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.03427978735652,
+          14.5107427
+        ]
+      },
+      "properties": {
+        "name": "Taguig-Pateros District Hospital",
+        "osm_type": "way",
+        "osm_id": 145083991,
+        "source_url": "https://www.openstreetmap.org/way/145083991",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.15231940409323,
+          14.524675250000001
+        ]
+      },
+      "properties": {
+        "name": "San Isidro Hospital - Extension Facility",
+        "osm_type": "way",
+        "osm_id": 152173092,
+        "source_url": "https://www.openstreetmap.org/way/152173092",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.01762757761333,
+          14.6202051
+        ]
+      },
+      "properties": {
+        "name": "De Los Santos Medical Center",
+        "osm_type": "way",
+        "osm_id": 155400231,
+        "source_url": "https://www.openstreetmap.org/way/155400231",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.97193364763982,
+          14.5975538
+        ]
+      },
+      "properties": {
+        "name": "Justice Jose Abad Santos General Hospital",
+        "osm_type": "way",
+        "osm_id": 161306364,
+        "source_url": "https://www.openstreetmap.org/way/161306364",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.96618245501696,
+          14.6090382
+        ]
+      },
+      "properties": {
+        "name": "Mary Johnston Hospital",
+        "osm_type": "way",
+        "osm_id": 161306372,
+        "source_url": "https://www.openstreetmap.org/way/161306372",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.96487932592156,
+          14.6011029
+        ]
+      },
+      "properties": {
+        "name": "Gat Andres Bonifacio Medical Center",
+        "osm_type": "way",
+        "osm_id": 161306530,
+        "source_url": "https://www.openstreetmap.org/way/161306530",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.09461727900447,
+          14.6421958
+        ]
+      },
+      "properties": {
+        "name": "Saint Victoria Hospital",
+        "osm_type": "way",
+        "osm_id": 162045159,
+        "source_url": "https://www.openstreetmap.org/way/162045159",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.10762764608769,
+          14.65095595
+        ]
+      },
+      "properties": {
+        "name": "St. Vincent Hospital",
+        "osm_type": "way",
+        "osm_id": 162639734,
+        "source_url": "https://www.openstreetmap.org/way/162639734",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.9804708193438,
+          14.6780788
+        ]
+      },
+      "properties": {
+        "name": "Fatima University Medical Center",
+        "osm_type": "way",
+        "osm_id": 175024244,
+        "source_url": "https://www.openstreetmap.org/way/175024244",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.9899718633591,
+          14.603111
+        ]
+      },
+      "properties": {
+        "name": "Mary Chiles General Hospital",
+        "osm_type": "way",
+        "osm_id": 182994404,
+        "source_url": "https://www.openstreetmap.org/way/182994404",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.99962739171909,
+          14.5998315
+        ]
+      },
+      "properties": {
+        "name": "De Ocampo Memorial Medical Center",
+        "osm_type": "way",
+        "osm_id": 184031593,
+        "source_url": "https://www.openstreetmap.org/way/184031593",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.09924098494857,
+          14.5724406
+        ]
+      },
+      "properties": {
+        "name": "Pasig City General Hospital",
+        "osm_type": "way",
+        "osm_id": 188693881,
+        "source_url": "https://www.openstreetmap.org/way/188693881",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.03168434549946,
+          14.64124865
+        ]
+      },
+      "properties": {
+        "name": "Providence Hospital",
+        "osm_type": "way",
+        "osm_id": 193633009,
+        "source_url": "https://www.openstreetmap.org/way/193633009",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.11393670288723,
+          14.5802829
+        ]
+      },
+      "properties": {
+        "name": "Cainta Municipal Hospital",
+        "osm_type": "way",
+        "osm_id": 229503729,
+        "source_url": "https://www.openstreetmap.org/way/229503729",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.12528401986009,
+          14.573852
+        ]
+      },
+      "properties": {
+        "name": "Taytay Doctors Multispecialty Hospital",
+        "osm_type": "way",
+        "osm_id": 229639122,
+        "source_url": "https://www.openstreetmap.org/way/229639122",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.04140249265473,
+          14.6476275
+        ]
+      },
+      "properties": {
+        "name": "Philippine Children's Medical Center",
+        "osm_type": "way",
+        "osm_id": 231404558,
+        "source_url": "https://www.openstreetmap.org/way/231404558",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.1428903599676,
+          14.7267477
+        ]
+      },
+      "properties": {
+        "name": "H-Vill Hospital",
+        "osm_type": "way",
+        "osm_id": 233135828,
+        "source_url": "https://www.openstreetmap.org/way/233135828",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.0653855935114,
+          14.530879299999999
+        ]
+      },
+      "properties": {
+        "name": "Medical Center Taguig",
+        "osm_type": "way",
+        "osm_id": 244438634,
+        "source_url": "https://www.openstreetmap.org/way/244438634",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.02352635619678,
+          14.606549350000002
+        ]
+      },
+      "properties": {
+        "name": "San Juan Medical Center",
+        "osm_type": "way",
+        "osm_id": 255989049,
+        "source_url": "https://www.openstreetmap.org/way/255989049",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.02256110165938,
+          14.59487885
+        ]
+      },
+      "properties": {
+        "name": "Main Building",
+        "osm_type": "way",
+        "osm_id": 255991090,
+        "source_url": "https://www.openstreetmap.org/way/255991090",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.09943995619237,
+          14.637106450000001
+        ]
+      },
+      "properties": {
+        "name": "VT Maternity Hospital",
+        "osm_type": "way",
+        "osm_id": 256058998,
+        "source_url": "https://www.openstreetmap.org/way/256058998",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.97350637206284,
+          14.648326749999999
+        ]
+      },
+      "properties": {
+        "name": "Caloocan City Medical Center South",
+        "osm_type": "way",
+        "osm_id": 256339755,
+        "source_url": "https://www.openstreetmap.org/way/256339755",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.1529050057553,
+          14.531402700000001
+        ]
+      },
+      "properties": {
+        "name": "Angono Medics Hospital",
+        "osm_type": "way",
+        "osm_id": 261877875,
+        "source_url": "https://www.openstreetmap.org/way/261877875",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.10895820594624,
+          14.638366300000001
+        ]
+      },
+      "properties": {
+        "name": "Jesus Immaculate Concepcion Hospital",
+        "osm_type": "way",
+        "osm_id": 262308307,
+        "source_url": "https://www.openstreetmap.org/way/262308307",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.15214068412783,
+          14.526683049999999
+        ]
+      },
+      "properties": {
+        "name": "Angono General Hospital",
+        "osm_type": "way",
+        "osm_id": 263121475,
+        "source_url": "https://www.openstreetmap.org/way/263121475",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.06607210793516,
+          14.6219447
+        ]
+      },
+      "properties": {
+        "name": "Villarosa Hospital",
+        "osm_type": "way",
+        "osm_id": 264289095,
+        "source_url": "https://www.openstreetmap.org/way/264289095",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.98709866380403,
+          14.6577621
+        ]
+      },
+      "properties": {
+        "name": "Manila Central University Hospital",
+        "osm_type": "way",
+        "osm_id": 265574761,
+        "source_url": "https://www.openstreetmap.org/way/265574761",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.0707897242221,
+          14.5293405
+        ]
+      },
+      "properties": {
+        "name": "Cruz-Rabe Hospital",
+        "osm_type": "way",
+        "osm_id": 273216481,
+        "source_url": "https://www.openstreetmap.org/way/273216481",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.99586787727101,
+          14.52990695
+        ]
+      },
+      "properties": {
+        "name": "Sta. Rita De Baclaran General Hospital",
+        "osm_type": "way",
+        "osm_id": 273430418,
+        "source_url": "https://www.openstreetmap.org/way/273430418",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.95524278783387,
+          14.751614700000001
+        ]
+      },
+      "properties": {
+        "name": "Nazarenus Hospital",
+        "osm_type": "way",
+        "osm_id": 282854038,
+        "source_url": "https://www.openstreetmap.org/way/282854038",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.06331760106954,
+          14.626959150000001
+        ]
+      },
+      "properties": {
+        "name": "World Citi Medical Center",
+        "osm_type": "way",
+        "osm_id": 283053426,
+        "source_url": "https://www.openstreetmap.org/way/283053426",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.9883424989595,
+          14.61339215
+        ]
+      },
+      "properties": {
+        "name": "Perpetual Help Hospital",
+        "osm_type": "way",
+        "osm_id": 287975636,
+        "source_url": "https://www.openstreetmap.org/way/287975636",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.95640643584127,
+          14.69429075
+        ]
+      },
+      "properties": {
+        "name": "San Lorenzo Ruiz General Hospital",
+        "osm_type": "way",
+        "osm_id": 288185193,
+        "source_url": "https://www.openstreetmap.org/way/288185193",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.94586382315727,
+          14.6601295
+        ]
+      },
+      "properties": {
+        "name": "Navotas City Hospital",
+        "osm_type": "way",
+        "osm_id": 288588367,
+        "source_url": "https://www.openstreetmap.org/way/288588367",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.98930043736962,
+          14.614052699999998
+        ]
+      },
+      "properties": {
+        "name": "Hospital of the Infant Jesus Medical Center",
+        "osm_type": "way",
+        "osm_id": 291642917,
+        "source_url": "https://www.openstreetmap.org/way/291642917",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.95797686990477,
+          14.7371904
+        ]
+      },
+      "properties": {
+        "name": "The Lord's Hospital",
+        "osm_type": "way",
+        "osm_id": 292038834,
+        "source_url": "https://www.openstreetmap.org/way/292038834",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.95746202135479,
+          14.73391165
+        ]
+      },
+      "properties": {
+        "name": "St. Francis Hospital",
+        "osm_type": "way",
+        "osm_id": 292038922,
+        "source_url": "https://www.openstreetmap.org/way/292038922",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.04747623604715,
+          14.73826225
+        ]
+      },
+      "properties": {
+        "name": "Nodado General Hospital",
+        "osm_type": "way",
+        "osm_id": 299406484,
+        "source_url": "https://www.openstreetmap.org/way/299406484",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.01767673438022,
+          14.58396395
+        ]
+      },
+      "properties": {
+        "name": "Trinity Woman and Child Hospital",
+        "osm_type": "way",
+        "osm_id": 303409437,
+        "source_url": "https://www.openstreetmap.org/way/303409437",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.01628492579462,
+          14.5834285
+        ]
+      },
+      "properties": {
+        "name": "Santa Ana Hospital",
+        "osm_type": "way",
+        "osm_id": 303409449,
+        "source_url": "https://www.openstreetmap.org/way/303409449",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.00393443062015,
+          14.608975650000001
+        ]
+      },
+      "properties": {
+        "name": "St. Francis General Hospital",
+        "osm_type": "way",
+        "osm_id": 310796627,
+        "source_url": "https://www.openstreetmap.org/way/310796627",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.9759067750488,
+          14.63855585
+        ]
+      },
+      "properties": {
+        "name": "Martinez Hospital",
+        "osm_type": "way",
+        "osm_id": 312353855,
+        "source_url": "https://www.openstreetmap.org/way/312353855",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.0162299,
+          14.600707499999999
+        ]
+      },
+      "properties": {
+        "name": "Unciano Paramedical General Hospital",
+        "osm_type": "way",
+        "osm_id": 332083684,
+        "source_url": "https://www.openstreetmap.org/way/332083684",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.07847931155462,
+          14.56544075
+        ]
+      },
+      "properties": {
+        "name": "Javillonar Clinic and Hospital",
+        "osm_type": "way",
+        "osm_id": 344562174,
+        "source_url": "https://www.openstreetmap.org/way/344562174",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.12224235592504,
+          14.62541045
+        ]
+      },
+      "properties": {
+        "name": "Cornel Medical Center",
+        "osm_type": "way",
+        "osm_id": 353772389,
+        "source_url": "https://www.openstreetmap.org/way/353772389",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.08530861513958,
+          14.5758025
+        ]
+      },
+      "properties": {
+        "name": "TriCity Medical Center",
+        "osm_type": "way",
+        "osm_id": 353969645,
+        "source_url": "https://www.openstreetmap.org/way/353969645",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.00068638644996,
+          14.59370865
+        ]
+      },
+      "properties": {
+        "name": "Presidential Security Group Station Hospital",
+        "osm_type": "way",
+        "osm_id": 360817932,
+        "source_url": "https://www.openstreetmap.org/way/360817932",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.09798062935474,
+          14.58986565
+        ]
+      },
+      "properties": {
+        "name": "Mission Medical Plaza",
+        "osm_type": "way",
+        "osm_id": 372781921,
+        "source_url": "https://www.openstreetmap.org/way/372781921",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.98071017510195,
+          14.613777
+        ]
+      },
+      "properties": {
+        "name": "San Lazaro Hospital",
+        "osm_type": "way",
+        "osm_id": 384932890,
+        "source_url": "https://www.openstreetmap.org/way/384932890",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.09175272644153,
+          14.61220045
+        ]
+      },
+      "properties": {
+        "name": "St. Camillus Medical Center",
+        "osm_type": "way",
+        "osm_id": 384934616,
+        "source_url": "https://www.openstreetmap.org/way/384934616",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.09621724191851,
+          14.62015835
+        ]
+      },
+      "properties": {
+        "name": "Salve Regina General Hospital",
+        "osm_type": "way",
+        "osm_id": 384934859,
+        "source_url": "https://www.openstreetmap.org/way/384934859",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.05965485,
+          14.51332345
+        ]
+      },
+      "properties": {
+        "name": "Recuenco General Hospital",
+        "osm_type": "way",
+        "osm_id": 443525352,
+        "source_url": "https://www.openstreetmap.org/way/443525352",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.10669385699248,
+          14.6570412
+        ]
+      },
+      "properties": {
+        "name": "De Guzman Clinic",
+        "osm_type": "way",
+        "osm_id": 477645762,
+        "source_url": "https://www.openstreetmap.org/way/477645762",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.05203321457137,
+          14.6094712
+        ]
+      },
+      "properties": {
+        "name": "Philippine National Police General Hospital",
+        "osm_type": "way",
+        "osm_id": 486970925,
+        "source_url": "https://www.openstreetmap.org/way/486970925",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.04664245493606,
+          14.7401512
+        ]
+      },
+      "properties": {
+        "name": "Bernardino General Hospital 2",
+        "osm_type": "way",
+        "osm_id": 497953970,
+        "source_url": "https://www.openstreetmap.org/way/497953970",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.98938919731813,
+          14.6158259
+        ]
+      },
+      "properties": {
+        "name": "Saint Jude Hospital and Medical Center",
+        "osm_type": "way",
+        "osm_id": 506543661,
+        "source_url": "https://www.openstreetmap.org/way/506543661",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.02359717702385,
+          14.65938605
+        ]
+      },
+      "properties": {
+        "name": "Dr. Montano G. Ramos General Hospital",
+        "osm_type": "way",
+        "osm_id": 525405920,
+        "source_url": "https://www.openstreetmap.org/way/525405920",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.05021284967398,
+          14.75615595
+        ]
+      },
+      "properties": {
+        "name": "Caloocan City North Medical Center",
+        "osm_type": "way",
+        "osm_id": 528989939,
+        "source_url": "https://www.openstreetmap.org/way/528989939",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.03903344431995,
+          14.71930025
+        ]
+      },
+      "properties": {
+        "name": "Hope General Hopital",
+        "osm_type": "way",
+        "osm_id": 541799981,
+        "source_url": "https://www.openstreetmap.org/way/541799981",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.02058692429948,
+          14.6793364
+        ]
+      },
+      "properties": {
+        "name": "Casaul General Hospital",
+        "osm_type": "way",
+        "osm_id": 541820647,
+        "source_url": "https://www.openstreetmap.org/way/541820647",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.94247209757702,
+          14.677015350000001
+        ]
+      },
+      "properties": {
+        "name": "Banaag Dental Clinic",
+        "osm_type": "way",
+        "osm_id": 549330479,
+        "source_url": "https://www.openstreetmap.org/way/549330479",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.94771720726698,
+          14.66750915
+        ]
+      },
+      "properties": {
+        "name": "QuintoPolyMedic",
+        "osm_type": "way",
+        "osm_id": 549332778,
+        "source_url": "https://www.openstreetmap.org/way/549332778",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.01225928455142,
+          14.616323049999998
+        ]
+      },
+      "properties": {
+        "name": "Quezon Institute Compound",
+        "osm_type": "way",
+        "osm_id": 560063538,
+        "source_url": "https://www.openstreetmap.org/way/560063538",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.11801535624645,
+          14.586032549999999
+        ]
+      },
+      "properties": {
+        "name": "Ortigas Hospital and Healthcare Center",
+        "osm_type": "way",
+        "osm_id": 561507712,
+        "source_url": "https://www.openstreetmap.org/way/561507712",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.10309766940298,
+          14.61272275
+        ]
+      },
+      "properties": {
+        "name": "Arnaiz Hospital",
+        "osm_type": "way",
+        "osm_id": 569368253,
+        "source_url": "https://www.openstreetmap.org/way/569368253",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.95058259435709,
+          14.65717495
+        ]
+      },
+      "properties": {
+        "name": "Ospital ng Malabon",
+        "osm_type": "way",
+        "osm_id": 574920880,
+        "source_url": "https://www.openstreetmap.org/way/574920880",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.96305788786233,
+          14.635075650000001
+        ]
+      },
+      "properties": {
+        "name": "Tondo Medical Center",
+        "osm_type": "way",
+        "osm_id": 578433431,
+        "source_url": "https://www.openstreetmap.org/way/578433431",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.11560163318026,
+          14.68543545
+        ]
+      },
+      "properties": {
+        "name": "San Mateo Medical Center",
+        "osm_type": "way",
+        "osm_id": 591364370,
+        "source_url": "https://www.openstreetmap.org/way/591364370",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.06914269836628,
+          14.73573225
+        ]
+      },
+      "properties": {
+        "name": "San Lorenzo Hospital",
+        "osm_type": "way",
+        "osm_id": 591766108,
+        "source_url": "https://www.openstreetmap.org/way/591766108",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.9573390447316,
+          14.7152869
+        ]
+      },
+      "properties": {
+        "name": "Allied Care Experts Medical Center Valenzuela",
+        "osm_type": "way",
+        "osm_id": 658684225,
+        "source_url": "https://www.openstreetmap.org/way/658684225",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.076287344279,
+          14.6685139
+        ]
+      },
+      "properties": {
+        "name": "Diliman Doctors Hospital",
+        "osm_type": "way",
+        "osm_id": 704249058,
+        "source_url": "https://www.openstreetmap.org/way/704249058",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.03166407092209,
+          14.53026455
+        ]
+      },
+      "properties": {
+        "name": "Philippine Navy Hospital",
+        "osm_type": "way",
+        "osm_id": 741963839,
+        "source_url": "https://www.openstreetmap.org/way/741963839",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.0957736,
+          14.59202415
+        ]
+      },
+      "properties": {
+        "name": "Holylife Hospital",
+        "osm_type": "way",
+        "osm_id": 767425252,
+        "source_url": "https://www.openstreetmap.org/way/767425252",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.99114194386524,
+          14.500424200000001
+        ]
+      },
+      "properties": {
+        "name": "Ospital ng Para\u00f1aque",
+        "osm_type": "way",
+        "osm_id": 775154939,
+        "source_url": "https://www.openstreetmap.org/way/775154939",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.034839536672,
+          14.70018445
+        ]
+      },
+      "properties": {
+        "name": "Bernardino General Hospital",
+        "osm_type": "way",
+        "osm_id": 781507514,
+        "source_url": "https://www.openstreetmap.org/way/781507514",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.09225896348467,
+          14.600862150000001
+        ]
+      },
+      "properties": {
+        "name": "Pasig Doctors Medical Center",
+        "osm_type": "way",
+        "osm_id": 781515671,
+        "source_url": "https://www.openstreetmap.org/way/781515671",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.0891038,
+          14.686097
+        ]
+      },
+      "properties": {
+        "name": "Rosario Maclang Bautista General Hospital",
+        "osm_type": "way",
+        "osm_id": 784554612,
+        "source_url": "https://www.openstreetmap.org/way/784554612",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.0016931248008,
+          14.58798625
+        ]
+      },
+      "properties": {
+        "name": "Ygeia Medical Center, Inc.",
+        "osm_type": "way",
+        "osm_id": 786331536,
+        "source_url": "https://www.openstreetmap.org/way/786331536",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.08464749999999,
+          14.5901099
+        ]
+      },
+      "properties": {
+        "name": "Alfonso Specialist Hospital",
+        "osm_type": "way",
+        "osm_id": 786370497,
+        "source_url": "https://www.openstreetmap.org/way/786370497",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.97830590000001,
+          14.62599475
+        ]
+      },
+      "properties": {
+        "name": "Ospital ng Tondo",
+        "osm_type": "way",
+        "osm_id": 786370974,
+        "source_url": "https://www.openstreetmap.org/way/786370974",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.03228543587423,
+          14.73721845
+        ]
+      },
+      "properties": {
+        "name": "San Lorenzo Hospital",
+        "osm_type": "way",
+        "osm_id": 796759425,
+        "source_url": "https://www.openstreetmap.org/way/796759425",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.97836048516635,
+          14.60963125
+        ]
+      },
+      "properties": {
+        "name": "Metropolitan Medical Center",
+        "osm_type": "way",
+        "osm_id": 806655759,
+        "source_url": "https://www.openstreetmap.org/way/806655759",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.15313862450893,
+          14.525701399999999
+        ]
+      },
+      "properties": {
+        "name": "San Isidro Hospital",
+        "osm_type": "way",
+        "osm_id": 807314859,
+        "source_url": "https://www.openstreetmap.org/way/807314859",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.12574648873627,
+          14.6246916
+        ]
+      },
+      "properties": {
+        "name": "Blessed Trinity Hospital",
+        "osm_type": "way",
+        "osm_id": 836344280,
+        "source_url": "https://www.openstreetmap.org/way/836344280",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.02317763449355,
+          14.6230767
+        ]
+      },
+      "properties": {
+        "name": "St. Luke's Medical Center",
+        "osm_type": "way",
+        "osm_id": 836960349,
+        "source_url": "https://www.openstreetmap.org/way/836960349",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.04401345523661,
+          14.723260199999999
+        ]
+      },
+      "properties": {
+        "name": "Cruz-Dalida Hospital",
+        "osm_type": "way",
+        "osm_id": 847013665,
+        "source_url": "https://www.openstreetmap.org/way/847013665",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.15643998242942,
+          14.5207628
+        ]
+      },
+      "properties": {
+        "name": "Pag-Asa Hospital",
+        "osm_type": "way",
+        "osm_id": 859800364,
+        "source_url": "https://www.openstreetmap.org/way/859800364",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.11752798423475,
+          14.69358485
+        ]
+      },
+      "properties": {
+        "name": "San Mateo Doctors",
+        "osm_type": "way",
+        "osm_id": 866859679,
+        "source_url": "https://www.openstreetmap.org/way/866859679",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.03208428797446,
+          14.6705428
+        ]
+      },
+      "properties": {
+        "name": "Dr. Montano G. Ramos General Hospital",
+        "osm_type": "way",
+        "osm_id": 923686671,
+        "source_url": "https://www.openstreetmap.org/way/923686671",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.11409061227681,
+          14.58262105
+        ]
+      },
+      "properties": {
+        "name": "Metro Rizal Doctors Hospital",
+        "osm_type": "way",
+        "osm_id": 925788657,
+        "source_url": "https://www.openstreetmap.org/way/925788657",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.96286093481234,
+          14.69540245
+        ]
+      },
+      "properties": {
+        "name": "Valenzuela Citicare Medical Center",
+        "osm_type": "way",
+        "osm_id": 930226857,
+        "source_url": "https://www.openstreetmap.org/way/930226857",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.02276878876555,
+          14.634070699999999
+        ]
+      },
+      "properties": {
+        "name": "Capitol Medical Center",
+        "osm_type": "way",
+        "osm_id": 933223291,
+        "source_url": "https://www.openstreetmap.org/way/933223291",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.98917581750227,
+          14.6848627
+        ]
+      },
+      "properties": {
+        "name": "Vian Family Hospital",
+        "osm_type": "way",
+        "osm_id": 1023374780,
+        "source_url": "https://www.openstreetmap.org/way/1023374780",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.10990185767565,
+          14.6738107
+        ]
+      },
+      "properties": {
+        "name": "Saint Mattheus Hospital",
+        "osm_type": "way",
+        "osm_id": 1024382287,
+        "source_url": "https://www.openstreetmap.org/way/1024382287",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.01764265287792,
+          14.5630476
+        ]
+      },
+      "properties": {
+        "name": "Makati Life Medical Center",
+        "osm_type": "way",
+        "osm_id": 1061369046,
+        "source_url": "https://www.openstreetmap.org/way/1061369046",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.06530225,
+          14.544056900000001
+        ]
+      },
+      "properties": {
+        "name": "Allied Care Experts Medical Center",
+        "osm_type": "way",
+        "osm_id": 1072477745,
+        "source_url": "https://www.openstreetmap.org/way/1072477745",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.0725630583612,
+          14.51445515
+        ]
+      },
+      "properties": {
+        "name": "Taguig City General Hospital",
+        "osm_type": "way",
+        "osm_id": 1075934213,
+        "source_url": "https://www.openstreetmap.org/way/1075934213",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.95721913117333,
+          14.5914354
+        ]
+      },
+      "properties": {
+        "name": "President Corazon C. Aquino General Hospital",
+        "osm_type": "way",
+        "osm_id": 1219924267,
+        "source_url": "https://www.openstreetmap.org/way/1219924267",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.99118960445736,
+          14.591844349999999
+        ]
+      },
+      "properties": {
+        "name": "National Center for Geriatric Health",
+        "osm_type": "way",
+        "osm_id": 1243950712,
+        "source_url": "https://www.openstreetmap.org/way/1243950712",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.0669747390359,
+          14.698852599999999
+        ]
+      },
+      "properties": {
+        "name": "Far Eastern University - Nicanor Reyes Medical Foundation",
+        "osm_type": "way",
+        "osm_id": 1251014451,
+        "source_url": "https://www.openstreetmap.org/way/1251014451",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.0062867087598,
+          14.539101599999999
+        ]
+      },
+      "properties": {
+        "name": "Metro Pasay Hospital and Medical Center",
+        "osm_type": "way",
+        "osm_id": 1271746131,
+        "source_url": "https://www.openstreetmap.org/way/1271746131",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.08259035,
+          14.6210693
+        ]
+      },
+      "properties": {
+        "name": "Marikina Doctors Hospital and Medical Center",
+        "osm_type": "way",
+        "osm_id": 1290815713,
+        "source_url": "https://www.openstreetmap.org/way/1290815713",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.04845125373343,
+          14.502841799999999
+        ]
+      },
+      "properties": {
+        "name": "Healthway Cancer Care Hospital",
+        "osm_type": "way",
+        "osm_id": 1296098159,
+        "source_url": "https://www.openstreetmap.org/way/1296098159",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.00183318447753,
+          14.6171552
+        ]
+      },
+      "properties": {
+        "name": "United Doctors Medical Center",
+        "osm_type": "way",
+        "osm_id": 1302980224,
+        "source_url": "https://www.openstreetmap.org/way/1302980224",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.98044450926211,
+          14.6152845
+        ]
+      },
+      "properties": {
+        "name": "Dr. Jose Fabella Memorial Hospital",
+        "osm_type": "way",
+        "osm_id": 1329028411,
+        "source_url": "https://www.openstreetmap.org/way/1329028411",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.01992076224124,
+          14.516922699999999
+        ]
+      },
+      "properties": {
+        "name": "Air Force General Hospital",
+        "osm_type": "way",
+        "osm_id": 1350622464,
+        "source_url": "https://www.openstreetmap.org/way/1350622464",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.06929150078497,
+          14.58997575
+        ]
+      },
+      "properties": {
+        "name": "The Medical City",
+        "osm_type": "way",
+        "osm_id": 1435976373,
+        "source_url": "https://www.openstreetmap.org/way/1435976373",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.98424221665407,
+          14.67524105
+        ]
+      },
+      "properties": {
+        "name": "Sanctissimo Rosario General Hospital",
+        "osm_type": "way",
+        "osm_id": 1450354186,
+        "source_url": "https://www.openstreetmap.org/way/1450354186",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.1140247402454,
+          14.68117135
+        ]
+      },
+      "properties": {
+        "name": "Padre Pio Hospital",
+        "osm_type": "way",
+        "osm_id": 1482301511,
+        "source_url": "https://www.openstreetmap.org/way/1482301511",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.01219368452894,
+          14.6167698
+        ]
+      },
+      "properties": {
+        "name": "Quezon Institute Compound",
+        "osm_type": "way",
+        "osm_id": 1504104774,
+        "source_url": "https://www.openstreetmap.org/way/1504104774",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.02673154400293,
+          14.5953111
+        ]
+      },
+      "properties": {
+        "name": "ACE Medical Center Mandaluyong",
+        "osm_type": "way",
+        "osm_id": 1537832135,
+        "source_url": "https://www.openstreetmap.org/way/1537832135",
+        "point_role": "OSM representative point; entrance unverified",
+        "capacity": null
+      }
+    }
+  ]
+}

@@ -14,7 +14,8 @@
     "typecheck": "next typegen && tsc --noEmit",
     "test": "npm run test:domain && npm run test:data",
     "test:domain": "node --test tests/*.test.ts",
-    "test:data": "python -m unittest discover -s tests -p test_*.py"
+    "test:data": "python -m unittest discover -s tests -p test_*.py",
+    "benchmark:routing": "node scripts/benchmark-routing.ts"
   },
   "dependencies": {
     "geotiff": "3.0.5",

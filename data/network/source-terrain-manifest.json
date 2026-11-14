@@ -1,0 +1,32 @@
+{
+  "generated_at": "2026-11-13T05:33:39.595863+00:00",
+  "dem_sha256": "39ee1d9afa27ffbf5a552566253e646a740416c3b86cac61db79209dbaec2a86",
+  "graph_sha256": "4c4a8eb4138c1d8f452e92422a5f43860bdd1ee0f19763f0ac406f0dfaf3e7e4",
+  "contours": 3290,
+  "contour_levels_m": [
+    5,
+    10,
+    15,
+    20,
+    25,
+    30,
+    40,
+    50,
+    75,
+    100,
+    150,
+    200,
+    250,
+    300
+  ],
+  "contour_simplification_m": 10,
+  "contour_minimum_length_m": 180,
+  "road_edges": 155830,
+  "road_edges_with_dsm": 155830,
+  "road_sampling": "Original geometry vertices plus points at <=15m on EPSG:3857 grid; nearest raster cell; minimum DSM height per directed edge.",
+  "limitations": [
+    "DSM includes buildings and vegetation; it is not bare-earth or surveyed road-deck elevation.",
+    "Uniform water-surface scenario does not model river hydraulics, connectivity, drainage, barriers, bridges, rainfall or tides.",
+    "No elevation precision or flood-depth accuracy is implied by the display contour interval."
+  ]
+}

@@ -4,17 +4,17 @@ A research workspace for radar observations and surface-elevation scenarios in t
 
 ## Current scope
 
-Phase 1 makes three sources inspectable in the app:
+Three sources are inspectable in the app:
 
 - **NASA–ISRO NISAR:** original ASF DAAC browse images, catalog records and coverage footprints for 21 October and 2 November 2026. Both are L2 GCOV products on ascending track 140, frame 009, twelve days apart. Their downloaded bytes are checked against the provider's PNG checksums. These are visual references, not quantitative science rasters, and do not observe Carina in 2024.
 - **Sentinel-1:** the existing Orbit 32 observations from 10 July and 3 August 2024, imported unchanged. The app reads the actual Float32 TIFFs on their aligned 854 × 998 grid, with 852,292 finite pixels per band. Values are already gamma-naught dB. The two acquisitions are 24 days apart; neither captures the flood peak.
 - **Copernicus GLO-30 DSM:** surface elevations and a 59-sample, 1.724 km Marikina transect. A user-selected subsidence rate and elapsed time lower the surface with `z_model = z_DSM - abs(rate_mm_per_year) / 1000 * years`. At −30 mm/year over 13 years, the change is −0.390 m. This is a sensitivity scenario, not a measured velocity field.
 
-The app supports source inspection, raster sampling and the elevation scenario. Network routing, SMS delivery, operational flood mapping and quantitative NISAR analysis are not part of this phase.
+The app supports source inspection, raster sampling and elevation scenarios. The routing service operates on a local OpenStreetMap graph; its paths are research results, not verified road access or hospital availability. The SMS tool is a local acknowledgement simulator and does not transmit messages. Quantitative NISAR analysis remains outside the downloaded browse-data scope.
 
 ## Development
 
-Use Node.js 22.18+ in the 22.x series or Node.js 24+, npm, and Python 3.11+. Development was checked with Node.js 26.7.0 and Python 3.13. Package versions are exact and the lockfile is committed. Python data tools use only the standard library; the committed data allows offline verification.
+Use Node.js 22.18+ in the 22.x series or Node.js 24+, npm, and Python 3.11+. Development was checked with Node.js 26.7.0 and Python 3.13. Package versions are exact and the lockfile is committed. NASA import and verification tools use Python's standard library; the committed data allows offline verification. Rebuilding the road import from the original GraphML additionally needs OSMnx, NumPy, Shapely, pyproj and rasterio in the original research environment.
 
 ```sh
 npm ci
@@ -55,7 +55,25 @@ The [Sentinel-1 manifest](data/sentinel-1/manifest.json) records scene identifie
 
 Git preserves `data/` bytes exactly, including original line endings, so a checkout does not invalidate the retained checksums.
 
-The official [Dancing with the SARs challenge](https://www.spaceappschallenge.org/2026/challenges/dancing-with-the-sars/) and its [resources](https://www.spaceappschallenge.org/2026/challenges/dancing-with-the-sars/?tab=resources) motivate the NISAR workflow. This phase establishes traceable data access and inspection; it does not yet deliver the challenge's quantitative surface-change analysis.
+The official [Dancing with the SARs challenge](https://www.spaceappschallenge.org/2026/challenges/dancing-with-the-sars/) and its [resources](https://www.spaceappschallenge.org/2026/challenges/dancing-with-the-sars/?tab=resources) motivate the NISAR workflow. The current reference bundle establishes traceable data access and inspection; it does not yet deliver quantitative NISAR surface-change analysis.
+
+## Local acknowledgement
+
+`simulateSms` accepts a request category (`FLOOD`, `DIALYSIS` or `TRAUMA`) followed by a location. Its fixed reply is exactly 145 GSM-7 characters and septets. Requests are limited to 145 septets; extension-table characters consume two, and unsupported Unicode is rejected rather than silently recoded. The [GSM-7 encoding reference](https://www.twilio.com/docs/glossary/what-is-gsm-7-character-encoding) describes this distinction. The simulator has no SMS gateway, transmission or dispatch capability.
+
+## Routing and reproducible sessions
+
+`GET /api/route` provides the origins and 215 hospital-tagged OSM features. These may include multiple features for one facility. `POST /api/route` accepts `{origin: [longitude, latitude], hospitalId, scenario}`; `scenario` is either `null` or `{waterLevelM, rateMmYear, elapsedYears}`. Heights use EGM2008, rates use mm/year, and elapsed time uses years. The response includes the exact applied request, graph hashes, the topology-only path, the scenario path and separate depth-closure/unknown-coverage counts.
+
+The imported directed multigraph has 62,446 nodes and 155,830 edges. A* minimizes the original OSM lengths with an admissible scaled Euclidean heuristic. Each edge's DSM samples include its vertices and positions no more than 15 projected metres apart. An edge is closed by the model only when depth exceeds 0.30 m. Six edges have partially missing DSM coverage and are excluded separately in scenarios; they are not classified as flooded.
+
+For Tumana to the selected Amang Rodriguez Memorial Medical Center OSM anchor, the unmodified network path is 3.726297 km. At a 10 m water surface it becomes 27.875634 km, both with zero lowering and with −0.390 m lowering. The lowering changes depth-closed directed edges from 55,136 to 56,568 (+1,432); total exclusions including unknown coverage are 55,142 and 56,574. At 12 m water and −0.390 m lowering, that selected origin/anchor pair has no path. This does not establish isolation from every hospital.
+
+Run `npm run benchmark:routing` to record 30 graph-search runs after ten warmups. The [current report](data/network/benchmark-current.json) retains every timing, runtime, graph hash and timing scope. The archived Python medians of 0.216 ms (Malanday) and 0.304 ms (Tumana) are historical references; 22.27 ms was one archived detour solve. They are not hardcoded live performance claims.
+
+The [network manifest](data/network/manifest.json) identifies the original GraphML, hospital extract, DSM and sampled-index hashes. `scripts/import-network.py --legacy-root <original-research-directory>` rebuilds this import and checks freshly sampled minima against the archived index; it requires the original research files. Running the app, its tests and its benchmark uses the checked graph already included here. OpenStreetMap attribution and ODbL terms are retained in [the network notice](data/network/NOTICE.txt).
+
+JSON sessions preserve dataset hashes, map state, requested parameters and the complete applied route response separately. An export during a pending calculation retains that state explicitly. Client timestamps are identified as unverified; nonfinite values cannot silently turn into JSON `null`.
 
 ## Provenance and assistance
 
@@ -63,9 +81,9 @@ Pre-competition research and a separate local prototype were developed during **
 
 Development has used **OpenAI Codex and Google Gemini** for research, architectural discussion, implementation and review. AI assistance is part of the project's development history. Scientific claims, source data and generated code require human review; assistance does not substitute for validation.
 
-The workstation clock was found to be eight hours behind on 14 November 2026: GitHub returned `Sat, 14 Nov 2026 03:30:15 GMT` while the workstation reported `2026-11-13T19:30:15Z`. Commit timestamps for this phase are taken from a fresh GitHub HTTPS response at commit time. The workstation clock is left unchanged. This corrects clock skew; it does not reconstruct or disguise earlier development.
+The workstation clock was found to be eight hours behind on 14 November 2026: GitHub returned `Sat, 14 Nov 2026 03:30:15 GMT` while the workstation reported `2026-11-13T19:30:15Z`. Commit timestamps are taken from a fresh GitHub HTTPS response at commit time. The workstation clock is left unchanged. This corrects clock skew; it does not reconstruct or disguise earlier development.
 
-The Sentinel-1 TIFFs, DSM and archived transect came from that earlier research workspace. The NASA catalog and browse files were newly downloaded during Phase 1. Source datasets retain their own licenses and attribution requirements; see [data/NOTICE.txt](data/NOTICE.txt) and the NISAR bundle's source notes.
+The Sentinel-1 TIFFs, DSM and archived transect came from that earlier research workspace. The NASA catalog and browse files were downloaded on 14 November 2026. Source datasets retain their own licenses and attribution requirements; see [data/NOTICE.txt](data/NOTICE.txt) and the NISAR bundle's source notes.
 
 ## License
 

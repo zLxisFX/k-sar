@@ -1,0 +1,77 @@
+{
+  "schemaVersion": 1,
+  "source": "OpenStreetMap contributors via OSMnx/Overpass",
+  "sourceUrl": "https://www.openstreetmap.org/copyright",
+  "license": "ODbL-1.0",
+  "licenseUrl": "https://opendatacommons.org/licenses/odbl/1-0/",
+  "attribution": "OpenStreetMap contributors",
+  "file": {
+    "path": "waterways.geojson",
+    "bytes": 2381373,
+    "sha256": "eca79db5e7d29d8efcd05770b39e18b30afb5845b813640c5e5c8fc73b5111df"
+  },
+  "featureCount": 3414,
+  "geometryTypes": {
+    "LineString": 2842,
+    "MultiLineString": 4,
+    "MultiPolygon": 9,
+    "Polygon": 559
+  },
+  "bbox": [
+    120.93,
+    14.5,
+    121.16,
+    14.76
+  ],
+  "provenance": "Byte-for-byte reuse of existing K-SAR research material prepared during 5-13 November 2026; no new OSM retrieval was performed for this copy.",
+  "timestampSemantics": "The original waterways manifest records a workstation-generated preparation timestamp. OSMnx caching was enabled, so it does not prove a fresh Overpass download or exact OSM observation date. Original timestamps are retained without independent clock verification. The companion road-graph manifest timestamp applies to that earlier extract, not this waterway file.",
+  "sourceFile": {
+    "path": "C:\\K_SAR_Sandbox_Local\\data\\waterways.geojson",
+    "bytes": 2381373,
+    "sha256": "eca79db5e7d29d8efcd05770b39e18b30afb5845b813640c5e5c8fc73b5111df"
+  },
+  "sourceManifest": {
+    "path": "waterways_manifest.json",
+    "bytes": 410,
+    "sha256": "9b968412bbea332f03e0b4757162b66c684013946e599e07450f57fca2c2de9d",
+    "originalRecord": {
+      "retrieved_at": "2026-11-13T05:40:22.349570+00:00",
+      "source": "OpenStreetMap contributors via OSMnx/Overpass",
+      "source_url": "https://www.openstreetmap.org/copyright",
+      "license": "ODbL-1.0",
+      "features": 3414,
+      "bbox": [
+        120.93,
+        14.5,
+        121.16,
+        14.76
+      ],
+      "limitations": [
+        "Mapped water features, not an event inundation extent or historical 2024 snapshot."
+      ]
+    }
+  },
+  "companionRoadManifest": {
+    "path": "osm_manifest.json",
+    "bytes": 561,
+    "sha256": "275a06719e32d4523cda4581edd8d9ece0be7a03bb710a3463a41fb87f7aa711",
+    "originalRecordedTimestamp": "2026-11-05T05:56:03.059658+00:00",
+    "scope": "Earlier road-network research context only; not the waterway acquisition timestamp."
+  },
+  "preparation": {
+    "sourceScript": "pipeline/prepare_context.py::bake_waterways",
+    "queryTags": {
+      "waterway": [
+        "river",
+        "stream",
+        "canal"
+      ],
+      "natural": "water"
+    },
+    "processing": "Intersection with the study bounding box; retain LineString, MultiLineString, Polygon and MultiPolygon geometries. Original feature-level OSM IDs and source URLs are preserved."
+  },
+  "limitations": [
+    "Mapped water features, not an event inundation extent or historical 2024 snapshot.",
+    "Mapped water geometry is contextual cartography, not radar-derived floodwater, live water level, navigability or verified hydraulic connectivity."
+  ]
+}

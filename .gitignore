@@ -12,3 +12,4 @@ playwright-report/
 Thumbs.db
 __pycache__/
 *.py[cod]
+/public/maplibre/

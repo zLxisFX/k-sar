@@ -10,7 +10,9 @@ Three sources are inspectable in the app:
 - **Sentinel-1:** the existing Orbit 32 observations from 10 July and 3 August 2024, imported unchanged. The app reads the actual Float32 TIFFs on their aligned 854 × 998 grid, with 852,292 finite pixels per band. Values are already gamma-naught dB. The two acquisitions are 24 days apart; neither captures the flood peak.
 - **Copernicus GLO-30 DSM:** surface elevations and a 59-sample, 1.724 km Marikina transect. A user-selected subsidence rate and elapsed time lower the surface with `z_model = z_DSM - abs(rate_mm_per_year) / 1000 * years`. At −30 mm/year over 13 years, the change is −0.390 m. This is a sensitivity scenario, not a measured velocity field.
 
-The app supports source inspection, raster sampling and elevation scenarios. The routing service operates on a local OpenStreetMap graph; its paths are research results, not verified road access or hospital availability. The SMS tool is a local acknowledgement simulator and does not transmit messages. Quantitative NISAR analysis remains outside the downloaded browse-data scope.
+The map compares the two Sentinel-1 acquisitions with a swipe curtain. Clicking the map samples both radar passes and the DSM at the same coordinate; pointing at the river profile selects one of its 59 samples. The profile previews the selected lowering, while **Use for routing** applies the water-level and lowering scenario to the road graph. **Sources** opens the NASA browse images, footprints and original records.
+
+The routing service operates on a local OpenStreetMap graph; its paths are research results, not verified road access or hospital availability. The SMS tool is a local acknowledgement simulator and does not transmit messages. Quantitative NISAR analysis remains outside the downloaded browse-data scope.
 
 ## Development
 
@@ -31,11 +33,13 @@ npm run build
 
 `npm start` serves the production build. Development and production servers bind to the local loopback address by default.
 
+`npm ci` also copies the pinned MapLibre worker modules into `public/maplibre/`. The radar, terrain, network and NASA reference files are served locally. The OpenStreetMap background tiles require a network connection; they are contextual cartography, not a historical flood map.
+
 ## Structure
 
-- `src/app/` contains the page, styles and an allowlisted data-download route.
-- `src/components/` contains the NISAR reference viewer and raster/profile interactions.
-- `src/domain/` contains the raster decoder, coordinate sampling, elevation equations and shared types. Raster transforms use `x = columnX × column + rowX × row + originX` and `y = columnY × column + rowY × row + originY`.
+- `src/app/` contains the page, styles, routing endpoint and an allowlisted data-download route.
+- `src/components/` contains the map workstation, NASA reference viewer and river profile.
+- `src/domain/` contains the raster decoder, coordinate sampling, elevation equations, graph search, SMS encoding and session serialization. Raster transforms use `x = columnX × column + rowX × row + originX` and `y = columnY × column + rowY × row + originY`.
 - `data/` contains the source TIFFs, NASA reference bundle, transect, hashes, provenance and license documents.
 - `scripts/` contains reproducible data import and verification commands; `tests/` checks the data contracts and scientific calculations.
 
@@ -73,7 +77,7 @@ Run `npm run benchmark:routing` to record 30 graph-search runs after ten warmups
 
 The [network manifest](data/network/manifest.json) identifies the original GraphML, hospital extract, DSM and sampled-index hashes. `scripts/import-network.py --legacy-root <original-research-directory>` rebuilds this import and checks freshly sampled minima against the archived index; it requires the original research files. Running the app, its tests and its benchmark uses the checked graph already included here. OpenStreetMap attribution and ODbL terms are retained in [the network notice](data/network/NOTICE.txt).
 
-JSON sessions preserve dataset hashes, map state, requested parameters and the complete applied route response separately. An export during a pending calculation retains that state explicitly. Client timestamps are identified as unverified; nonfinite values cannot silently turn into JSON `null`.
+JSON sessions use schema version 2 and preserve dataset hashes, map state, layer visibility, surface preview parameters and the complete applied route response. Preview parameters remain present when scenario routing is disabled. Requested and applied routes are stored separately; an export during a pending calculation retains that state explicitly. Client timestamps are identified as unverified; nonfinite values cannot silently turn into JSON `null`. External OpenStreetMap background tiles are not archived or covered by the local dataset hashes.
 
 ## Provenance and assistance
 

@@ -1,11 +1,16 @@
 import type { Coordinate } from "./graph.ts";
 import { validateCoordinate } from "./graph.ts";
-import type { RouteRequest, RouteResponse } from "./routing.ts";
+import type { RouteRequest, RouteResponse, ScenarioParameters } from "./routing.ts";
 import { validateScenario } from "./routing.ts";
 
 export type SessionState = {
   datasets: { id: string; sha256: string }[];
-  view: { center: Coordinate; zoom: number; curtainPercent: number; selectedCoordinate: Coordinate | null; transectIndex: number | null };
+  view: {
+    center: Coordinate; zoom: number; curtainPercent: number;
+    selectedCoordinate: Coordinate | null; transectIndex: number | null;
+    layers: { radar: boolean; roadNetwork: boolean; crossSection: boolean };
+  };
+  surfacePreview: ScenarioParameters;
   requestedRoute: RouteRequest | null;
   appliedRoute: RouteResponse | null;
   calculationPending: boolean;
@@ -28,6 +33,12 @@ export function serializeSession(state: SessionState, recordedAtClient: string):
   if (state.view.selectedCoordinate) validateCoordinate(state.view.selectedCoordinate);
   if (state.view.zoom < 0 || state.view.zoom > 24 || state.view.curtainPercent < 0 || state.view.curtainPercent > 100
     || (state.view.transectIndex !== null && (!Number.isInteger(state.view.transectIndex) || state.view.transectIndex < 0 || state.view.transectIndex > 58))) throw new RangeError("Invalid map or transect state.");
+  const layers = state.view.layers;
+  if (!layers || typeof layers.radar !== "boolean" || typeof layers.roadNetwork !== "boolean" || typeof layers.crossSection !== "boolean") {
+    throw new TypeError("Session layer visibility requires radar, roadNetwork and crossSection booleans.");
+  }
+  if (!state.surfacePreview || typeof state.surfacePreview !== "object") throw new TypeError("Session requires surface preview parameters.");
+  validateScenario(state.surfacePreview);
   for (const dataset of state.datasets) {
     if (!dataset.id || !/^[a-f0-9]{64}$/.test(dataset.sha256)) throw new RangeError("Dataset identities require SHA-256 hashes.");
   }
@@ -36,5 +47,5 @@ export function serializeSession(state: SessionState, recordedAtClient: string):
     validateCoordinate(state.requestedRoute.origin);
     if (state.requestedRoute.scenario) validateScenario(state.requestedRoute.scenario);
   }
-  return JSON.stringify({ schemaVersion: 1, recordedAtClient, clockVerified: false, ...state }, null, 2) + "\n";
+  return JSON.stringify({ schemaVersion: 2, recordedAtClient, clockVerified: false, ...state }, null, 2) + "\n";
 }

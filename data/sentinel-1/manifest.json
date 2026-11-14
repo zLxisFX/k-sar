@@ -1,0 +1,148 @@
+{
+  "schema_version": 1,
+  "id": "legacy-sentinel1-orbit32-july-august-2024",
+  "imported_at": "2026-11-14T03:39:21+00:00",
+  "timestamp_source": "https://cmr.earthdata.nasa.gov/search/collections.json?short_name=OPERA_L2_RTC-S1_V1&page_size=1",
+  "http_date": "Sat, 14 Nov 2026 03:39:21 GMT",
+  "host_clock_used": false,
+  "provenance": {
+    "status": "reused pre-existing research data, byte-for-byte copies",
+    "source_workspace": "C:\\K_SAR_Sandbox_Local",
+    "source_manifest": "source-raster-manifest.json",
+    "source_timestamp_note": "The source manifest timestamp is preserved, not independently verified against an external clock.",
+    "processing_script": "Original pipeline/prepare_rasters.py; new import scripts/import-baseline.py",
+    "nasa_product": false
+  },
+  "grid": {
+    "width": 854,
+    "height": 998,
+    "crs": "EPSG:3857",
+    "pixelSizeMeters": [
+      30,
+      30
+    ],
+    "transform": [
+      30,
+      0,
+      13461866.021630574,
+      0,
+      -30,
+      1661556.429169403
+    ],
+    "noData": "NaN",
+    "dataType": "float32",
+    "rasterType": "PixelIsArea",
+    "image_coordinates": [
+      [
+        120.93,
+        14.759999999999998
+      ],
+      [
+        121.16014837579144,
+        14.759999999999998
+      ],
+      [
+        121.16014837579144,
+        14.499764851305686
+      ],
+      [
+        120.93,
+        14.499764851305686
+      ]
+    ]
+  },
+  "scenes": [
+    {
+      "role": "baseline",
+      "id": "S1A_IW_GRDH_1SDV_20240710T214714_20240710T214739_054704_06A8FA_rtc",
+      "datetime": "2024-07-10T21:47:27.132913Z",
+      "relative_orbit": 32,
+      "orbit_state": "descending",
+      "collection": "sentinel-1-rtc",
+      "assets": {
+        "vh": "https://sentinel1euwestrtc.blob.core.windows.net/sentinel1-grd-rtc/GRD/2024/7/10/IW/DV/S1A_IW_GRDH_1SDV_20240710T214714_20240710T214739_054704_06A8FA_D309/measurement/iw-vh.rtc.tiff",
+        "vv": "https://sentinel1euwestrtc.blob.core.windows.net/sentinel1-grd-rtc/GRD/2024/7/10/IW/DV/S1A_IW_GRDH_1SDV_20240710T214714_20240710T214739_054704_06A8FA_D309/measurement/iw-vv.rtc.tiff"
+      },
+      "radiometry": "gamma0",
+      "unit": "dB; 10 log10(linear power)",
+      "native_nominal_resolution_m": 10
+    },
+    {
+      "role": "post",
+      "id": "S1A_IW_GRDH_1SDV_20240803T214707_20240803T214731_055054_06B519_rtc",
+      "datetime": "2024-08-03T21:47:19.197268Z",
+      "relative_orbit": 32,
+      "orbit_state": "descending",
+      "collection": "sentinel-1-rtc",
+      "assets": {
+        "vh": "https://sentinel1euwestrtc.blob.core.windows.net/sentinel1-grd-rtc/GRD/2024/8/3/IW/DV/S1A_IW_GRDH_1SDV_20240803T214707_20240803T214731_055054_06B519_5555/measurement/iw-vh.rtc.tiff",
+        "vv": "https://sentinel1euwestrtc.blob.core.windows.net/sentinel1-grd-rtc/GRD/2024/8/3/IW/DV/S1A_IW_GRDH_1SDV_20240803T214707_20240803T214731_055054_06B519_5555/measurement/iw-vv.rtc.tiff"
+      },
+      "radiometry": "gamma0",
+      "unit": "dB; 10 log10(linear power)",
+      "native_nominal_resolution_m": 10
+    }
+  ],
+  "files": [
+    {
+      "file": "baseline.tif",
+      "role": "Sentinel-1 RTC baseline",
+      "bytes": 6153533,
+      "sha256": "0f035f4b14488d27c45c7d88744503b23c12ac32f6145b1b1af56006115475f4",
+      "bands": [
+        "VV",
+        "VH"
+      ],
+      "units": "gamma-naught dB",
+      "radiometric_conversion_required": false
+    },
+    {
+      "file": "post.tif",
+      "role": "Sentinel-1 RTC later pass",
+      "bytes": 6147415,
+      "sha256": "24473d762dcd2de5dbf227e3d0ce043b32b3d46f4ce767076cda1e21e5e21f0c",
+      "bands": [
+        "VV",
+        "VH"
+      ],
+      "units": "gamma-naught dB",
+      "radiometric_conversion_required": false
+    },
+    {
+      "file": "dem.tif",
+      "role": "Copernicus GLO-30 DSM",
+      "bytes": 2561258,
+      "sha256": "39ee1d9afa27ffbf5a552566253e646a740416c3b86cac61db79209dbaec2a86",
+      "bands": [
+        "surface_elevation"
+      ],
+      "units": "m EGM2008",
+      "radiometric_conversion_required": false
+    }
+  ],
+  "processing": [
+    "Original radar assets are gamma-naught power; the existing import bilinearly resampled linear power before converting with 10*log10(power).",
+    "The bundled baseline/post TIFFs already contain dB: do not apply another logarithm.",
+    "DSM was mosaicked/resampled onto the same projected grid. Elevations include structures and vegetation.",
+    "30m refers to projected grid spacing; ground spacing varies with latitude."
+  ],
+  "licenses": {
+    "radar": {
+      "license": "CC-BY-4.0 plus underlying Copernicus Sentinel notice",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/",
+      "attribution": "Contains modified Copernicus Sentinel data 2024. RTC processing by Catalyst; hosted/licensed by Microsoft Planetary Computer."
+    },
+    "dsm": {
+      "license": "Copernicus WorldDEM-30 public GLO-30-F license",
+      "license_url": "https://dataspace.copernicus.eu/sites/default/files/media/files/2025-06/copernicus_contributing_mission_data_access_v2_cop_dem_licenses.pdf",
+      "notice": "../NOTICE.txt"
+    }
+  },
+  "limitations": [
+    "The pair does not observe the July 24–25 flood peak. Change between July 10 and August 3 is not proof of storm-caused inundation.",
+    "Gamma-naught RTC is not sigma-naught. Thresholds require calibration for this product and landscape.",
+    "No permanent-water, rainfall, slope or land-cover validation has been applied. Candidate water pixels are not a validated flood map.",
+    "OSM is current topology, not a historical 2024 network. Routes are research calculations, not emergency guidance.",
+    "No NISAR/OPERA science raster, measured vertical-velocity field, water level, or verified safe route is introduced by this import."
+  ]
+}

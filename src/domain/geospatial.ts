@@ -19,13 +19,3 @@ export type RasterGrid = {
   ];
   noData: number | null;
 };
-
-export type EvidenceKind = "observation" | "surface-model" | "mapped-network";
-
-export type DatasetScope = {
-  id: string;
-  name: string;
-  evidence: EvidenceKind;
-  interpretation: string;
-  referenceGrid?: Pick<RasterGrid, "width" | "height" | "pixelSizeMeters">;
-};

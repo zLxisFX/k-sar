@@ -2,17 +2,22 @@
   "name": "k-sar-2026",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "license": "Apache-2.0",
   "engines": {
-    "node": ">=20.9.0"
+    "node": "^22.18.0 || >=24.0.0"
   },
   "scripts": {
     "dev": "next dev --hostname 127.0.0.1",
     "build": "next build",
     "start": "next start --hostname 127.0.0.1",
-    "typecheck": "next typegen && tsc --noEmit"
+    "typecheck": "next typegen && tsc --noEmit",
+    "test": "npm run test:domain && npm run test:data",
+    "test:domain": "node --test tests/*.test.ts",
+    "test:data": "python -m unittest discover -s tests -p test_*.py"
   },
   "dependencies": {
+    "geotiff": "3.0.5",
     "next": "16.4.6",
     "react": "19.3.1",
     "react-dom": "19.3.1"

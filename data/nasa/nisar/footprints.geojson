@@ -1,0 +1,79 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "id": "G4404197169-ASF",
+      "properties": {
+        "conceptId": "G4404197169-ASF",
+        "acquisitionStart": "2026-10-21T21:30:32.000000Z",
+        "sourceUrl": "https://cmr.earthdata.nasa.gov/search/concepts/G4404197169-ASF.umm_json",
+        "scope": "catalog-footprint"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              121.55935,
+              14.04123
+            ],
+            [
+              121.03648,
+              16.12287
+            ],
+            [
+              118.76666,
+              15.57682
+            ],
+            [
+              119.30215,
+              13.50286
+            ],
+            [
+              121.55935,
+              14.04123
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "G4408731464-ASF",
+      "properties": {
+        "conceptId": "G4408731464-ASF",
+        "acquisitionStart": "2026-11-02T21:30:32.000000Z",
+        "sourceUrl": "https://cmr.earthdata.nasa.gov/search/concepts/G4408731464-ASF.umm_json",
+        "scope": "catalog-footprint"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              121.5705,
+              14.00246
+            ],
+            [
+              121.0515,
+              16.08498
+            ],
+            [
+              118.77613,
+              15.53769
+            ],
+            [
+              119.31134,
+              13.4637
+            ],
+            [
+              121.5705,
+              14.00246
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}

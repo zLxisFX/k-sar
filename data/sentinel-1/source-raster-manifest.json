@@ -1,0 +1,196 @@
+{
+  "generated_at": "2026-11-05T05:57:17.050546+00:00",
+  "bbox": [
+    120.93,
+    14.5,
+    121.16,
+    14.76
+  ],
+  "image_coordinates": [
+    [
+      120.93,
+      14.759999999999998
+    ],
+    [
+      121.16014837579144,
+      14.759999999999998
+    ],
+    [
+      121.16014837579144,
+      14.499764851305686
+    ],
+    [
+      120.93,
+      14.499764851305686
+    ]
+  ],
+  "width": 854,
+  "height": 998,
+  "grid_crs": "EPSG:3857",
+  "grid_resolution_m": 30,
+  "grid_note": "30m Web Mercator grid; ground sampling varies with latitude. Bilinear resampling in linear power before dB conversion.",
+  "scenes": [
+    {
+      "role": "baseline",
+      "id": "S1A_IW_GRDH_1SDV_20240710T214714_20240710T214739_054704_06A8FA_rtc",
+      "datetime": "2024-07-10T21:47:27.132913Z",
+      "relative_orbit": 32,
+      "orbit_state": "descending",
+      "collection": "sentinel-1-rtc",
+      "assets": {
+        "vh": "https://sentinel1euwestrtc.blob.core.windows.net/sentinel1-grd-rtc/GRD/2024/7/10/IW/DV/S1A_IW_GRDH_1SDV_20240710T214714_20240710T214739_054704_06A8FA_D309/measurement/iw-vh.rtc.tiff",
+        "vv": "https://sentinel1euwestrtc.blob.core.windows.net/sentinel1-grd-rtc/GRD/2024/7/10/IW/DV/S1A_IW_GRDH_1SDV_20240710T214714_20240710T214739_054704_06A8FA_D309/measurement/iw-vv.rtc.tiff"
+      },
+      "radiometry": "gamma0",
+      "unit": "dB; 10 log10(linear power)",
+      "native_nominal_resolution_m": 10
+    },
+    {
+      "role": "post",
+      "id": "S1A_IW_GRDH_1SDV_20240803T214707_20240803T214731_055054_06B519_rtc",
+      "datetime": "2024-08-03T21:47:19.197268Z",
+      "relative_orbit": 32,
+      "orbit_state": "descending",
+      "collection": "sentinel-1-rtc",
+      "assets": {
+        "vh": "https://sentinel1euwestrtc.blob.core.windows.net/sentinel1-grd-rtc/GRD/2024/8/3/IW/DV/S1A_IW_GRDH_1SDV_20240803T214707_20240803T214731_055054_06B519_5555/measurement/iw-vh.rtc.tiff",
+        "vv": "https://sentinel1euwestrtc.blob.core.windows.net/sentinel1-grd-rtc/GRD/2024/8/3/IW/DV/S1A_IW_GRDH_1SDV_20240803T214707_20240803T214731_055054_06B519_5555/measurement/iw-vv.rtc.tiff"
+      },
+      "radiometry": "gamma0",
+      "unit": "dB; 10 log10(linear power)",
+      "native_nominal_resolution_m": 10
+    }
+  ],
+  "candidate_pixels": 7528,
+  "valid_pixels": 852292,
+  "candidate_percent": 0.883,
+  "histogram": {
+    "counts": [
+      309,
+      366,
+      408,
+      460,
+      443,
+      487,
+      540,
+      602,
+      647,
+      829,
+      924,
+      1166,
+      1480,
+      2017,
+      2879,
+      4315,
+      6994,
+      12356,
+      21325,
+      36098,
+      57534,
+      84558,
+      109539,
+      122545,
+      115627,
+      93551,
+      66816,
+      42575,
+      25418,
+      14515,
+      8227,
+      4684,
+      2734,
+      1679,
+      1131,
+      843,
+      642,
+      436,
+      353,
+      317,
+      240,
+      201,
+      167,
+      155,
+      138,
+      118,
+      99,
+      80
+    ],
+    "edges": [
+      -12.0,
+      -11.5,
+      -11.0,
+      -10.5,
+      -10.0,
+      -9.5,
+      -9.0,
+      -8.5,
+      -8.0,
+      -7.5,
+      -7.0,
+      -6.5,
+      -6.0,
+      -5.5,
+      -5.0,
+      -4.5,
+      -4.0,
+      -3.5,
+      -3.0,
+      -2.5,
+      -2.0,
+      -1.5,
+      -1.0,
+      -0.5,
+      0.0,
+      0.5,
+      1.0,
+      1.5,
+      2.0,
+      2.5,
+      3.0,
+      3.5,
+      4.0,
+      4.5,
+      5.0,
+      5.5,
+      6.0,
+      6.5,
+      7.0,
+      7.5,
+      8.0,
+      8.5,
+      9.0,
+      9.5,
+      10.0,
+      10.5,
+      11.0,
+      11.5,
+      12.0
+    ]
+  },
+  "thresholds": {
+    "delta_db": -3.5,
+    "absolute_db": -17.0,
+    "status": "uncalibrated screening hypothesis"
+  },
+  "dem": {
+    "collection": "cop-dem-glo-30",
+    "type": "DSM; includes buildings and vegetation",
+    "acquisition_period": "2011\u20132015, with older gap fills",
+    "reference_epoch": null,
+    "source_url": "https://dataspace.copernicus.eu/explore-data/data-collections/copernicus-contributing-missions/collections-description/COP-DEM"
+  },
+  "unavailable": [
+    "L-band HH",
+    "interferometric coherence",
+    "validated vertical-velocity raster",
+    "observed water-surface level",
+    "field-verified passability",
+    "hospital capacity"
+  ],
+  "limitations": [
+    "The pair does not observe the July 24\u201325 flood peak. Change between July 10 and August 3 is not proof of storm-caused inundation.",
+    "Gamma-naught RTC is not sigma-naught. Thresholds require calibration for this product and landscape.",
+    "No permanent-water, rainfall, slope or land-cover validation has been applied. Candidate water pixels are not a validated flood map.",
+    "OSM is current topology, not a historical 2024 network. Routes are research calculations, not emergency guidance."
+  ]
+}

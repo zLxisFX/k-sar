@@ -1,0 +1,185 @@
+{
+  "schemaVersion": 1,
+  "title": "NISAR catalog and browse references over the Marikina region",
+  "scope": "catalog-and-browse-reference",
+  "scienceRasterDownloaded": false,
+  "quantitativeAnalysisPerformed": false,
+  "coRegistered": false,
+  "attribution": "NASA–ISRO NISAR mission; L-SAR products processed by NASA JPL and distributed by NASA ASF DAAC.",
+  "collection": {
+    "shortName": "NISAR_L2_GCOV_V1",
+    "version": "1",
+    "conceptId": "C3622241360-ASF",
+    "doi": "10.5067/NIL2GCOV-V1",
+    "freeAndOpenData": true,
+    "dataUseGuidanceUrl": "https://www.earthdata.nasa.gov/engage/open-data-services-software-policies/data-use-guidance",
+    "metadata": {
+      "path": "raw/C3622241360-ASF.umm.json",
+      "sourceUrl": "https://cmr.earthdata.nasa.gov/search/concepts/C3622241360-ASF.umm_json",
+      "resolvedUrl": "https://cmr.earthdata.nasa.gov/search/concepts/C3622241360-ASF.umm_json",
+      "httpStatus": 200,
+      "httpDate": "Sat, 14 Nov 2026 03:44:03 GMT",
+      "httpAgeSeconds": 0,
+      "retrievedAt": "2026-11-14T03:44:03Z",
+      "retrievedAtBasis": "http-response-date",
+      "hostRecordedAt": "2026-11-13T19:44:03Z",
+      "clockSkewSeconds": 28800,
+      "bytes": 10704,
+      "sha256": "616216cbc19bbf9f16b70ac4b6c063b993f4d966007a3a26c7ee7259598bc256"
+    }
+  },
+  "discoveryBounds": [
+    121.04,
+    14.5,
+    121.15,
+    14.75
+  ],
+  "discoveryBoundsCrs": "EPSG:4326",
+  "intervalDays": 12.0,
+  "limitations": [
+    "Catalog metadata and provider browse images only; science HDF5 pixels were not downloaded or analyzed.",
+    "These observations are from October and November 2026. They do not observe the July 2024 Carina event.",
+    "The pair shares a track and frame, but the browse images are not pixel-co-registered; their footprints differ.",
+    "Browse colors are provider-rendered visualizations, not quantitative backscatter values or flood classifications.",
+    "A footprint describes catalog coverage, not a guarantee of valid science pixels at every point.",
+    "VALIDATED is the provider's product maturity label; it does not validate any K-SAR flood or routing result.",
+    "Frequency A and B are L-SAR subbands, not separate L-band and S-band instruments."
+  ],
+  "clockNote": "The workstation clock was approximately eight hours behind the providers at import. RetrievedAt uses a fresh HTTPS response Date, or that clock plus elapsed monotonic time. Host and response times are retained separately; the workstation clock was not changed.",
+  "sourceDocumentation": [
+    "https://nisar-docs.asf.alaska.edu/gcov/",
+    "https://nisar-docs.asf.alaska.edu/availability-overview/",
+    "https://nisar-docs.asf.alaska.edu/access-overview/"
+  ],
+  "footprints": {
+    "path": "footprints.geojson",
+    "sha256": "d96bf5c72628cfc01512c9b0a00b8cd6aa7b3d074fb60600d260b183389eca2a",
+    "bytes": 1710
+  },
+  "records": [
+    {
+      "conceptId": "G4404197169-ASF",
+      "granuleUr": "NISAR_L2_PR_GCOV_033_140_A_009_4005_DHDH_A_20261021T213032_20261021T213106_P05036_N_F_J_001",
+      "acquisitionStart": "2026-10-21T21:30:32.000000Z",
+      "acquisitionEnd": "2026-10-21T21:31:06.999342Z",
+      "track": 140,
+      "frame": 9,
+      "direction": "ASCENDING",
+      "stackId": "140_A_009",
+      "instrument": "L-SAR",
+      "maturity": "VALIDATED",
+      "crid": "P05036",
+      "polarizations": {
+        "A": [
+          "HH",
+          "HV"
+        ],
+        "B": [
+          "HH",
+          "HV"
+        ]
+      },
+      "rangeBandwidthMHz": {
+        "A": 40.0,
+        "B": 5.0
+      },
+      "footprintId": "G4404197169-ASF",
+      "metadata": {
+        "path": "raw/G4404197169-ASF.umm.json",
+        "sourceUrl": "https://cmr.earthdata.nasa.gov/search/concepts/G4404197169-ASF.umm_json",
+        "resolvedUrl": "https://cmr.earthdata.nasa.gov/search/concepts/G4404197169-ASF.umm_json",
+        "httpStatus": 200,
+        "httpDate": "Sat, 14 Nov 2026 03:38:07 GMT",
+        "httpAgeSeconds": 0,
+        "retrievedAt": "2026-11-14T03:38:07Z",
+        "retrievedAtBasis": "http-response-date",
+        "hostRecordedAt": "2026-11-13T19:38:08Z",
+        "clockSkewSeconds": 28799,
+        "bytes": 29124,
+        "sha256": "870955a73ab5ac97dbddeca674d2483c59d3602a517dfe6730ce5aecc5bffe27"
+      },
+      "browse": {
+        "path": "browse/2026-10-21.png",
+        "sourceUrl": "https://nisar.asf.earthdatacloud.nasa.gov/BROWSE/NISAR_L2_GCOV_V1/NISAR_L2_PR_GCOV_033_140_A_009_4005_DHDH_A_20261021T213032_20261021T213106_P05036_N_F_J_001/NISAR_L2_PR_GCOV_033_140_A_009_4005_DHDH_A_20261021T213032_20261021T213106_P05036_N_F_J_001_LATLON.png",
+        "resolvedUrl": "https://d1mv8zhcvry6x4.cloudfront.net/s3-7fdfbcb0ce308dc58d08f97acb1f0590/sds-n-cumulus-prod-nisar-browse.s3.us-west-2.amazonaws.com/NISAR_L2_GCOV_V1/NISAR_L2_PR_GCOV_033_140_A_009_4005_DHDH_A_20261021T213032_20261021T213106_P05036_N_F_J_001/NISAR_L2_PR_GCOV_033_140_A_009_4005_DHDH_A_20261021T213032_20261021T213106_P05036_N_F_J_001_LATLON.png",
+        "httpStatus": 200,
+        "httpDate": "Sat, 14 Nov 2026 03:38:09 GMT",
+        "httpAgeSeconds": 0,
+        "retrievedAt": "2026-11-14T03:38:09Z",
+        "retrievedAtBasis": "http-response-date",
+        "hostRecordedAt": "2026-11-13T19:38:09Z",
+        "clockSkewSeconds": 28799,
+        "bytes": 3577844,
+        "sha256": "28b5d11fe4953b81ec0c82ae5c0512894ef2a5550afbffced8c5b7da385cb5bf",
+        "providerFilename": "NISAR_L2_PR_GCOV_033_140_A_009_4005_DHDH_A_20261021T213032_20261021T213106_P05036_N_F_J_001_LATLON.png",
+        "providerChecksumAlgorithm": "MD5",
+        "md5": "6ba7ae0b684116d8c46d479decd65c68",
+        "providerMd5Verified": true,
+        "width": 1990,
+        "height": 1960
+      }
+    },
+    {
+      "conceptId": "G4408731464-ASF",
+      "granuleUr": "NISAR_L2_PR_GCOV_034_140_A_009_4005_DHDH_A_20261102T213032_20261102T213106_P05036_N_F_J_001",
+      "acquisitionStart": "2026-11-02T21:30:32.000000Z",
+      "acquisitionEnd": "2026-11-02T21:31:06.999342Z",
+      "track": 140,
+      "frame": 9,
+      "direction": "ASCENDING",
+      "stackId": "140_A_009",
+      "instrument": "L-SAR",
+      "maturity": "VALIDATED",
+      "crid": "P05036",
+      "polarizations": {
+        "A": [
+          "HH",
+          "HV"
+        ],
+        "B": [
+          "HH",
+          "HV"
+        ]
+      },
+      "rangeBandwidthMHz": {
+        "A": 40.0,
+        "B": 5.0
+      },
+      "footprintId": "G4408731464-ASF",
+      "metadata": {
+        "path": "raw/G4408731464-ASF.umm.json",
+        "sourceUrl": "https://cmr.earthdata.nasa.gov/search/concepts/G4408731464-ASF.umm_json",
+        "resolvedUrl": "https://cmr.earthdata.nasa.gov/search/concepts/G4408731464-ASF.umm_json",
+        "httpStatus": 200,
+        "httpDate": "Sat, 14 Nov 2026 03:38:11 GMT",
+        "httpAgeSeconds": 0,
+        "retrievedAt": "2026-11-14T03:38:11Z",
+        "retrievedAtBasis": "http-response-date",
+        "hostRecordedAt": "2026-11-13T19:38:11Z",
+        "clockSkewSeconds": 28800,
+        "bytes": 29120,
+        "sha256": "6a95424ba69fe1affaf0e5ae28479c6cebebd14569fa99598694b449b1cc8200"
+      },
+      "browse": {
+        "path": "browse/2026-11-02.png",
+        "sourceUrl": "https://nisar.asf.earthdatacloud.nasa.gov/BROWSE/NISAR_L2_GCOV_V1/NISAR_L2_PR_GCOV_034_140_A_009_4005_DHDH_A_20261102T213032_20261102T213106_P05036_N_F_J_001/NISAR_L2_PR_GCOV_034_140_A_009_4005_DHDH_A_20261102T213032_20261102T213106_P05036_N_F_J_001_LATLON.png",
+        "resolvedUrl": "https://d1mv8zhcvry6x4.cloudfront.net/s3-7fdfbcb0ce308dc58d08f97acb1f0590/sds-n-cumulus-prod-nisar-browse.s3.us-west-2.amazonaws.com/NISAR_L2_GCOV_V1/NISAR_L2_PR_GCOV_034_140_A_009_4005_DHDH_A_20261102T213032_20261102T213106_P05036_N_F_J_001/NISAR_L2_PR_GCOV_034_140_A_009_4005_DHDH_A_20261102T213032_20261102T213106_P05036_N_F_J_001_LATLON.png",
+        "httpStatus": 200,
+        "httpDate": "Sat, 14 Nov 2026 03:38:12 GMT",
+        "httpAgeSeconds": 0,
+        "retrievedAt": "2026-11-14T03:38:12Z",
+        "retrievedAtBasis": "http-response-date",
+        "hostRecordedAt": "2026-11-13T19:38:13Z",
+        "clockSkewSeconds": 28799,
+        "bytes": 3461930,
+        "sha256": "066d77b8f38fbc0b03edf65727ff1647f0db6e58898f53544173dc5008b78289",
+        "providerFilename": "NISAR_L2_PR_GCOV_034_140_A_009_4005_DHDH_A_20261102T213032_20261102T213106_P05036_N_F_J_001_LATLON.png",
+        "providerChecksumAlgorithm": "MD5",
+        "md5": "106a4a63b764dfc1f3477440b214e201",
+        "providerMd5Verified": true,
+        "width": 1990,
+        "height": 1960
+      }
+    }
+  ]
+}

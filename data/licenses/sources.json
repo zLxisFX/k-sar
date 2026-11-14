@@ -1,0 +1,33 @@
+{
+  "imported_at": "2026-11-14T03:39:21+00:00",
+  "timestamp_source": "https://cmr.earthdata.nasa.gov/search/collections.json?short_name=OPERA_L2_RTC-S1_V1&page_size=1",
+  "http_date": "Sat, 14 Nov 2026 03:39:21 GMT",
+  "host_clock_used": false,
+  "files": [
+    {
+      "file": "copernicus-dem-licenses.pdf",
+      "source_url": "https://dataspace.copernicus.eu/sites/default/files/media/files/2025-06/copernicus_contributing_mission_data_access_v2_cop_dem_licenses.pdf",
+      "bytes": 499914,
+      "sha256": "bb4a01dcd7f61acefa81c9ccd76af975e12096158169acf0d7b5c44c26c8701f"
+    },
+    {
+      "file": "sentinel-data-legal-notice.pdf",
+      "source_url": "https://sentinels.copernicus.eu/documents/247904/690755/Sentinel_Data_Legal_Notice",
+      "bytes": 115881,
+      "sha256": "fa2955ff48a1d82e77fc7296d63681670ecdb9d2811a0505ae60d0683b62fa64"
+    },
+    {
+      "file": "cc-by-4.0.txt",
+      "source_url": "https://creativecommons.org/licenses/by/4.0/legalcode.txt",
+      "bytes": 18657,
+      "sha256": "9ba9550ad48438d0836ddab3da480b3b69ffa0aac7b7878b5a0039e7ab429411"
+    },
+    {
+      "file": "sentinel-1-rtc-collection.json",
+      "source_url": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/sentinel-1-rtc",
+      "bytes": 9298,
+      "sha256": "30bc296e602afc5288d24587c4c74c322f9b51bdd4fc5b329703f54a3daac8f0"
+    }
+  ],
+  "copernicus_applicable_section": "GLO-30-F public license, PDF pages 22-24 (zero-based 21-23); earlier restrictive GLO-30-R terms are a different product."
+}

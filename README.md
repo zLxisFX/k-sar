@@ -1,102 +1,158 @@
 # Project K-SAR
 
-A research workspace for radar observations and surface-elevation scenarios in the Marikina–Pasig basin, Philippines.
+A browser workspace for radar observations, surface-elevation scenarios and hospital-path calculations in the Marikina–Pasig basin, Philippines.
 
-[Open the live workspace](https://k-sar.vercel.app).
+[Open the workspace](https://k-sar.vercel.app) · [Source code](https://github.com/zLxisFX/k-sar) · [Seven-slide presentation](https://k-sar.vercel.app/Project_K-SAR_2026_Final.pdf)
 
-## Current scope
+K-SAR places two Sentinel-1 acquisitions, a Copernicus surface model and an OpenStreetMap road graph in one map. Compare radar passes, inspect a pixel, preview surface lowering along the river profile, and calculate how an assumed water surface changes a path to a selected hospital feature. The Sources view provides two original NASA–ISRO NISAR browse images, their catalog records and coverage footprints.
 
-Three sources are inspectable in the app:
+![K-SAR showing the Tumana hospital detour, radar curtain, scenario presets and Marikina River profile.](docs/workstation.png)
 
-- **NASA–ISRO NISAR:** original ASF DAAC browse images, catalog records and coverage footprints for 21 October and 2 November 2026. Both are L2 GCOV products on ascending track 140, frame 009, twelve days apart. Their downloaded bytes are checked against the provider's PNG checksums. These are visual references, not quantitative science rasters, and do not observe Carina in 2024.
-- **Sentinel-1:** the existing Orbit 32 observations from 10 July and 3 August 2024, imported unchanged. The app reads the actual Float32 TIFFs on their aligned 854 × 998 grid, with 852,292 finite pixels per band. Values are already gamma-naught dB. The two acquisitions are 24 days apart; neither captures the flood peak.
-- **Copernicus GLO-30 DSM:** surface elevations and a 59-sample, 1.724 km Marikina transect. A user-selected subsidence rate and elapsed time lower the surface with `z_model = z_DSM - abs(rate_mm_per_year) / 1000 * years`. At −30 mm/year over 13 years, the change is −0.390 m. This is a sensitivity scenario, not a measured velocity field.
+The deployed 10 m scenario: a 27.876 km graph path to the selected Amang Rodriguez hospital anchor, with 0.390 m assumed surface lowering.
 
-The map compares the two Sentinel-1 acquisitions with a swipe curtain. Clicking the map samples both radar passes and the DSM at the same coordinate; pointing at the river profile selects one of its 59 samples. The profile previews the selected lowering, while **Use for routing** applies the water-level and lowering scenario to the road graph. **Sources** opens the NASA browse images, footprints and original records.
+## Reproduce the example
 
-The routing service operates on a local OpenStreetMap graph; its paths are research results, not verified road access or hospital availability. The SMS tool is a local acknowledgement simulator and does not transmit messages. Quantitative NISAR analysis remains outside the downloaded browse-data scope.
+Use the **Baseline**, **10 m water** and **12 m water** buttons in the route panel. Each selects Tumana and the Amang Rodriguez Memorial Medical Center OSM anchor, applies the matching inputs and recalculates the route.
 
-## Development
+| Preset | Water surface | Rate / elapsed time | Routing scenario | Reference result |
+|---|---:|---|---|---|
+| Baseline | 0 m EGM2008 | 0 mm/year / 13 years | Off | 3.726 km topology-only path |
+| 10 m water | 10 m EGM2008 | −30 mm/year / 13 years | On; 0.390 m lowering | 27.876 km path, a 648% increase |
+| 12 m water | 12 m EGM2008 | −30 mm/year / 13 years | On; 0.390 m lowering | No path to the selected anchor |
 
-Use Node.js 26.x, npm, and Python 3.11+. Development was checked with Node.js 26.7.0 and Python 3.13. Package versions are exact and the lockfile is committed. NASA import and verification tools use Python's standard library; the committed data allows offline verification. Rebuilding the road import from the original GraphML additionally needs OSMnx, NumPy, Shapely, pyproj and rasterio in the original research environment.
+The preset's reference text is distinct from the computed result. Changing the origin, hospital, water level, rate, elapsed time or routing toggle removes the preset selection unless the controls exactly match another preset. **Custom inputs** remain editable; with **Use for routing** off, surface preview changes do not apply flood exclusions to the graph.
+
+The 10 m scenario has 55,136 depth-closed directed edges without lowering and 56,568 with 0.390 m lowering: **1,432 additional closures**. The amber layer contains 803 unique geometries associated with those 1,432 newly excluded directed edges. Six edges with incomplete DSM coverage are excluded separately. The 27.876 km path is the same with and without lowering at this water level.
+
+These calculations screen graph connectivity using an assumed water surface and a DSM. They do not establish observed flooding, road passability, hospital operation or isolation from every hospital.
+
+## Run locally
+
+Use Node.js 26.x, npm and Python 3.11 or later. Package versions and the npm lockfile are pinned.
 
 ```sh
 npm ci
 npm run dev
 ```
 
-Open <http://127.0.0.1:3000>. Before committing changes:
+Open <http://127.0.0.1:3000>. To check and build:
 
 ```sh
 npm run typecheck
 npm test
 npm run build
+npm start
 ```
 
-`npm start` serves the production build. Development and production servers bind to the local loopback address by default.
+The servers bind to loopback by default. The committed data supports local calculations and offline data verification; the contextual OpenStreetMap background tiles require a network connection.
 
-`npm ci` also copies the pinned MapLibre worker modules into `public/maplibre/`. Before development, build and start, `prepare:assets` publishes an explicit list of 34 source files into `public/data/` and verifies their bytes. Both generated directories are ignored by Git. The OpenStreetMap background tiles require a network connection; they are contextual cartography, not a historical flood map.
+## Data
 
-## Production deployment
+| Source | Included material | Use |
+|---|---|---|
+| Sentinel-1 RTC | Orbit 32, descending, 10 July and 3 August 2024; VV/VH Float32 TIFFs | Radar comparison and coordinate samples |
+| Copernicus GLO-30 | DSM aligned to the radar grid; elevations in m EGM2008 | Surface profile and scenario screening |
+| OpenStreetMap | 62,446 nodes, 155,830 directed edges, 215 hospital-tagged features and contextual waterways | Graph search and map context |
+| NASA–ISRO NISAR | L2 GCOV catalog records, original browse PNGs and footprints for 21 October and 2 November 2026 | Inspectable mission observations and provenance |
 
-From a Vercel-linked checkout, deploy with `npx vercel@65.16.0 --prod`. `vercel.json` requires `npm run build`, including asset preparation. The large TIFFs and GeoJSONs are static files; the routing function bundles only its graph, hospital features and manifest. Route results retain the same JSON structure and stream as plain JSON. Vercel handles transport compression; application-level gzip would double-encode the response. Streaming avoids the buffered-response size limit without reducing data precision.
+The Sentinel-1 TIFFs contain gamma-naught values already converted to dB on an aligned **854 × 998** grid. Each band has **852,292 finite pixels**. Grid spacing is 30 projected metres in EPSG:3857. The acquisitions are 24 days apart and do not capture the July 2024 flood peak.
 
-The CLI deploys the current checkout. Push the reviewed commit before the final deployment; this workflow does not depend on a GitHub auto-deployment integration. Credentials and Vercel's local project files are ignored by Git.
+The NISAR pair shares ascending track 140 and frame 009, twelve days apart. The browse files are checked against the provider's PNG checksums. Their colors are visual references; quantitative GCOV HDF5 pixels have not been downloaded or analyzed, and the differing footprints are not registered for pixel subtraction. These 2026 observations do not depict the 2024 Carina event.
 
-## Structure
+### Why C-band and L-band
 
-- `src/app/` contains the page, styles and routing endpoint.
-- `src/components/` contains the map workstation, NASA reference viewer and river profile.
-- `src/domain/` contains the raster decoder, coordinate sampling, elevation equations, graph search, SMS encoding and session serialization. Raster transforms use `x = columnX × column + rowX × row + originX` and `y = columnY × column + rowY × row + originY`.
-- `data/` contains the source TIFFs, NASA reference bundle, transect, hashes, provenance and license documents.
-- `scripts/` contains reproducible data import and verification commands; `tests/` checks the data contracts and scientific calculations.
+Sentinel-1 uses **C-band, approximately 5.6 cm wavelength**; NISAR L-SAR uses **L-band, approximately 24 cm**. Longer-wavelength radar generally penetrates farther into vegetation, although canopy density and target geometry affect the response. This motivates testing NISAR for surface change beneath vegetation alongside the Sentinel-1 observations. It does not establish a universal flood threshold or make the two sensors' backscatter directly interchangeable. K-SAR currently compares quantitative Sentinel-1 values and displays NISAR browse references; it has not measured an L-band flood response. Sources: [ESA Sentinel-1 tutorial](https://step.esa.int/docs/tutorials/S1TBX%20Landcover%20classification%20with%20Sentinel-1%20GRD.pdf), [NASA NISAR fact sheet](https://www.earthdata.nasa.gov/s3fs-public/2025-01/HR_NA_NISAR_Nov2024.pdf), [NASA SAR Handbook, chapter 2](https://earthdata.nasa.gov/s3fs-public/2025-04/SARHB_CH2_Content.pdf).
 
-The grid's 30 m spacing is in EPSG:3857 projected metres, not a uniform ground distance. DSM elevations use EGM2008 and include structures and vegetation. Scenario water levels must use that same vertical reference; the `depth > 0.30 m` cutoff is a screening assumption, not verified vehicle passability. Missing values remain unknown.
+The [raster manifest](data/sentinel-1/manifest.json), [network manifest](data/network/manifest.json), [transect reference](data/transect/reference.json) and [NISAR documentation](data/nasa/nisar/README.md) retain file hashes and source details. The 59-point transect spans 1.724 km on the WGS84 ellipsoid.
 
-## NASA data and reproduction
+## Calculations
 
-The [NISAR bundle documentation](data/nasa/nisar/README.md) identifies the two exact CMR concepts, acquisition times, original filenames and checksum verification. To verify the committed files without a network connection:
+Surface lowering uses:
+
+```text
+z_model = z_DSM − abs(rate_mm_per_year) / 1000 × elapsed_years
+```
+
+At −30 mm/year over 13 years, the modeled change is −0.390 m. Rate and elapsed time are user inputs, not a measured InSAR velocity field or an exact acquisition epoch. GLO-30 is a surface model that includes buildings and vegetation.
+
+Each road edge is sampled at its vertices and at intervals of at most 15 projected metres. The minimum sampled DSM elevation is lowered by the selected amount. An edge is excluded when modeled depth is strictly greater than 0.30 m; any missing DSM sample excludes the edge as unknown. Water and surface elevations share the EGM2008 vertical reference. Bridges, flood barriers, water connectivity and surveyed road-deck heights are not modeled.
+
+Conventional A* minimizes original OSM edge lengths using an admissible scaled Euclidean heuristic in EPSG:32651. Origins and hospital features are snapped to graph nodes; snap distances are reported. Hospital-tagged features can duplicate a facility and do not verify entrances, capacity or operation.
+
+The surface preview and routing scenario are independent. **Use for routing** applies the selected water level, rate and elapsed time. Pending calculations remain distinguishable from applied results.
+
+## API and session export
+
+`GET /api/route` returns the origin and hospital catalog. `POST /api/route` accepts:
+
+```json
+{
+  "origin": [121.09593983925672, 14.6580158],
+  "hospitalId": "way/54025002",
+  "scenario": { "waterLevelM": 10, "rateMmYear": -30, "elapsedYears": 13 }
+}
+```
+
+Use `scenario: null` for the topology-only result. Responses preserve the applied request, graph identity, path geometry, search timing and separate depth-closure and unknown-coverage counts.
+
+Session JSON uses schema 2. It records **17 file identities and SHA-256 hashes**, map position, layer visibility, the selected coordinate/profile index, surface preview, requested route, applied response and pending state. A client timestamp is marked unverified. The file identifies the source rasters and profile rather than embedding every source pixel; external background tiles are outside its hash coverage.
+
+The SMS panel is a local acknowledgement simulator. It validates GSM-7 requests and returns a fixed reply of exactly 145 characters and septets. It has no gateway, transmission or dispatch integration.
+
+## Verification and benchmarks
+
+The current suite has 47 passing tests: 35 Node.js tests and 12 Python tests. It checks raster decoding and alignment, real pixel samples, geodesic transect distances, the lowering equation, strict depth boundaries, unknown coverage, graph-search correctness, route examples, presets, session state, GSM-7 encoding, streaming transport and the pinned NISAR metadata/browse bundle. These are software and data-contract checks, not field validation of floodwater or access.
 
 ```sh
 python scripts/import-nisar.py --verify
+npm run benchmark:routing
 ```
 
-Running the same script without `--verify` downloads those pinned NASA records and browse images again. It does not require credentials. Quantitative GCOV science pixels require Earthdata authentication and are not included in this repository. Browse colors have no project-defined physical scale; the differing footprints are not registered for pixel subtraction.
+The benchmark records 30 graph-search runs after ten warmups. [benchmark-current.json](data/network/benchmark-current.json) retains the runtime, every timing and graph hashes. Its 14 November Node.js run measured Tumana baseline at 0.1654 ms median and the 10 m detour at 3.7931 ms median. Search timing includes allocation and path reconstruction; it excludes graph loading, snapping, scenario preparation, geometry and HTTP. Live timings vary.
 
-The [Sentinel-1 manifest](data/sentinel-1/manifest.json) records scene identifiers, upstream assets and inherited processing. The [transect reference](data/transect/reference.json) preserves the prior sampled array; tests independently sample the imported TIFFs and check it within the original rounding precision.
+Running `scripts/import-nisar.py` without `--verify` downloads the pinned public NASA metadata and browse files again. Rebuilding `scripts/import-network.py --legacy-root <directory>` additionally requires the original GraphML/research files and OSMnx, NumPy, Shapely, pyproj and rasterio. Running the application and tests uses the checked graph bundled here.
 
-Git preserves `data/` bytes exactly, including original line endings, so a checkout does not invalidate the retained checksums.
+## Architecture and deployment
 
-The official [Dancing with the SARs challenge](https://www.spaceappschallenge.org/2026/challenges/dancing-with-the-sars/) and its [resources](https://www.spaceappschallenge.org/2026/challenges/dancing-with-the-sars/?tab=resources) motivate the NISAR workflow. The current reference bundle establishes traceable data access and inspection; it does not yet deliver quantitative NISAR surface-change analysis.
+- `src/components/`: MapLibre workspace, radar curtain, river profile and NASA reference viewer.
+- `src/domain/`: raster sampling, elevation, graph search, SMS encoding and session serialization.
+- `src/server/` and `src/app/api/route/`: graph loading and route responses.
+- `data/`, `scripts/` and `tests/`: source assets, import records, reproduction and checks.
 
-## Local acknowledgement
+Before development, build or production start, `prepare:assets` copies an explicit list of source files into `public/data/` and verifies the copied bytes. The pinned MapLibre worker is copied to `public/maplibre/`. Both generated directories are ignored by Git.
 
-`simulateSms` accepts a request category (`FLOOD`, `DIALYSIS` or `TRAUMA`) followed by a location. Its fixed reply is exactly 145 GSM-7 characters and septets. Requests are limited to 145 septets; extension-table characters consume two, and unsupported Unicode is rejected rather than silently recoded. The [GSM-7 encoding reference](https://www.twilio.com/docs/glossary/what-is-gsm-7-character-encoding) describes this distinction. The simulator has no SMS gateway, transmission or dispatch capability.
+For Vercel, `vercel.json` runs `npm run build`; large TIFF/GeoJSON assets are static. The routing function streams plain JSON and leaves transport compression to Vercel. From a linked checkout, deploy with `npx vercel@65.16.0 --prod`. Review and push the intended commit before deploying the checkout. Local Vercel configuration and credentials are ignored by Git.
 
-## Routing and reproducible sessions
+## Sources and development record
 
-`GET /api/route` provides the origins and 215 hospital-tagged OSM features. These may include multiple features for one facility. `POST /api/route` accepts `{origin: [longitude, latitude], hospitalId, scenario}`; `scenario` is either `null` or `{waterLevelM, rateMmYear, elapsedYears}`. Heights use EGM2008, rates use mm/year, and elapsed time uses years. The response includes the exact applied request, graph hashes, the topology-only path, the scenario path and separate depth-closure/unknown-coverage counts.
+See [data/NOTICE.txt](data/NOTICE.txt) for dataset attribution and licenses, [data/network/NOTICE.txt](data/network/NOTICE.txt) for OpenStreetMap/ODbL terms, [presentation sources](docs/presentation-sources.md) for image and font credits, and [development history](docs/development-history.md) for the research timeline, reused artifacts, assisted development and clock provenance.
 
-The imported directed multigraph has 62,446 nodes and 155,830 edges. A* minimizes the original OSM lengths with an admissible scaled Euclidean heuristic. Each edge's DSM samples include its vertices and positions no more than 15 projected metres apart. An edge is closed by the model only when depth exceeds 0.30 m. Six edges have partially missing DSM coverage and are excluded separately in scenarios; they are not classified as flooded.
+The [Dancing with the SARs challenge](https://www.spaceappschallenge.org/2026/challenges/dancing-with-the-sars/) motivates the NISAR inspection workflow. Quantitative NISAR change analysis and field comparison are further work.
 
-For Tumana to the selected Amang Rodriguez Memorial Medical Center OSM anchor, the unmodified network path is 3.726297 km. At a 10 m water surface it becomes 27.875634 km, both with zero lowering and with −0.390 m lowering. The lowering changes depth-closed directed edges from 55,136 to 56,568 (+1,432); total exclusions including unknown coverage are 55,142 and 56,574. At 12 m water and −0.390 m lowering, that selected origin/anchor pair has no path. This does not establish isolation from every hospital.
+Original software is licensed under [Apache License 2.0](LICENSE). Third-party data and dependencies retain their own licenses.
 
-Run `npm run benchmark:routing` to record 30 graph-search runs after ten warmups. The [current report](data/network/benchmark-current.json) retains every timing, runtime, graph hash and timing scope. The archived Python medians of 0.216 ms (Malanday) and 0.304 ms (Tumana) are historical references; 22.27 ms was one archived detour solve. They are not hardcoded live performance claims.
+## Session source hashes
 
-The [network manifest](data/network/manifest.json) identifies the original GraphML, hospital extract, DSM and sampled-index hashes. `scripts/import-network.py --legacy-root <original-research-directory>` rebuilds this import and checks freshly sampled minima against the archived index; it requires the original research files. Running the app, its tests and its benchmark uses the checked graph already included here. OpenStreetMap attribution and ODbL terms are retained in [the network notice](data/network/NOTICE.txt).
+All 17 files were fetched anonymously from the production alias on 15 November 2026 and matched these local SHA-256 digests. The table identifies source files, not external map tiles or field validity.
 
-JSON sessions use schema version 2 and preserve dataset hashes, map state, layer visibility, surface preview parameters and the complete applied route response. Preview parameters remain present when scenario routing is disabled. Requested and applied routes are stored separately; an export during a pending calculation retains that state explicitly. Client timestamps are identified as unverified; nonfinite values cannot silently turn into JSON `null`. External OpenStreetMap background tiles are not archived or covered by the local dataset hashes.
+| # | Dataset ID | Bytes | SHA-256 |
+|---:|---|---:|---|
+| 1 | `sentinel-1/baseline.tif` | 6,153,533 | `0f035f4b14488d27c45c7d88744503b23c12ac32f6145b1b1af56006115475f4` |
+| 2 | `sentinel-1/post.tif` | 6,147,415 | `24473d762dcd2de5dbf227e3d0ce043b32b3d46f4ce767076cda1e21e5e21f0c` |
+| 3 | `sentinel-1/dem.tif` | 2,561,258 | `39ee1d9afa27ffbf5a552566253e646a740416c3b86cac61db79209dbaec2a86` |
+| 4 | `network/graph.json.gz` | 8,001,173 | `187a0e0fb4929b4ef5e092a76d43bcf76c179f622659887baa5c7497af7380b2` |
+| 5 | `network/hospitals.geojson` | 106,810 | `cb8398481f67381f2a9d2c604325d4f9ed9b9c0aa63caf1f51ed0e9b5691db83` |
+| 6 | `network/roads-display.geojson` | 16,179,717 | `3ee78a19b59672fa90c287cdff7693139d98f9582fe7c3451f29f94ddb7d3e4b` |
+| 7 | `network/source-osm-manifest.json` | 561 | `275a06719e32d4523cda4581edd8d9ece0be7a03bb710a3463a41fb87f7aa711` |
+| 8 | `network/source-terrain-manifest.json` | 1,049 | `d63ce525ab23df671e1deb380d643dae46c60c4550d661097b3ec8c97b35855b` |
+| 9 | `network/odbl-1.0.html` | 51,543 | `85bc21fb2c00b2effb9202b2aa785934ce5a05df954e17cbd2a1f7c10c04c633` |
+| 10 | `network/waterways.geojson` | 2,381,373 | `eca79db5e7d29d8efcd05770b39e18b30afb5845b813640c5e5c8fc73b5111df` |
+| 11 | `transect/reference.json` | 23,416 | `848bc873ac998406b7287a4b54a7ba7d413d2d7780b6fa8d5b73bdd97117ab8e` |
+| 12 | `nasa/nisar/browse/2026-10-21.png` | 3,577,844 | `28b5d11fe4953b81ec0c82ae5c0512894ef2a5550afbffced8c5b7da385cb5bf` |
+| 13 | `nasa/nisar/raw/G4404197169-ASF.umm.json` | 29,124 | `870955a73ab5ac97dbddeca674d2483c59d3602a517dfe6730ce5aecc5bffe27` |
+| 14 | `nasa/nisar/browse/2026-11-02.png` | 3,461,930 | `066d77b8f38fbc0b03edf65727ff1647f0db6e58898f53544173dc5008b78289` |
+| 15 | `nasa/nisar/raw/G4408731464-ASF.umm.json` | 29,120 | `6a95424ba69fe1affaf0e5ae28479c6cebebd14569fa99598694b449b1cc8200` |
+| 16 | `nasa/nisar/raw/C3622241360-ASF.umm.json` | 10,704 | `616216cbc19bbf9f16b70ac4b6c063b993f4d966007a3a26c7ee7259598bc256` |
+| 17 | `nasa/nisar/footprints.geojson` | 1,710 | `d96bf5c72628cfc01512c9b0a00b8cd6aa7b3d074fb60600d260b183389eca2a` |
 
-## Provenance and assistance
-
-Pre-competition research and a separate local prototype were developed during **5–13 November 2026**. This repository began on **14 November 2026** as a new scaffold; its creation date is not the start of the underlying research. Earlier research, code, data preparation and benchmark work must be attributed when imported. This repository does not establish competition eligibility or imply endorsement by NASA, ISRO or the Space Apps Challenge.
-
-Development has used **OpenAI Codex and Google Gemini** for research, architectural discussion, implementation and review. AI assistance is part of the project's development history. Scientific claims, source data and generated code require human review; assistance does not substitute for validation.
-
-The workstation clock was found to be eight hours behind on 14 November 2026: GitHub returned `Sat, 14 Nov 2026 03:30:15 GMT` while the workstation reported `2026-11-13T19:30:15Z`. Commit timestamps are taken from a fresh GitHub HTTPS response at commit time. The workstation clock is left unchanged. This corrects clock skew; it does not reconstruct or disguise earlier development.
-
-The Sentinel-1 TIFFs, DSM and archived transect came from that earlier research workspace. The NASA catalog and browse files were downloaded on 14 November 2026. Source datasets retain their own licenses and attribution requirements; see [data/NOTICE.txt](data/NOTICE.txt) and the NISAR bundle's source notes.
-
-## License
-
-Original project code is licensed under [Apache License 2.0](LICENSE). Dependency and dataset licenses remain separate.
+These are 17 file identities, not 17 independent scientific datasets. They include a license document and provenance metadata. External OpenStreetMap tiles are not included. The transect hash is computed from the actual file by the page, rather than a separate expected-hash entry.

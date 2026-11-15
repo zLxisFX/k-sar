@@ -18,6 +18,8 @@ import type {
 import type { ReferenceTransect } from "@/domain/research";
 import type { DecodedRaster } from "@/domain/raster";
 import rasterManifest from "@data/sentinel-1/manifest.json";
+import nisarComparison from "@data/nasa/nisar/comparison/manifest.json";
+import type { RadarSource, NisarDisplay } from "@/domain/nisar-browse";
 
 const EMPTY: FeatureCollection = { type: "FeatureCollection", features: [] };
 type MapCoordinate = [number, number];
@@ -87,6 +89,8 @@ function mapStyle(): StyleSpecification {
 }
 type Props = {
   rasters: RasterSet | null;
+  radarSource: RadarSource;
+  nisarDisplay: NisarDisplay;
   route: RouteResponse | null;
   scenario: ScenarioInputs | null;
   radar: boolean;
@@ -451,18 +455,35 @@ export default function BasinMap(p: Props) {
     };
   }, [p.transect]);
   useEffect(() => {
-    if (!ready || !p.rasters) return;
-    const images = [
-      rasterImage(p.rasters.post),
-      rasterImage(p.rasters.baseline),
+    if (!ready || (p.radarSource === "sentinel-1" && !p.rasters)) return;
+    const bounds = nisarComparison.grid.boundsWgs84;
+    const nisarCorners: typeof rasterCorners = [
+      [bounds.west, bounds.north],
+      [bounds.east, bounds.north],
+      [bounds.east, bounds.south],
+      [bounds.west, bounds.south],
     ];
+    const images =
+      p.radarSource === "nisar"
+        ? (p.nisarDisplay === "difference"
+            ? [
+                nisarComparison.difference.image.path,
+                nisarComparison.difference.image.path,
+              ]
+            : [
+                nisarComparison.records[1].aligned.path,
+                nisarComparison.records[0].aligned.path,
+              ]
+          ).map((path) => `/data/nasa/nisar/${path}`)
+        : [rasterImage(p.rasters!.post), rasterImage(p.rasters!.baseline)];
     maps.current.forEach((map, index) => {
       (map.getSource("radar") as ImageSource).updateImage({
         url: images[index],
-        coordinates: rasterCorners,
+        coordinates: p.radarSource === "nisar" ? nisarCorners : rasterCorners,
       });
+      map.setPaintProperty("radar", "raster-resampling", "nearest");
     });
-  }, [ready, p.rasters]);
+  }, [ready, p.rasters, p.radarSource, p.nisarDisplay]);
   useEffect(() => {
     if (!ready) return;
     const controller = new AbortController();
@@ -525,18 +546,42 @@ export default function BasinMap(p: Props) {
       map.setLayoutProperty(
         "radar",
         "visibility",
-        p.radar && p.rasters ? "visible" : "none",
+        p.radar && (p.rasters || p.radarSource === "nisar")
+          ? "visible"
+          : "none",
       );
       map.setLayoutProperty(
         "roads",
         "visibility",
-        p.roads ? "visible" : "none",
+        p.roads && p.radarSource === "sentinel-1" ? "visible" : "none",
+      );
+      for (const id of [
+        "hospitals",
+        "closures",
+        "additional-closures",
+        "unknown-closures",
+        "route-halo",
+        "route",
+        "anchors",
+      ])
+        map.setLayoutProperty(
+          id,
+          "visibility",
+          p.radarSource === "sentinel-1" ? "visible" : "none",
+        );
+      map.setPaintProperty(
+        "radar",
+        "raster-opacity",
+        p.radarSource === "nisar" ? 1 : 0.8,
       );
     });
-  }, [ready, p.radar, p.roads, p.rasters]);
+  }, [ready, p.radar, p.roads, p.rasters, p.radarSource]);
   useEffect(() => {
     if (!ready || !p.rasters) return;
-    const url = p.scenario ? rasterImage(p.rasters.dem, p.scenario) : null;
+    const url =
+      p.scenario && p.radarSource === "sentinel-1"
+        ? rasterImage(p.rasters.dem, p.scenario)
+        : null;
     maps.current.forEach((map) => {
       if (url)
         (map.getSource("inundation") as ImageSource).updateImage({
@@ -549,7 +594,7 @@ export default function BasinMap(p: Props) {
         url ? "visible" : "none",
       );
     });
-  }, [ready, p.rasters, p.scenario]);
+  }, [ready, p.rasters, p.scenario, p.radarSource]);
   useEffect(() => {
     if (!ready) return;
     const features: FeatureCollection["features"] = [];
@@ -571,7 +616,8 @@ export default function BasinMap(p: Props) {
     }
     const closureCollection = (
       collection:
-        NonNullable<RouteResponse["scenarioSummary"]>["closures"] | undefined,
+        | NonNullable<RouteResponse["scenarioSummary"]>["closures"]
+        | undefined,
     ): FeatureCollection => ({
       type: "FeatureCollection",
       features: (collection?.features ?? []).map((feature) => ({
@@ -657,6 +703,7 @@ export default function BasinMap(p: Props) {
   const fitRoute = useCallback(() => {
     const coordinates =
       p.route?.scenarioRoute?.feature?.geometry.coordinates ??
+      p.route?.withoutLoweringRoute?.feature?.geometry.coordinates ??
       p.route?.baseline.feature?.geometry.coordinates;
     if (!coordinates?.length) return false;
     const bounds = new maplibregl.LngLatBounds();
@@ -693,30 +740,63 @@ export default function BasinMap(p: Props) {
         className="map-canvas comparison-map"
         style={{ clipPath: `inset(0 ${100 - curtain}% 0 0)` }}
       />
-      {p.radar && (
-        <>
-          <div className="map-date before">
-            10 Jul 2024 <span>Sentinel-1 VV</span>
-          </div>
-          <div className="map-date after">
-            3 Aug 2024 <span>Sentinel-1 VV</span>
-          </div>
-          <div className="curtain-line" style={{ left: `${curtain}%` }} />
-          <label className="curtain-control">
-            Compare radar passes
-            <input
-              type="range"
-              min="0"
-              max="100"
-              value={curtain}
-              aria-label="Radar comparison position"
-              onChange={(e) => setCurtain(Number(e.target.value))}
-            />
-            <output>{curtain}%</output>
-          </label>
-        </>
-      )}
+      {p.radar &&
+        !(p.radarSource === "nisar" && p.nisarDisplay === "difference") && (
+          <>
+            <div className="map-date before">
+              {p.radarSource === "nisar" ? (
+                <>
+                  21 Oct 2026 <span>NISAR RGB browse</span>
+                </>
+              ) : (
+                <>
+                  10 Jul 2024 <span>Sentinel-1 VV</span>
+                </>
+              )}
+            </div>
+            <div className="map-date after">
+              {p.radarSource === "nisar" ? (
+                <>
+                  2 Nov 2026 <span>NISAR RGB browse</span>
+                </>
+              ) : (
+                <>
+                  3 Aug 2024 <span>Sentinel-1 VV</span>
+                </>
+              )}
+            </div>
+            <div className="curtain-line" style={{ left: `${curtain}%` }} />
+            <label className="curtain-control">
+              Compare radar passes
+              <input
+                type="range"
+                min="0"
+                max="100"
+                value={curtain}
+                aria-label="Radar comparison position"
+                onChange={(e) => setCurtain(Number(e.target.value))}
+              />
+              <output>{curtain}%</output>
+            </label>
+          </>
+        )}
       <div className="map-actions">
+        {p.radarSource === "nisar" && (
+          <button
+            onClick={() => {
+              const b = nisarComparison.grid.boundsWgs84;
+              maps.current[0]?.fitBounds(
+                [
+                  [b.west, b.south],
+                  [b.east, b.north],
+                ],
+                { padding: 55, duration: 350 },
+              );
+            }}
+          >
+            NISAR common grid
+          </button>
+        )}
         <button
           onClick={() =>
             maps.current[0]?.fitBounds(
@@ -735,7 +815,7 @@ export default function BasinMap(p: Props) {
         </button>
       </div>
       <div className="map-legend" aria-label="Map legend">
-        {p.radar && (
+        {p.radar && p.radarSource === "sentinel-1" && (
           <div className="radar-legend">
             <span>γ⁰ VV / dB</span>
             <div className="radar-ramp" />
@@ -745,41 +825,64 @@ export default function BasinMap(p: Props) {
             </div>
           </div>
         )}
+        {p.radar && p.radarSource === "nisar" && (
+          <div className="radar-legend">
+            <span>
+              {p.nisarDisplay === "pair"
+                ? "Provider RGB · display codes"
+                : "2 Nov − 21 Oct · display DN"}
+            </span>
+            {p.nisarDisplay === "difference" && (
+              <>
+                <div className="nisar-difference-ramp" />
+                <div className="ramp-values">
+                  <span>≤ −64</span>
+                  <span>0</span>
+                  <span>≥ +64</span>
+                </div>
+              </>
+            )}
+            <span>200 m projected cells</span>
+          </div>
+        )}
         <p title="OSM centerline with screen-space emphasis; the casing does not measure river width.">
           <b className="river-key" aria-hidden="true" />
           Marikina River · OSM centerline
         </p>
-        {p.route?.baseline.feature && (
+        {p.radarSource === "sentinel-1" && p.route?.baseline.feature && (
           <p>
             <b className="baseline-key" aria-hidden="true" />
             Baseline path
           </p>
         )}
-        {p.route?.scenarioRoute?.feature && (
+        {p.radarSource === "sentinel-1" && p.route?.scenarioRoute?.feature && (
           <p>
             <b className="scenario-key" aria-hidden="true" />
             Scenario path
           </p>
         )}
-        {!!p.route?.scenarioSummary?.closures.features.length && (
-          <p>
-            <b className="closure-key" aria-hidden="true" />
-            Modeled depth &gt; 0.30 m
-          </p>
-        )}
-        {!!p.route?.scenarioSummary?.additionalClosures.features.length && (
-          <p title="Known-depth edges newly excluded by the specified surface lowering, compared with the same water level and no lowering.">
-            <b className="additional-closure-key" aria-hidden="true" />
-            Additional closures · lowering
-          </p>
-        )}
-        {!!p.route?.scenarioSummary?.unknownClosures.features.length && (
-          <p>
-            <b className="unknown-key" aria-hidden="true" />
-            Unknown DSM · excluded
-          </p>
-        )}
-        {p.scenario && (
+        {p.radarSource === "sentinel-1" &&
+          !!p.route?.scenarioSummary?.closures.features.length && (
+            <p>
+              <b className="closure-key" aria-hidden="true" />
+              Modeled depth &gt; 0.30 m
+            </p>
+          )}
+        {p.radarSource === "sentinel-1" &&
+          !!p.route?.scenarioSummary?.additionalClosures.features.length && (
+            <p title="Known-depth edges newly excluded by the specified surface lowering, compared with the same water level and no lowering.">
+              <b className="additional-closure-key" aria-hidden="true" />
+              Additional closures · lowering
+            </p>
+          )}
+        {p.radarSource === "sentinel-1" &&
+          !!p.route?.scenarioSummary?.unknownClosures.features.length && (
+            <p>
+              <b className="unknown-key" aria-hidden="true" />
+              Unknown DSM · excluded
+            </p>
+          )}
+        {p.scenario && p.radarSource === "sentinel-1" && (
           <p>
             <i aria-hidden="true" />
             Scenario water above adjusted DSM

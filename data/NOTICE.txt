@@ -55,3 +55,19 @@ does not convert these data to Apache-2.0.
 Original license documents and the RTC collection declaration are retained in
 data/licenses; sources.json records their URLs, hashes and externally observed
 HTTP retrieval date. The system wall clock is not used for that timestamp.
+
+
+NISAR PROVIDER BROWSE COMPARISON
+NASA-ISRO NISAR mission; L-SAR products processed by NASA JPL and distributed
+by NASA ASF DAAC. Collection NISAR_L2_GCOV_V1, DOI 10.5067/NIL2GCOV-V1.
+Source collection metadata declares free and open data. NASA data-use guidance:
+https://www.earthdata.nasa.gov/engage/open-data-services-software-policies/data-use-guidance
+
+The original October 21 and November 2, 2026 browse PNGs and CMR records remain
+unchanged. comparison/ contains derivatives sampled to a common 200 m projected
+grid using the provider's explicitly linked KML image bounds. Changes are
+nearest-neighbor reprojection/cropping, common coverage masking and differences
+of rendered RGB display codes. These derivatives are not calibrated GCOV science
+rasters, quantitative backscatter change, flood detections or observations of
+July 2024 Carina. The comparison manifest binds inputs and outputs by SHA-256
+and records processing limitations. No NASA, ISRO or ASF endorsement is implied.

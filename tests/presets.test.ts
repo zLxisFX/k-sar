@@ -97,4 +97,11 @@ test("all reference buttons reproduce their claims on the imported graph and sel
   assert.equal(results[2].scenarioRoute!.status, "NO_PATH");
   assert.equal(results[2].scenarioRoute!.feature, null);
   assert.equal(results[2].destination.id, PRESET_SCOPE.hospitalId);
+  assert.ok(
+    Math.abs(results[3].scenarioRoute!.lengthM! - 27875.63395980343) < 0.001,
+  );
+  assert.equal(results[3].scenarioSummary!.closedEdges, 61848);
+  assert.equal(results[4].scenarioRoute!.status, "NO_PATH");
+  assert.equal(results[4].scenarioSummary!.closedEdges, 63408);
+  assert.equal(results[4].scenarioSummary!.additionalClosedEdges, 1560);
 });

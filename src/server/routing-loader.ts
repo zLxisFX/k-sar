@@ -66,9 +66,13 @@ export async function computeRoute(request: RouteRequest): Promise<RouteResponse
   const baseline = solveRoute(graph, request.origin, destination.coordinate);
   const scenario = request.scenario ? prepareScenario(graph, request.scenario) : null;
   const scenarioRoute = scenario ? solveRoute(graph, request.origin, destination.coordinate, scenario) : null;
+  const withoutLoweringRoute = !scenario ? null : scenario.verticalLoweringM === 0 ? scenarioRoute
+    : solveRoute(graph, request.origin, destination.coordinate, prepareScenario(graph, {
+      waterLevelM: scenario.waterLevelM, rateMmYear: 0, elapsedYears: scenario.elapsedYears,
+    }, false));
   const scenarioSummary = scenario ? summarizeScenario(graph, scenario) : null;
   return {
-    request, baseline, scenarioRoute, scenarioSummary, destination,
+    request, baseline, scenarioRoute, withoutLoweringRoute, scenarioSummary, destination,
     graph: { nodes: graph.nodes.length, directedEdges: graph.edges.length, schemaVersion: manifest.schemaVersion, sha256: graphHash, sourceGraphSha256: manifest.sourceHashes.graphml },
     receipt: { hostRecordedAt: new Date().toISOString(), clockBasis: "Workstation clock, previously observed about eight hours behind provider HTTP time; not a trusted acquisition or UTC retrieval timestamp." },
     limitations: ROUTING_LIMITATIONS,

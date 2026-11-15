@@ -28,7 +28,8 @@ export const ROUTE_PRESETS = [
     detail: "27.876 km",
     parameters: { waterLevelM: 10, rateMmYear: -30, elapsedYears: 13 },
     scenarioOn: true,
-    reference: "0.390 m lowering · 27.876 km path · 56,568 depth closures · +1,432 from lowering.",
+    reference:
+      "0.390 m lowering · 27.876 km path · 56,568 depth closures · +1,432 from lowering.",
   },
   {
     id: "water-12",
@@ -36,7 +37,26 @@ export const ROUTE_PRESETS = [
     detail: "No path",
     parameters: { waterLevelM: 12, rateMmYear: -30, elapsedYears: 13 },
     scenarioOn: true,
-    reference: "0.390 m lowering · no network path to this selected hospital anchor.",
+    reference:
+      "0.390 m lowering · no network path to this selected hospital anchor.",
+  },
+  {
+    id: "tipping-unlowered",
+    label: "Without lowering",
+    detail: "27.876 km",
+    parameters: { waterLevelM: 11.6, rateMmYear: 0, elapsedYears: 13 },
+    scenarioOn: true,
+    reference:
+      "11.6 m water · 0 m lowering · 61,848 depth closures · connected to the selected anchor.",
+  },
+  {
+    id: "tipping-lowered",
+    label: "With 0.390 m lowering",
+    detail: "No path",
+    parameters: { waterLevelM: 11.6, rateMmYear: -30, elapsedYears: 13 },
+    scenarioOn: true,
+    reference:
+      "11.6 m water · 0.390 m lowering · 63,408 depth closures · +1,560 from lowering · no path to this anchor.",
   },
 ] as const;
 

@@ -129,10 +129,12 @@ export default function NisarReference({
         ))}
       </div>
       <p className="evidence-note">
-        These provider browse images are visual references. Their footprints
-        differ and they are not pixel-aligned; image brightness is not a
-        calibrated backscatter measurement. These 2026 acquisitions do not
-        observe the July 2024 Carina event.
+        The original provider images below retain their full scene extents.
+        Select NISAR L-band in the main map to swipe their aligned common-area
+        subset and inspect RGB display changes. Alignment uses the provider KML
+        geometry and both catalog footprints. Display brightness is not
+        calibrated backscatter. These 2026 acquisitions do not observe the July
+        2024 Carina event.
       </p>
       <div className="source-links">
         <span>NASA JPL / NASA ASF DAAC · provider-rendered GCOV browse</span>

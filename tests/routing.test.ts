@@ -142,6 +142,32 @@ test("no lowering adds zero known closures while retaining the same water-level 
     assert.deepEqual(response.scenarioSummary?.additionalClosures, { type: "FeatureCollection", features: [] });
     assert.equal(response.scenarioSummary?.unknownEdges, 6);
     assert.equal(response.scenarioSummary?.excludedEdges, 55142);
+    assert.strictEqual(response.withoutLoweringRoute, response.scenarioRoute, "A zero-lowering scenario reuses the identical solve, including its timing.");
+  }
+});
+
+test("same-water counterfactual route separates lowering from topology and changing water level", async () => {
+  const request = { origin: [121.09593983925672, 14.6580158] as const, hospitalId: "way/54025002" };
+  const topology = await computeRoute({ ...request, scenario: null });
+  assert.equal(topology.withoutLoweringRoute, null);
+  for (const [waterLevelM, knownWithout, knownWith] of [[10, 55136, 56568], [11.6, 61848, 63408]]) {
+    const response = await computeRoute({ ...request, scenario: { waterLevelM, rateMmYear: -30, elapsedYears: 13 } });
+    const reference = response.withoutLoweringRoute!;
+    assert.equal(reference.status, "NETWORK_PATH");
+    assert.equal(reference.lengthM, 27875.63395980343);
+    assert.notEqual(reference.lengthM, response.baseline.lengthM, "The reference retains water screening instead of substituting the topology-only path.");
+    assert.equal(reference.excludedEdges, knownWithout + 6);
+    assert.equal(response.scenarioRoute!.excludedEdges, knownWith + 6);
+    assert.equal(reference.sourceNode, response.scenarioRoute!.sourceNode);
+    assert.equal(reference.targetNode, response.scenarioRoute!.targetNode);
+    assert.ok(reference.feature && reference.edgeIds.length > 0);
+    if (waterLevelM === 10) {
+      assert.deepEqual(reference.edgeIds, response.scenarioRoute!.edgeIds);
+      assert.equal(reference.lengthM, response.scenarioRoute!.lengthM);
+    } else {
+      assert.equal(response.scenarioRoute!.status, "NO_PATH");
+      assert.equal(response.scenarioRoute!.feature, null);
+    }
   }
 });
 

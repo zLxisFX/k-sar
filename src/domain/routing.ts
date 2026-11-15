@@ -23,6 +23,7 @@ export type RoutingCatalog = {
 export type RouteResponse = {
   request: RouteRequest;
   baseline: RouteResult; scenarioRoute: RouteResult | null;
+  withoutLoweringRoute: RouteResult | null;
   scenarioSummary: (Omit<ScenarioState, "excluded"> & {
     closedEdgesWithoutLowering: number;
     additionalClosedEdges: number;

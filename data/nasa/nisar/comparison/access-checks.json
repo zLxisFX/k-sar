@@ -1,0 +1,36 @@
+{
+  "authenticationUsed": false,
+  "sciencePixelsRetrieved": false,
+  "note": "Anonymous probes stopped at the Earthdata OAuth redirect; no credentials were inspected or sent. No science-data transformation job was created.",
+  "fullHdf5": [
+    {
+      "conceptId": "G4404197169-ASF",
+      "kind": "hdf5",
+      "url": "https://nisar.asf.earthdatacloud.nasa.gov/NISAR/NISAR_L2_GCOV_V1/NISAR_L2_PR_GCOV_033_140_A_009_4005_DHDH_A_20261021T213032_20261021T213106_P05036_N_F_J_001/NISAR_L2_PR_GCOV_033_140_A_009_4005_DHDH_A_20261021T213032_20261021T213106_P05036_N_F_J_001.h5",
+      "status": 302,
+      "redirectHost": "urs.earthdata.nasa.gov",
+      "redirectPath": "/oauth/authorize",
+      "contentType": "application/json"
+    },
+    {
+      "conceptId": "G4408731464-ASF",
+      "kind": "hdf5",
+      "url": "https://nisar.asf.earthdatacloud.nasa.gov/NISAR/NISAR_L2_GCOV_V1/NISAR_L2_PR_GCOV_034_140_A_009_4005_DHDH_A_20261102T213032_20261102T213106_P05036_N_F_J_001/NISAR_L2_PR_GCOV_034_140_A_009_4005_DHDH_A_20261102T213032_20261102T213106_P05036_N_F_J_001.h5",
+      "status": 302,
+      "redirectHost": "urs.earthdata.nasa.gov",
+      "redirectPath": "/oauth/authorize",
+      "contentType": "application/json"
+    }
+  ],
+  "harmonySubset": {
+    "status": 303,
+    "redirectHost": "urs.earthdata.nasa.gov",
+    "redirectPath": "/oauth/authorize",
+    "contentType": "text/plain; charset=utf-8",
+    "requestUrl": "https://harmony.earthdata.nasa.gov/C3622241360-ASF/ogc-api-coverages/1.0.0/all/coverage/rangeset?subset=lat%2814.5%3A14.75%29&subset=lon%28121.04%3A121.15%29&granuleId=G4404197169-ASF&format=image%2Ftiff&maxResults=1"
+  },
+  "documentation": [
+    "https://nisar-docs.asf.alaska.edu/harmony/",
+    "https://harmony.earthdata.nasa.gov/docs/#getting-started"
+  ]
+}

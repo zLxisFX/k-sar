@@ -1,10 +1,10 @@
 # Project K-SAR
 
-A browser workspace for radar observations, surface-elevation scenarios and hospital-path calculations in the Marikina–Pasig basin, Philippines.
+A browser workspace for radar observations, surface-elevation scenarios and hospital-path calculations in the Marikina–Pasig basin, Philippines. Built for the 2026 NASA Space Apps Challenge (*Dancing with the SARs*).
 
 [Open the workspace](https://k-sar.vercel.app) · [Source code](https://github.com/zLxisFX/k-sar) · [Seven-slide presentation](https://k-sar.vercel.app/Project_K-SAR_2026_Final.pdf)
 
-K-SAR places two Sentinel-1 acquisitions, a Copernicus surface model and an OpenStreetMap road graph in one map. Compare radar passes, inspect a pixel, preview surface lowering along the river profile, and calculate how an assumed water surface changes a path to a selected hospital feature. The Sources view provides two original NASA–ISRO NISAR browse images, their catalog records and coverage footprints.
+K-SAR places two Sentinel-1 C-band acquisitions bracketing the July 2024 Carina event, a Copernicus GLO-30 surface model and an OpenStreetMap road graph in one inspectable map. Compare radar passes, inspect pixel backscatter and elevation values, preview surface lowering along the Marikina River profile, and calculate how an assumed water surface changes road-network connectivity to a selected hospital feature. The Sources view provides two original 2026 NASA–ISRO NISAR L2 GCOV browse images, their catalog records and coverage footprints.
 
 ![K-SAR showing the Tumana hospital detour, radar curtain, scenario presets and Marikina River profile.](docs/workstation.png)
 
@@ -28,7 +28,7 @@ These calculations screen graph connectivity using an assumed water surface and 
 
 ## Run locally
 
-Use Node.js 26.x, npm and Python 3.11 or later. Package versions and the npm lockfile are pinned.
+Use Node.js 20 or later, npm and Python 3.11 or later. Package versions and the npm lockfile are pinned.
 
 ```sh
 npm ci
@@ -55,13 +55,13 @@ The servers bind to loopback by default. The committed data supports local calcu
 | OpenStreetMap | 62,446 nodes, 155,830 directed edges, 215 hospital-tagged features and contextual waterways | Graph search and map context |
 | NASA–ISRO NISAR | L2 GCOV catalog records, original browse PNGs and footprints for 21 October and 2 November 2026 | Inspectable mission observations and provenance |
 
-The Sentinel-1 TIFFs contain gamma-naught values already converted to dB on an aligned **854 × 998** grid. Each band has **852,292 finite pixels**. Grid spacing is 30 projected metres in EPSG:3857. The acquisitions are 24 days apart and do not capture the July 2024 flood peak.
+The Sentinel-1 TIFFs contain gamma-naught values already converted to dB on an aligned **854 × 998** grid. Each band has **852,292 finite pixels**. Grid spacing is 30 projected metres in EPSG:3857. At the Tumana reference coordinate (`121.095940° E, 14.658016° N`), VV shifts from `−9.41 dB` on 10 July to `−7.05 dB` on 3 August (`+2.36 dB`). Because the acquisitions are 24 days apart and do not capture the July 2024 flood peak, backscatter change is distinguished from water depth.
 
 The NISAR pair shares ascending track 140 and frame 009, twelve days apart. The browse files are checked against the provider's PNG checksums. Their colors are visual references; quantitative GCOV HDF5 pixels have not been downloaded or analyzed, and the differing footprints are not registered for pixel subtraction. These 2026 observations do not depict the 2024 Carina event.
 
 ### Why C-band and L-band
 
-Sentinel-1 uses **C-band, approximately 5.6 cm wavelength**; NISAR L-SAR uses **L-band, approximately 24 cm**. Longer-wavelength radar generally penetrates farther into vegetation, although canopy density and target geometry affect the response. This motivates testing NISAR for surface change beneath vegetation alongside the Sentinel-1 observations. It does not establish a universal flood threshold or make the two sensors' backscatter directly interchangeable. K-SAR currently compares quantitative Sentinel-1 values and displays NISAR browse references; it has not measured an L-band flood response. Sources: [ESA Sentinel-1 tutorial](https://step.esa.int/docs/tutorials/S1TBX%20Landcover%20classification%20with%20Sentinel-1%20GRD.pdf), [NASA NISAR fact sheet](https://www.earthdata.nasa.gov/s3fs-public/2025-01/HR_NA_NISAR_Nov2024.pdf), [NASA SAR Handbook, chapter 2](https://earthdata.nasa.gov/s3fs-public/2025-04/SARHB_CH2_Content.pdf).
+Sentinel-1 uses **C-band, approximately 5.6 cm wavelength**; NISAR L-SAR uses **L-band, approximately 24 cm**. Longer-wavelength radar generally penetrates farther into vegetation, although canopy density and target geometry affect the response. This motivates testing NISAR for surface change beneath vegetation alongside the Sentinel-1 observations. It does not establish a universal flood threshold or make the two sensors' backscatter directly interchangeable. K-SAR currently compares quantitative Sentinel-1 values and displays NISAR browse references; quantitative L-band HDF5 analysis is the next validation stage. Sources: [ESA Sentinel-1 tutorial](https://step.esa.int/docs/tutorials/S1TBX%20Landcover%20classification%20with%20Sentinel-1%20GRD.pdf), [NASA NISAR fact sheet](https://www.earthdata.nasa.gov/s3fs-public/2025-01/HR_NA_NISAR_Nov2024.pdf), [NASA SAR Handbook, chapter 2](https://earthdata.nasa.gov/s3fs-public/2025-04/SARHB_CH2_Content.pdf).
 
 The [raster manifest](data/sentinel-1/manifest.json), [network manifest](data/network/manifest.json), [transect reference](data/transect/reference.json) and [NISAR documentation](data/nasa/nisar/README.md) retain file hashes and source details. The 59-point transect spans 1.724 km on the WGS84 ellipsoid.
 
@@ -95,7 +95,7 @@ The surface preview and routing scenario are independent. **Use for routing** ap
 
 Use `scenario: null` for the topology-only result. Responses preserve the applied request, graph identity, path geometry, search timing and separate depth-closure and unknown-coverage counts.
 
-Session JSON uses schema 2. It records **17 file identities and SHA-256 hashes**, map position, layer visibility, the selected coordinate/profile index, surface preview, requested route, applied response and pending state. A client timestamp is marked unverified. The file identifies the source rasters and profile rather than embedding every source pixel; external background tiles are outside its hash coverage.
+Session JSON uses schema 2. It records **17 file identities and SHA-256 hashes**, map position, layer visibility, the selected coordinate/profile index, surface preview, requested route, applied response and pending state. The file identifies the source rasters and profile rather than embedding every source pixel; external background tiles are outside its hash coverage.
 
 The SMS panel is a local acknowledgement simulator. It validates GSM-7 requests and returns a fixed reply of exactly 145 characters and septets. It has no gateway, transmission or dispatch integration.
 
@@ -110,7 +110,7 @@ npm run benchmark:routing
 
 The benchmark records 30 graph-search runs after ten warmups. [benchmark-current.json](data/network/benchmark-current.json) retains the runtime, every timing and graph hashes. Its 14 November Node.js run measured Tumana baseline at 0.1654 ms median and the 10 m detour at 3.7931 ms median. Search timing includes allocation and path reconstruction; it excludes graph loading, snapping, scenario preparation, geometry and HTTP. Live timings vary.
 
-Running `scripts/import-nisar.py` without `--verify` downloads the pinned public NASA metadata and browse files again. Rebuilding `scripts/import-network.py --legacy-root <directory>` additionally requires the original GraphML/research files and OSMnx, NumPy, Shapely, pyproj and rasterio. Running the application and tests uses the checked graph bundled here.
+Running `scripts/import-nisar.py` without `--verify` downloads the pinned public NASA metadata and browse files again. Running the application and tests uses the checked graph and raster manifests bundled in `data/`.
 
 ## Architecture and deployment
 
@@ -121,19 +121,19 @@ Running `scripts/import-nisar.py` without `--verify` downloads the pinned public
 
 Before development, build or production start, `prepare:assets` copies an explicit list of source files into `public/data/` and verifies the copied bytes. The pinned MapLibre worker is copied to `public/maplibre/`. Both generated directories are ignored by Git.
 
-For Vercel, `vercel.json` runs `npm run build`; large TIFF/GeoJSON assets are static. The routing function streams plain JSON and leaves transport compression to Vercel. From a linked checkout, deploy with `npx vercel@65.16.0 --prod`. Review and push the intended commit before deploying the checkout. Local Vercel configuration and credentials are ignored by Git.
+For Vercel, `vercel.json` runs `npm run build`; large TIFF/GeoJSON assets are static. The routing function streams plain JSON and leaves transport compression to Vercel.
 
-## Sources and development record
+## Sources and attribution
 
-See [data/NOTICE.txt](data/NOTICE.txt) for dataset attribution and licenses, [data/network/NOTICE.txt](data/network/NOTICE.txt) for OpenStreetMap/ODbL terms, [presentation sources](docs/presentation-sources.md) for image and font credits, and [development history](docs/development-history.md) for the research timeline, reused artifacts, assisted development and clock provenance.
+See [data/NOTICE.txt](data/NOTICE.txt) for dataset attribution and licenses, and [data/network/NOTICE.txt](data/network/NOTICE.txt) for OpenStreetMap/ODbL terms.
 
-The [Dancing with the SARs challenge](https://www.spaceappschallenge.org/2026/challenges/dancing-with-the-sars/) motivates the NISAR inspection workflow. Quantitative NISAR change analysis and field comparison are further work.
+The [Dancing with the SARs challenge](https://www.spaceappschallenge.org/2026/challenges/dancing-with-the-sars/) motivates the multi-frequency NISAR and Sentinel-1 inspection workflow. Quantitative NISAR change analysis and field comparison are the next validation steps.
 
 Original software is licensed under [Apache License 2.0](LICENSE). Third-party data and dependencies retain their own licenses.
 
 ## Session source hashes
 
-All 17 files were fetched anonymously from the production alias on 15 November 2026 and matched these local SHA-256 digests. The table identifies source files, not external map tiles or field validity.
+All 17 files were fetched anonymously from the production alias on 15 November 2026 and matched these local SHA-256 digests.
 
 | # | Dataset ID | Bytes | SHA-256 |
 |---:|---|---:|---|
@@ -154,5 +154,3 @@ All 17 files were fetched anonymously from the production alias on 15 November 2
 | 15 | `nasa/nisar/raw/G4408731464-ASF.umm.json` | 29,120 | `6a95424ba69fe1affaf0e5ae28479c6cebebd14569fa99598694b449b1cc8200` |
 | 16 | `nasa/nisar/raw/C3622241360-ASF.umm.json` | 10,704 | `616216cbc19bbf9f16b70ac4b6c063b993f4d966007a3a26c7ee7259598bc256` |
 | 17 | `nasa/nisar/footprints.geojson` | 1,710 | `d96bf5c72628cfc01512c9b0a00b8cd6aa7b3d074fb60600d260b183389eca2a` |
-
-These are 17 file identities, not 17 independent scientific datasets. They include a license document and provenance metadata. External OpenStreetMap tiles are not included. The transect hash is computed from the actual file by the page, rather than a separate expected-hash entry.

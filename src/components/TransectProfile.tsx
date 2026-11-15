@@ -147,7 +147,7 @@ export default function TransectProfile({
         }}
         onKeyDown={keyInspect}
       >
-        <title>Marikina River cross-section surface profile</title>
+        <title>Marikina River cross-section A to B surface profile</title>
         {ticks.map((tick) => (
           <g key={tick}>
             <line
@@ -186,6 +186,7 @@ export default function TransectProfile({
                   : "middle"
             }
           >
+            {distance === 0 ? "A · " : distance === lastDistance ? "B · " : ""}
             {(distance / 1000).toFixed(2)} km
           </text>
         ))}

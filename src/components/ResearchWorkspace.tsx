@@ -10,6 +10,11 @@ import {
 import { correctedElevation } from "@/domain/elevation";
 import { simulateSms } from "@/domain/sms";
 import { serializeSession } from "@/domain/session";
+import {
+  PRESET_SCOPE,
+  ROUTE_PRESETS,
+  matchingRoutePreset,
+} from "@/domain/presets";
 import rasterManifest from "@data/sentinel-1/manifest.json";
 import networkManifest from "@data/network/manifest.json";
 import waterwayProvenance from "@data/network/waterways-provenance.json";
@@ -58,13 +63,19 @@ export default function ResearchWorkspace(p: Props) {
   const [catalog, setCatalog] = useState<RouteCatalog | null>(null),
     [originId, setOriginId] = useState(""),
     [hospitalId, setHospitalId] = useState("");
-  const [parameters, setParameters] = useState(DEFAULT_SCENARIO),
+  const [parameters, setParameters] = useState<ScenarioInputs>({
+      ...ROUTE_PRESETS[0].parameters,
+    }),
     [scenarioOn, setScenarioOn] = useState(false),
     [receivedRoute, setRoute] = useState<RouteResponse | null>(null),
     [routeStatus, setRouteStatus] = useState<
       "idle" | "loading" | "ready" | "error"
     >("idle"),
     [routeError, setRouteError] = useState("");
+  const [presetFit, setPresetFit] = useState<{
+    id: (typeof ROUTE_PRESETS)[number]["id"];
+    token: number;
+  } | null>(null);
   const [radar, setRadar] = useState(true),
     [roads, setRoads] = useState(true),
     [profileOpen, setProfileOpen] = useState(true),
@@ -80,6 +91,7 @@ export default function ResearchWorkspace(p: Props) {
     [smsResult, setSmsResult] = useState<LocalSmsResult | null>(null),
     [exportStatus, setExportStatus] = useState("");
   const dialog = useRef<HTMLDialogElement>(null),
+    presetSequence = useRef(0),
     requestVersion = useRef(0),
     mapView = useRef({
       center: [121.086, 14.651] as Coordinate,
@@ -89,6 +101,16 @@ export default function ResearchWorkspace(p: Props) {
   const origin = catalog?.origins.find((item) => item.id === originId);
   const hospital = catalog?.hospitals.find((item) => item.id === hospitalId);
   const scenario = scenarioOn ? parameters : null;
+  const activePreset = matchingRoutePreset({
+    originId,
+    hospitalId,
+    parameters,
+    scenarioOn,
+  });
+  const presetsAvailable = Boolean(
+    catalog?.origins.some((item) => item.id === PRESET_SCOPE.originId) &&
+    catalog.hospitals.some((item) => item.id === PRESET_SCOPE.hospitalId),
+  );
   const route =
     receivedRoute &&
     origin &&
@@ -100,6 +122,9 @@ export default function ResearchWorkspace(p: Props) {
       : null;
   const calculationPending =
     routeStatus === "loading" || (routeStatus === "ready" && !route);
+  useEffect(() => {
+    if (presetFit && activePreset?.id !== presetFit.id) setPresetFit(null);
+  }, [activePreset, presetFit]);
   useEffect(() => {
     const controller = new AbortController();
     let current = true;
@@ -211,6 +236,14 @@ export default function ResearchWorkspace(p: Props) {
     const selected = p.transect.samples[index];
     pick([selected.lon, selected.lat]);
     setActiveIndex(index);
+  }
+  function applyPreset(preset: (typeof ROUTE_PRESETS)[number]) {
+    if (!presetsAvailable) return;
+    setOriginId(PRESET_SCOPE.originId);
+    setHospitalId(PRESET_SCOPE.hospitalId);
+    setParameters({ ...preset.parameters });
+    setScenarioOn(preset.scenarioOn);
+    setPresetFit({ id: preset.id, token: ++presetSequence.current });
   }
   const before = rasters ? sampleRasterWgs84(rasters.baseline, ...point) : null,
     after = rasters ? sampleRasterWgs84(rasters.post, ...point) : null,
@@ -335,6 +368,14 @@ export default function ResearchWorkspace(p: Props) {
             roads={roads}
             point={point}
             transect={p.transect}
+            onTransectSelect={sample}
+            autoFitToken={
+              routeStatus === "ready" &&
+              route &&
+              activePreset?.id === presetFit?.id
+                ? (presetFit?.token ?? null)
+                : null
+            }
             onPick={pick}
             onError={setMapError}
             onView={(view) => {
@@ -381,7 +422,7 @@ export default function ResearchWorkspace(p: Props) {
           {profileOpen && (
             <section className="profile-strip" aria-label="River cross-section">
               <div className="profile-heading">
-                <h2>Marikina River cross-section</h2>
+                <h2>Marikina River cross-section A–B</h2>
                 <span>
                   59 samples · 1.724 km ·{" "}
                   {scenarioOn ? "Scenario applied" : "Surface preview"}
@@ -408,6 +449,38 @@ export default function ResearchWorkspace(p: Props) {
               <h1>Hospital route</h1>
               <span>OSM network</span>
             </div>
+            <fieldset
+              className="route-presets"
+              disabled={!presetsAvailable}
+              aria-label="Reference scenarios"
+            >
+              <legend>{PRESET_SCOPE.label}</legend>
+              <div className="preset-buttons">
+                {ROUTE_PRESETS.map((preset) => (
+                  <button
+                    type="button"
+                    key={preset.id}
+                    aria-label={`${preset.label} preset`}
+                    title={preset.reference}
+                    aria-pressed={activePreset?.id === preset.id}
+                    onClick={() => applyPreset(preset)}
+                  >
+                    <strong>{preset.label}</strong>
+                    <span>{preset.detail}</span>
+                  </button>
+                ))}
+              </div>
+              <p className="preset-reference" aria-live="polite">
+                {activePreset ? (
+                  <>
+                    <span>Verified reference: </span>
+                    {activePreset.reference}
+                  </>
+                ) : (
+                  "Custom inputs"
+                )}
+              </p>
+            </fieldset>
             <label className="field-label">
               Starting location
               <select

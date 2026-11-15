@@ -5,7 +5,7 @@ import { join } from "node:path";
 import { buildRoadGraph } from "../domain/graph.ts";
 import type { RoadGraph, RoadGraphData, Coordinate } from "../domain/graph.ts";
 import type { HospitalAnchor, RoutingCatalog, RouteRequest, RouteResponse } from "../domain/routing.ts";
-import { prepareScenario, solveRoute, ROUTING_LIMITATIONS, validateScenario } from "../domain/routing.ts";
+import { prepareScenario, summarizeScenario, solveRoute, ROUTING_LIMITATIONS, validateScenario } from "../domain/routing.ts";
 import { validateCoordinate } from "../domain/graph.ts";
 
 type NetworkManifest = { schemaVersion: number; sourceHashes: { graphml: string }; files: { path: string; sha256: string }[] };
@@ -66,17 +66,7 @@ export async function computeRoute(request: RouteRequest): Promise<RouteResponse
   const baseline = solveRoute(graph, request.origin, destination.coordinate);
   const scenario = request.scenario ? prepareScenario(graph, request.scenario) : null;
   const scenarioRoute = scenario ? solveRoute(graph, request.origin, destination.coordinate, scenario) : null;
-  const scenarioSummary = scenario ? (() => {
-    const { excluded: _excluded, ...summary } = scenario;
-    const reference = prepareScenario(graph, {
-      waterLevelM: scenario.waterLevelM, rateMmYear: 0, elapsedYears: scenario.elapsedYears,
-    }, false);
-    return {
-      ...summary,
-      closedEdgesWithoutLowering: reference.closedEdges,
-      additionalClosedEdges: scenario.closedEdges - reference.closedEdges,
-    };
-  })() : null;
+  const scenarioSummary = scenario ? summarizeScenario(graph, scenario) : null;
   return {
     request, baseline, scenarioRoute, scenarioSummary, destination,
     graph: { nodes: graph.nodes.length, directedEdges: graph.edges.length, schemaVersion: manifest.schemaVersion, sha256: graphHash, sourceGraphSha256: manifest.sourceHashes.graphml },

@@ -2,7 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { buildRoadGraph, nearestRoadNode } from "../src/domain/graph.ts";
 import type { RoadGraphData } from "../src/domain/graph.ts";
-import { prepareScenario, searchGraph, solveRoute } from "../src/domain/routing.ts";
+import { prepareScenario, summarizeScenario, searchGraph, solveRoute } from "../src/domain/routing.ts";
 import { loadRoutingData, parseRouteRequest, computeRoute, getRoutingCatalog } from "../src/server/routing-loader.ts";
 import { GET, POST } from "../src/app/api/route/route.ts";
 
@@ -69,6 +69,20 @@ test("invalid graph and request values fail explicitly", () => {
   assert.throws(() => parseRouteRequest({ origin: [121, 14], hospitalId: "way/54025002", scenario: { waterLevelM: Infinity, rateMmYear: -30, elapsedYears: 13 } }), RangeError);
 });
 
+test("added closures compare directed edges before deduplicating shared geometry and omit unknown coverage", () => {
+  const data = fixture();
+  data.edges[3] = [0, 3, 0, 3, 9.9, 0, 2, "New geometry"];
+  data.edges.push([1, 0, 0, 9, 9.7, 0, 0, "New reverse direction"], [3, 1, 0, 2, 9, 1, 3, "Unknown"]);
+  const graph = buildRoadGraph(data);
+  const summary = summarizeScenario(graph, prepareScenario(graph, { waterLevelM: 10, rateMmYear: -30, elapsedYears: 13 }));
+  assert.equal(summary.closedEdgesWithoutLowering, 1);
+  assert.equal(summary.additionalClosedEdges, 3);
+  assert.equal(summary.closedEdges, 4);
+  assert.equal(summary.unknownEdges, 1);
+  assert.deepEqual(summary.additionalClosures.features[0].geometry.coordinates, [graph.geometries[0], graph.geometries[2]], "The already-closed parallel direction must not hide a newly closed direction, and reciprocal directions share one displayed shape");
+  assert.deepEqual(summary.unknownClosures.features[0].geometry.coordinates, [graph.geometries[3]]);
+});
+
 test("full imported graph preserves counts and reproduces selected-anchor routes with conservative unknown coverage", async () => {
   const { graph, hospitals } = await loadRoutingData();
   assert.equal(graph.nodes.length, 62446); assert.equal(graph.edges.length, 155830); assert.equal(hospitals.length, 215);
@@ -109,6 +123,11 @@ test("route response preserves applied inputs, graph hashes and selected destina
   assert.equal(response.scenarioSummary?.additionalClosedEdges, 1432);
   assert.equal(response.scenarioSummary?.closedEdges, 56568);
   assert.ok(response.scenarioSummary?.closures.features[0].geometry.coordinates.length);
+  const { graph } = await loadRoutingData();
+  const addedEdges = graph.edges.filter((edge) => edge[4] !== null && edge[5] === 0 && edge[4] >= 10 - .30 && edge[4] < 10 + .390 - .30);
+  assert.equal(addedEdges.length, 1432);
+  const addedShapes = [...new Set(addedEdges.map((edge) => edge[6]))];
+  assert.deepEqual(response.scenarioSummary?.additionalClosures.features.flatMap((feature) => feature.geometry.coordinates), addedShapes.map((id) => graph.geometries[id]));
   assert.ok(!("excluded" in response.scenarioSummary!), "Internal mask is not serialized");
   assert.match(response.limitations, /does not establish isolation from all hospitals/);
   await assert.rejects(() => computeRoute({ ...request, hospitalId: "way/99999999999" }), RangeError);
@@ -120,6 +139,7 @@ test("no lowering adds zero known closures while retaining the same water-level 
     assert.equal(response.scenarioSummary?.closedEdgesWithoutLowering, 55136);
     assert.equal(response.scenarioSummary?.closedEdges, 55136);
     assert.equal(response.scenarioSummary?.additionalClosedEdges, 0);
+    assert.deepEqual(response.scenarioSummary?.additionalClosures, { type: "FeatureCollection", features: [] });
     assert.equal(response.scenarioSummary?.unknownEdges, 6);
     assert.equal(response.scenarioSummary?.excludedEdges, 55142);
   }

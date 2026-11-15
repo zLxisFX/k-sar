@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import * as maplibregl from "maplibre-gl";
 import type {
   Map as MapInstance,
@@ -93,6 +93,8 @@ type Props = {
   roads: boolean;
   point: Coordinate;
   transect: ReferenceTransect;
+  onTransectSelect: (index: number) => void;
+  autoFitToken: number | null;
   onPick: (point: Coordinate) => void;
   onError: (message: string) => void;
   onView: (view: {
@@ -105,6 +107,7 @@ export default function BasinMap(p: Props) {
   const lower = useRef<HTMLDivElement>(null),
     upper = useRef<HTMLDivElement>(null),
     maps = useRef<MapInstance[]>([]),
+    lastAutoFit = useRef<number | null>(null),
     latest = useRef(p);
   const [ready, setReady] = useState(false),
     [curtain, setCurtain] = useState(50);
@@ -136,6 +139,7 @@ export default function BasinMap(p: Props) {
     maps.current = [primary, comparison];
     let mounted = true;
     let loaded = 0;
+    const endpointMarkers: maplibregl.Marker[] = [];
     const sync = () => {
       comparison.jumpTo({
         center: primary.getCenter(),
@@ -214,6 +218,28 @@ export default function BasinMap(p: Props) {
           data: "/data/network/waterways.geojson",
         });
         map.addLayer({
+          id: "marikina-corridor",
+          type: "line",
+          source: "waterways",
+          filter: ["==", ["get", "name"], "Marikina River"],
+          layout: { "line-cap": "round", "line-join": "round" },
+          paint: {
+            "line-color": "#36899b",
+            "line-width": [
+              "interpolate",
+              ["linear"],
+              ["zoom"],
+              10,
+              9,
+              13,
+              18,
+              16,
+              30,
+            ],
+            "line-opacity": 0.2,
+          },
+        });
+        map.addLayer({
           id: "waterways",
           type: "line",
           source: "waterways",
@@ -222,6 +248,28 @@ export default function BasinMap(p: Props) {
             "line-color": "#5e8f9b",
             "line-width": ["interpolate", ["linear"], ["zoom"], 10, 0.8, 14, 2],
             "line-opacity": 0.85,
+          },
+        });
+        map.addLayer({
+          id: "marikina-centerline",
+          type: "line",
+          source: "waterways",
+          filter: ["==", ["get", "name"], "Marikina River"],
+          layout: { "line-cap": "round", "line-join": "round" },
+          paint: {
+            "line-color": "#287a8a",
+            "line-width": [
+              "interpolate",
+              ["linear"],
+              ["zoom"],
+              10,
+              1.2,
+              13,
+              2.5,
+              16,
+              4,
+            ],
+            "line-opacity": 0.95,
           },
         });
         map.addLayer({
@@ -244,6 +292,17 @@ export default function BasinMap(p: Props) {
             "line-color": "#83566e",
             "line-width": 1.2,
             "line-opacity": 0.45,
+          },
+        });
+        map.addSource("additional-closures", { type: "geojson", data: EMPTY });
+        map.addLayer({
+          id: "additional-closures",
+          type: "line",
+          source: "additional-closures",
+          paint: {
+            "line-color": "#a47122",
+            "line-width": 1.8,
+            "line-opacity": 0.8,
           },
         });
         map.addSource("unknown-closures", { type: "geojson", data: EMPTY });
@@ -309,6 +368,16 @@ export default function BasinMap(p: Props) {
           },
         });
         map.addLayer({
+          id: "transect-halo",
+          type: "line",
+          source: "transect",
+          paint: {
+            "line-color": "#fffef5",
+            "line-width": 4,
+            "line-opacity": 0.9,
+          },
+        });
+        map.addLayer({
           id: "transect",
           type: "line",
           source: "transect",
@@ -318,6 +387,34 @@ export default function BasinMap(p: Props) {
             "line-dasharray": [3, 2],
           },
         });
+        for (const [label, index] of [
+          ["A", 0],
+          ["B", p.transect.samples.length - 1],
+        ] as const) {
+          const sample = p.transect.samples[index];
+          const marker = document.createElement("button");
+          marker.type = "button";
+          marker.className = "transect-endpoint";
+          marker.textContent = label;
+          marker.title = `${label} · ${(sample.distance_m / 1000).toFixed(3)} km`;
+          marker.setAttribute(
+            "aria-label",
+            `Inspect transect endpoint ${label}`,
+          );
+          if (map === comparison) {
+            marker.tabIndex = -1;
+            marker.setAttribute("aria-hidden", "true");
+          }
+          marker.addEventListener("click", (event) => {
+            event.stopPropagation();
+            latest.current.onTransectSelect(index);
+          });
+          endpointMarkers.push(
+            new maplibregl.Marker({ element: marker, anchor: "center" })
+              .setLngLat([sample.lon, sample.lat])
+              .addTo(map),
+          );
+        }
         map.addSource("point", { type: "geojson", data: EMPTY });
         map.addLayer({
           id: "point-halo",
@@ -347,6 +444,7 @@ export default function BasinMap(p: Props) {
       mounted = false;
       observer.disconnect();
       primary.off("move", sync);
+      endpointMarkers.forEach((marker) => marker.remove());
       maps.current = [];
       primary.remove();
       comparison.remove();
@@ -487,6 +585,9 @@ export default function BasinMap(p: Props) {
       })),
     });
     const closures = closureCollection(p.route?.scenarioSummary?.closures);
+    const additionalClosures = closureCollection(
+      p.route?.scenarioSummary?.additionalClosures,
+    );
     const unknownClosures = closureCollection(
       p.route?.scenarioSummary?.unknownClosures,
     );
@@ -496,6 +597,9 @@ export default function BasinMap(p: Props) {
         features,
       });
       (map.getSource("closures") as GeoJSONSource).setData(closures);
+      (map.getSource("additional-closures") as GeoJSONSource).setData(
+        additionalClosures,
+      );
       (map.getSource("unknown-closures") as GeoJSONSource).setData(
         unknownClosures,
       );
@@ -550,21 +654,37 @@ export default function BasinMap(p: Props) {
       curtainPercent: curtain,
     });
   }, [ready, curtain]);
-  function fitRoute() {
+  const fitRoute = useCallback(() => {
     const coordinates =
       p.route?.scenarioRoute?.feature?.geometry.coordinates ??
       p.route?.baseline.feature?.geometry.coordinates;
-    if (!coordinates?.length) return;
+    if (!coordinates?.length) return false;
     const bounds = new maplibregl.LngLatBounds();
     coordinates.forEach((coordinate) =>
       bounds.extend([coordinate[0], coordinate[1]]),
     );
+    for (const sample of [
+      p.transect.samples[0],
+      p.transect.samples[p.transect.samples.length - 1],
+    ]) {
+      bounds.extend([sample.lon, sample.lat]);
+    }
     maps.current[0]?.fitBounds(bounds, {
       padding: 65,
       duration: 350,
       maxZoom: 14.5,
     });
-  }
+    return true;
+  }, [p.route, p.transect]);
+  useEffect(() => {
+    if (
+      !ready ||
+      p.autoFitToken === null ||
+      p.autoFitToken === lastAutoFit.current
+    )
+      return;
+    if (fitRoute()) lastAutoFit.current = p.autoFitToken;
+  }, [ready, p.autoFitToken, fitRoute]);
   return (
     <div className="map-frame" data-map-ready={ready}>
       <div ref={lower} className="map-canvas" />
@@ -625,6 +745,10 @@ export default function BasinMap(p: Props) {
             </div>
           </div>
         )}
+        <p title="OSM centerline with screen-space emphasis; the casing does not measure river width.">
+          <b className="river-key" aria-hidden="true" />
+          Marikina River · OSM centerline
+        </p>
         {p.route?.baseline.feature && (
           <p>
             <b className="baseline-key" aria-hidden="true" />
@@ -641,6 +765,12 @@ export default function BasinMap(p: Props) {
           <p>
             <b className="closure-key" aria-hidden="true" />
             Modeled depth &gt; 0.30 m
+          </p>
+        )}
+        {!!p.route?.scenarioSummary?.additionalClosures.features.length && (
+          <p title="Known-depth edges newly excluded by the specified surface lowering, compared with the same water level and no lowering.">
+            <b className="additional-closure-key" aria-hidden="true" />
+            Additional closures · lowering
           </p>
         )}
         {!!p.route?.scenarioSummary?.unknownClosures.features.length && (

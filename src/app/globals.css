@@ -45,8 +45,9 @@
   height: 100%;
 }
 .river-label {
-  font-size: 11px;
-  color: #315e6c;
+  font-size: 12px;
+  font-weight: 600;
+  color: #225e6b;
   font-style: italic;
   white-space: nowrap;
   pointer-events: none;
@@ -56,14 +57,33 @@
     -1px 0 #fff,
     0 -1px #fff;
 }
+.transect-endpoint {
+  width: 23px;
+  height: 23px;
+  padding: 0;
+  border: 2px solid #26332e;
+  background: #fffef7;
+  color: #26332e;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 19px;
+  text-align: center;
+  box-shadow: 0 0 0 1px #fffef7;
+}
 .baseline-key,
 .scenario-key,
 .closure-key,
-.unknown-key {
+.additional-closure-key,
+.unknown-key,
+.river-key {
   display: inline-block;
   width: 17px;
   flex: 0 0 17px;
   border-top: 2px solid #175f73;
+}
+.river-key {
+  border-color: #287a8a;
+  box-shadow: 0 0 0 3px #36899b33;
 }
 .scenario-key {
   border-color: #a54e27;
@@ -71,6 +91,10 @@
 .closure-key {
   border-color: #83566e;
   border-top-width: 1.2px;
+}
+.additional-closure-key {
+  border-color: #a47122;
+  border-top-width: 2px;
 }
 .unknown-key {
   border-color: #414743;
@@ -369,6 +393,63 @@ h3 {
 .panel-heading > span {
   font-size: 10px;
   color: var(--muted);
+}
+.route-presets {
+  min-width: 0;
+  margin: 0 0 8px;
+  padding: 0;
+  border: 0;
+}
+.route-presets legend {
+  padding: 0;
+  margin-bottom: 8px;
+  color: #46594e;
+  font-size: 11px;
+}
+.preset-buttons {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border: 1px solid #b5c1b3;
+}
+.preset-buttons button {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 3px;
+  min-height: 51px;
+  padding: 7px 4px;
+  border: 0;
+  border-right: 1px solid #b5c1b3;
+  border-bottom: 3px solid transparent;
+  background: #fffef7;
+  text-align: center;
+}
+.preset-buttons button:last-child {
+  border-right: 0;
+}
+.preset-buttons strong {
+  font-size: 12px;
+  font-weight: 600;
+}
+.preset-buttons span {
+  font-size: 10px;
+  color: #46594e;
+}
+.preset-buttons button[aria-pressed="true"] {
+  border-bottom-color: #246f78;
+  background: #e5efea;
+}
+.preset-buttons button:hover:not(:disabled) {
+  background: #edf2e9;
+}
+.preset-reference {
+  min-height: 2.9em;
+  margin-top: 7px;
+  font-size: 11px;
+  line-height: 1.45;
+}
+.preset-reference > span {
+  color: #607067;
 }
 .field-label {
   display: block;

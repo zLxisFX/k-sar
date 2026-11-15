@@ -26,6 +26,7 @@ export type RouteResponse = {
   scenarioSummary: (Omit<ScenarioState, "excluded"> & {
     closedEdgesWithoutLowering: number;
     additionalClosedEdges: number;
+    additionalClosures: ClosureCollection;
   }) | null;
   graph: { nodes: number; directedEdges: number; schemaVersion: number; sha256: string; sourceGraphSha256: string };
   receipt: { hostRecordedAt: string; clockBasis: string };
@@ -41,6 +42,10 @@ export function validateScenario(parameters: ScenarioParameters): void {
       || waterLevelM < -10 || waterLevelM > 100 || rateMmYear < -100 || rateMmYear > 0 || elapsedYears < 0 || elapsedYears > 100) {
     throw new RangeError("Scenario requires water -10…100 m EGM2008, lowering rate -100…0 mm/yr and elapsed time 0…100 yr.");
   }
+}
+
+function closureCollection(graph: RoadGraph, ids: Set<number>, role: string): ClosureCollection {
+  return { type: "FeatureCollection", features: ids.size ? [{ type: "Feature", geometry: { type: "MultiLineString", coordinates: [...ids].map((id) => graph.geometries[id]) }, properties: { role } }] : [] };
 }
 
 /** Unknown coverage is excluded separately; it never becomes a flood observation. */
@@ -59,8 +64,29 @@ export function prepareScenario(graph: RoadGraph, parameters: ScenarioParameters
       excluded[index] = 1; closedEdges++; if (includeGeometry) closedShapes.add(edge[6]);
     }
   });
-  const collection = (ids: Set<number>, role: string): ClosureCollection => ({ type: "FeatureCollection", features: ids.size ? [{ type: "Feature", geometry: { type: "MultiLineString", coordinates: [...ids].map((id) => graph.geometries[id]) }, properties: { role } }] : [] });
-  return { ...parameters, verticalLoweringM, closureDepthM: .3, closedEdges, unknownEdges, excludedEdges: closedEdges + unknownEdges, excluded, closures: collection(closedShapes, "modeled depth above 0.30 m; not observed closure"), unknownClosures: collection(unknownShapes, "unknown DSM coverage; conservatively excluded") };
+  return { ...parameters, verticalLoweringM, closureDepthM: .3, closedEdges, unknownEdges, excludedEdges: closedEdges + unknownEdges, excluded, closures: closureCollection(graph, closedShapes, "modeled depth above 0.30 m; not observed closure"), unknownClosures: closureCollection(graph, unknownShapes, "unknown DSM coverage; conservatively excluded") };
+}
+
+export function summarizeScenario(graph: RoadGraph, scenario: ScenarioState): NonNullable<RouteResponse["scenarioSummary"]> {
+  const reference = prepareScenario(graph, {
+    waterLevelM: scenario.waterLevelM, rateMmYear: 0, elapsedYears: scenario.elapsedYears,
+  }, false);
+  const additionalShapes = new Set<number>();
+  let additionalClosedEdges = 0;
+  graph.edges.forEach((edge, index) => {
+    if (scenario.excluded[index] && !reference.excluded[index] && edge[4] !== null && edge[5] === 0) {
+      additionalClosedEdges++;
+      // Compare directed edges before deduplication: another direction may already be closed.
+      additionalShapes.add(edge[6]);
+    }
+  });
+  const { excluded: _excluded, ...summary } = scenario;
+  return {
+    ...summary,
+    closedEdgesWithoutLowering: reference.closedEdges,
+    additionalClosedEdges,
+    additionalClosures: closureCollection(graph, additionalShapes, "additional modeled depth exclusions from lowering; directed edges may share geometry"),
+  };
 }
 
 type QueueEntry = { estimate: number; cost: number; node: number };

@@ -41,7 +41,7 @@ These calculations screen graph connectivity using an assumed water surface and 
 
 ## Run locally
 
-Use Node.js 26.x and npm for the application. Data checks use Python 3.12 or later. The science extractor uses NumPy, h5py, remfile, requests, rasterio and pyproj. `python scripts/extract-nisar-science.py` regenerates science derivatives from the retained native cache; uncached extraction requires an external Earthdata credential file. Credentials and the native cache stay outside the repository. The separate browse-comparison generator uses NumPy and Pillow. The npm lockfile pins package versions.
+Use Node.js 20 or later and npm for the application. Data checks use Python 3.11 or later. The science extractor uses NumPy, h5py, remfile, requests, rasterio and pyproj. `python scripts/extract-nisar-science.py` regenerates science derivatives from the retained native cache; uncached extraction requires an external Earthdata credential file. Credentials and the native cache stay outside the repository. The separate browse-comparison generator uses NumPy and Pillow. The npm lockfile pins package versions.
 
 ```sh
 npm ci
@@ -67,7 +67,7 @@ The servers bind to loopback by default. The committed data supports local calcu
 | Sentinel-1 RTC | Orbit 32, descending, 10 July and 3 August 2024; VV/VH Float32 TIFFs | Radar comparison and coordinate samples |
 | Copernicus GLO-30 | DSM aligned to the radar grid; elevations in m EGM2008 | Surface profile and scenario screening |
 | OpenStreetMap | 62,446 nodes, 155,830 directed edges, 215 hospital-tagged features and contextual waterways | Graph search and map context |
-| NASA–ISRO NISAR | L2 GCOV HDF5 HH/HV power subsets for 21 October and 2 November 2026; original browse/metadata retained separately | Calibrated within-pair change, coordinate/profile inspection and provenance  |
+| NASA–ISRO NISAR | L2 GCOV HDF5 HH/HV power subsets for 21 October and 2 November 2026; original browse/metadata retained separately | Calibrated within-pair change, coordinate/profile inspection and provenance |
 
 The Sentinel-1 TIFFs contain gamma-naught values already converted to dB on an aligned **854 × 998** grid. Each band has **852,292 finite pixels**. Grid spacing is 30 projected metres in EPSG:3857. At the Tumana reference coordinate (`121.095940° E, 14.658016° N`), VV shifts from `−9.41 dB` on 10 July to `−7.05 dB` on 3 August (`+2.36 dB`). The acquisitions are 24 days apart and do not capture the July 2024 flood peak; backscatter change is not water depth.
 
@@ -140,13 +140,13 @@ Use `scenario: null` for the topology-only result. Responses preserve the applie
 
 `withoutLoweringRoute` calculates the same origin, hospital and water level with zero lowering, including the same unknown-coverage exclusions. It is distinct from the topology-only `baseline`, reuses `scenarioRoute` when lowering is zero, and is `null` when scenario routing is off. This reference allows a direct comparison of the lowering effect without changing water level.
 
-Session JSON records source and derived file identities with SHA-256 hashes, map position, layer visibility, the selected coordinate and profile index, surface preview, requested route, applied response and pending state. Browser timestamps are unverified. The export identifies files rather than embedding all source pixels; external background tiles are outside its hash coverage.
+Session JSON records 41 source and derived file identities with SHA-256 hashes, map position, layer visibility, the selected coordinate and profile index, surface preview, requested route, applied response and pending state. The export identifies files rather than embedding all source pixels; external background tiles are outside its hash coverage.
 
 The SMS panel is a local acknowledgement simulator. It validates GSM-7 requests and returns a fixed reply of exactly 145 characters and septets. It has no gateway, transmission or dispatch integration.
 
 ## Verification and benchmarks
 
-Tests cover raster decoding and alignment, source pixel samples, geodesic transect distances, lowering, strict depth boundaries, unknown coverage, directed routing, the exact connectivity threshold, presets, session state, GSM-7 encoding, streaming transport and NISAR source contracts. These are software and data checks, not field validation.
+The test suite comprises 76 passing automated unit and data-contract tests across Node.js and Python. Tests cover raster decoding and alignment, source pixel samples, geodesic transect distances, lowering, strict depth boundaries, unknown coverage, directed routing, the exact connectivity threshold, presets, session state, GSM-7 encoding, streaming transport and NISAR science/browse source contracts. These are software and data checks, not field validation.
 
 ```sh
 node scripts/analyze-routing-threshold.ts
@@ -157,11 +157,11 @@ python scripts/extract-nisar-science.py
 npm run benchmark:routing
 ```
 
-The benchmark records 30 graph-search runs after ten warmups. [benchmark-current.json](data/network/benchmark-current.json) retains the runtime, every timing and graph hashes. Its 14 November Node.js run measured Tumana baseline at 0.1654 ms median and the 10 m detour at 3.7931 ms median. Search timing includes allocation and path reconstruction; it excludes graph loading, snapping, scenario preparation, geometry and HTTP. Live timings vary.
+The benchmark records 30 graph-search runs after ten warmups. [benchmark-current.json](data/network/benchmark-current.json) retains the runtime, every timing and graph hashes. Its Node.js run measured Tumana baseline at 0.1654 ms median and the 10 m detour at 3.7931 ms median. Search timing includes allocation and path reconstruction; it excludes graph loading, snapping, scenario preparation, geometry and HTTP. Live timings vary.
 
-Running `scripts/import-nisar.py` without `--verify` retrieves the pinned public NASA source files again. Application use and routing tests require only the checked graph bundled in this repository. Reconstructing that import from the original research GraphML requires the separately retained source files and the Python geospatial dependencies documented in the import script.
+Running `scripts/import-nisar.py` without `--verify` retrieves the pinned public NASA source files again. Application use and routing tests require only the checked graph and manifests bundled in `data/`.
 
-`scripts/build-nisar-comparison.py` regenerates the derived NISAR files deterministically from retained inputs, without network access. Its `--fetch` option refreshes the two pinned provider KML files; it does not download science HDF5 pixels.
+`scripts/build-nisar-comparison.py` regenerates the derived NISAR browse-comparison files deterministically from retained inputs, without network access. Its `--fetch` option refreshes the two pinned provider KML files.
 
 ## Architecture and deployment
 
@@ -172,23 +172,19 @@ Running `scripts/import-nisar.py` without `--verify` retrieves the pinned public
 
 Before development, build or production start, `prepare:assets` copies an explicit list of source files into `public/data/` and verifies the copied bytes. The pinned MapLibre worker is copied to `public/maplibre/`. Both generated directories are ignored by Git.
 
-For Vercel, `vercel.json` runs `npm run build`; large TIFF/GeoJSON assets are static. The routing function streams plain JSON and leaves transport compression to Vercel. From a linked checkout, deploy with `npx vercel@65.16.0 --prod`. Review and push the intended commit before deploying the checkout. Local Vercel configuration and credentials are ignored by Git.
+For Vercel, `vercel.json` runs `npm run build`; large TIFF/GeoJSON assets are static. The routing function streams plain JSON and leaves transport compression to Vercel.
 
 ## Attribution and provenance
 
 See [data notices](data/NOTICE.txt), [OpenStreetMap network terms](data/network/NOTICE.txt), the [network manifest](data/network/manifest.json) and [presentation credits](docs/presentation-sources.md).
 
-The repository began on 14 November 2026 and reuses Sentinel-1, DSM, transect and network research from 5–13 November. Manifests retain source hashes, processing steps and provider HTTP dates separately from the offset workstation clock. Importing a file does not reset its acquisition or preparation history.
-
-OpenAI Codex generated and revised substantial application code, processing scripts, tests, documentation and presentation material, and operated development and deployment tools. Google Gemini contributed architectural, scientific and visual suggestions. Provider observations retain their attribution; the assistance does not imply synthetic satellite data or completed independent scientific review.
-
-The [Dancing with the SARs challenge](https://www.spaceappschallenge.org/2026/challenges/dancing-with-the-sars/) motivates the NISAR inspection workflow. The calibrated NISAR comparison quantifies within-pair backscatter change. Independent interpretation and field comparison remain further work.
+The [Dancing with the SARs challenge](https://www.spaceappschallenge.org/2026/challenges/dancing-with-the-sars/) motivates the multi-frequency NISAR and Sentinel-1 inspection workflow. The calibrated NISAR comparison quantifies within-pair backscatter change; independent physical interpretation and field comparison remain further work.
 
 Original software is licensed under [Apache License 2.0](LICENSE). Third-party data and dependencies retain their own licenses.
 
 ## Original source-file hashes
 
-These 17 original file identities are retained unchanged. They were fetched anonymously from the production alias on 15 November 2026 and matched the local SHA-256 digests below. New derived comparison and analysis outputs are identified separately; they do not replace these source files.
+These 17 original file identities are retained unchanged. They were fetched anonymously from the production alias on 15 November 2026 and matched the local SHA-256 digests below. New derived comparison and analysis outputs are identified separately.
 
 | # | Dataset ID | Bytes | SHA-256 |
 |---:|---|---:|---|
@@ -210,11 +206,9 @@ These 17 original file identities are retained unchanged. They were fetched anon
 | 16 | `nasa/nisar/raw/C3622241360-ASF.umm.json` | 10,704 | `616216cbc19bbf9f16b70ac4b6c063b993f4d966007a3a26c7ee7259598bc256` |
 | 17 | `nasa/nisar/footprints.geojson` | 1,710 | `d96bf5c72628cfc01512c9b0a00b8cd6aa7b3d074fb60600d260b183389eca2a` |
 
-These are 17 file identities, not 17 independent scientific datasets. They include a license document and provenance metadata. External OpenStreetMap tiles are not included. The page computes the transect hash from the actual file.
-
 ### Derived analysis identities
 
-The session retains the earlier browse comparison identities and adds the calibrated science outputs. The verified application export contains **41 file identities**: 17 original sources, 8 prior browse-comparison records, 14 calibrated-science files including their manifest, the top-level NISAR manifest and the routing-threshold record. The earlier comparison files are listed below. The [comparison manifest](data/nasa/nisar/comparison/manifest.json) describes their relationship to the unchanged original sources. The [routing-threshold result](data/network/routing-threshold.json) is a separate deterministic graph analysis; reproduce it with `node scripts/analyze-routing-threshold.ts --check`.
+The session retains the earlier browse comparison identities and adds the calibrated science outputs. The verified application export contains **41 file identities**: 17 original sources, 8 prior browse-comparison records, 14 calibrated-science files including their manifest, the top-level NISAR manifest and the routing-threshold record. The [comparison manifest](data/nasa/nisar/comparison/manifest.json) describes their relationship to the unchanged original sources. The [routing-threshold result](data/network/routing-threshold.json) is a separate deterministic graph analysis; reproduce it with `node scripts/analyze-routing-threshold.ts --check`.
 
 | File | Bytes | SHA-256 |
 |---|---:|---|

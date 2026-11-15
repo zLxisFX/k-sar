@@ -90,9 +90,7 @@ export default function NisarAnalysis({
                 height={(78 * bin.count) / peak}
                 fill={bin.high < 0 ? "#376f84" : "#af7139"}
               >
-                <title>
-                  {bin.low} to {bin.high} DN: {bin.count} cells
-                </title>
+                <title>{`${bin.low} to ${bin.high} DN: ${bin.count} cells`}</title>
               </rect>
             ))}
             <line

@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "title": "NISAR catalog and browse references over the Marikina region",
-  "scope": "catalog-and-browse-reference",
-  "scienceRasterDownloaded": false,
-  "quantitativeAnalysisPerformed": false,
+  "title": "NISAR calibrated GCOV subsets, catalog and browse references over the Marikina region",
+  "scope": "calibrated-science-subsets-and-browse-reference",
+  "scienceRasterDownloaded": true,
+  "quantitativeAnalysisPerformed": true,
   "coRegistered": false,
   "attribution": "NASA–ISRO NISAR mission; L-SAR products processed by NASA JPL and distributed by NASA ASF DAAC.",
   "collection": {
@@ -37,11 +37,10 @@
   "discoveryBoundsCrs": "EPSG:4326",
   "intervalDays": 12.0,
   "limitations": [
-    "Catalog metadata and provider browse images only; science HDF5 pixels were not downloaded or analyzed.",
-    "These observations are from October and November 2026. They do not observe the July 2024 Carina event.",
-    "The pair shares a track and frame, but the browse images are not pixel-co-registered; their footprints differ.",
-    "Browse colors are provider-rendered visualizations, not quantitative backscatter values or flood classifications.",
-    "A footprint describes catalog coverage, not a guarantee of valid science pixels at every point.",
+    "Calibrated HH/HV subsets are extracted from the retained HDF5 products; the complete HDF5 files are not downloaded or locally checksum-verified.",
+    "These October and November 2026 observations do not observe the July 2024 Carina event.",
+    "Browse colors remain provider-rendered context. Quantitative values come only from the separate calibrated science rasters.",
+    "Aligned science grids do not establish independent ground-control registration accuracy or identify floodwater from backscatter change alone.",
     "VALIDATED is the provider's product maturity label; it does not validate any K-SAR flood or routing result.",
     "Frequency A and B are L-SAR subbands, not separate L-band and S-band instruments."
   ],
@@ -181,5 +180,60 @@
         "height": 1960
       }
     }
-  ]
+  ],
+  "wholeScienceFilesDownloaded": false,
+  "registrationScope": "Science grids are aligned by verified provider coordinates and deterministic reprojection; independent ground-control registration accuracy is not established.",
+  "science": {
+    "path": "science/manifest.json",
+    "bytes": 42140,
+    "sha256": "048e0c06384df025ed1a9b7618375c649d2ab9e36d235c3c81ccc87c351376d5",
+    "polarizations": [
+      "HH",
+      "HV"
+    ],
+    "units": "dB gamma0",
+    "grid": {
+      "width": 854,
+      "height": 998,
+      "crs": "EPSG:3857",
+      "pixelSizeMeters": [
+        30,
+        30
+      ],
+      "transform": [
+        30,
+        0,
+        13461866.021630574,
+        0,
+        -30,
+        1661556.429169403
+      ],
+      "noData": "NaN",
+      "dataType": "float32",
+      "rasterType": "PixelIsArea",
+      "image_coordinates": [
+        [
+          120.93,
+          14.759999999999998
+        ],
+        [
+          121.16014837579144,
+          14.759999999999998
+        ],
+        [
+          121.16014837579144,
+          14.499764851305686
+        ],
+        [
+          120.93,
+          14.499764851305686
+        ]
+      ]
+    },
+    "commonValidPixels": {
+      "HH": 852283,
+      "HV": 852283
+    },
+    "wholeFileChecksumsLocallyVerified": false
+  }
 }

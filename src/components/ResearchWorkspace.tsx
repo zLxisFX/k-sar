@@ -20,6 +20,9 @@ import networkManifest from "@data/network/manifest.json";
 import waterwayProvenance from "@data/network/waterways-provenance.json";
 import nisarManifest from "@data/nasa/nisar/manifest.json";
 import nisarComparison from "@data/nasa/nisar/comparison/manifest.json";
+import nisarScienceManifest from "@data/nasa/nisar/science/manifest.json";
+import { sampleScience, validateSciencePair } from "@/domain/nisar-science";
+import type { NisarPolarization, NisarSciencePair } from "@/domain/nisar-science";
 import { sampleBrowse } from "@/domain/nisar-browse";
 import type {
   BrowsePair,
@@ -43,6 +46,7 @@ import type {
 import NisarReference from "./NisarReference";
 import TransectProfile from "./TransectProfile";
 import NisarAnalysis from "./NisarAnalysis";
+import NisarScienceAnalysis, { BackscatterTable } from "./NisarScienceAnalysis";
 const BasinMap = dynamic(() => import("./BasinMap"), {
   ssr: false,
   loading: () => <p className="map-loading">Loading map renderer…</p>,
@@ -59,13 +63,19 @@ type Props = {
   transect: ReferenceTransect;
   transectHash: string;
   nisarComparisonHash: string;
+  nisarScienceHash: string;
+  nisarManifestHash: string;
+  thresholdHash: string;
   nisarRecords: NisarRecord[];
   nisarInterval: number;
   footprints: CatalogFootprint[];
 };
 export default function ResearchWorkspace(p: Props) {
-  const [radarSource, setRadarSource] = useState<RadarSource>("sentinel-1");
+  const [radarSource, setRadarSource] = useState<RadarSource>("nisar-science");
   const [nisarDisplay, setNisarDisplay] = useState<NisarDisplay>("pair");
+  const [nisarPolarization, setNisarPolarization] = useState<NisarPolarization>("HH");
+  const [science, setScience] = useState<NisarSciencePair | null>(null);
+  const [scienceError, setScienceError] = useState("");
   const [browsePair, setBrowsePair] = useState<BrowsePair | null>(null);
   const [browseError, setBrowseError] = useState("");
   const [rasters, setRasters] = useState<RasterSet | null>(null),
@@ -256,8 +266,29 @@ export default function ResearchWorkspace(p: Props) {
     setHospitalId(PRESET_SCOPE.hospitalId);
     setParameters({ ...preset.parameters });
     setScenarioOn(preset.scenarioOn);
+    setRadarSource("sentinel-1");
     setPresetFit({ id: preset.id, token: ++presetSequence.current });
   }
+  useEffect(() => {
+    const controller = new AbortController();
+    let current = true;
+    setScienceError("");
+    Promise.all(["2026-10-21-db", "2026-11-02-db", "change-db"].map(async name => {
+      const response = await fetch(`/data/nasa/nisar/science/${name}.tif`, { signal: controller.signal });
+      if (!response.ok) throw new Error(`NISAR science raster: HTTP ${response.status}`);
+      return decodeRaster(await response.arrayBuffer());
+    })).then(([before, after, change]) => {
+      const pair = { before, after, change };
+      validateSciencePair(pair);
+      if (current) setScience(pair);
+    }).catch(error => { if (current) setScienceError(String(error)); });
+    return () => { current = false; controller.abort(); };
+  }, [loadAttempt]);
+  useEffect(() => {
+    if (!rasters || !science) return;
+    try { assertAlignedGrids(rasters.baseline, science.before); }
+    catch (error) { setScienceError(String(error)); setScience(null); }
+  }, [rasters, science]);
   useEffect(() => {
     if (radarSource !== "nisar" || browsePair) return;
     const controller = new AbortController();
@@ -316,6 +347,10 @@ export default function ResearchWorkspace(p: Props) {
       parameters.rateMmYear,
       parameters.elapsedYears,
     );
+  const vhBefore = rasters ? sampleRasterWgs84(rasters.baseline, ...point, 1) : null;
+  const vhAfter = rasters ? sampleRasterWgs84(rasters.post, ...point, 1) : null;
+  const sentinelSample = { VV: { before, after, delta }, VH: { before: vhBefore, after: vhAfter, delta: backscatterChangeDb(vhBefore, vhAfter) } };
+  const nisarSample = sampleScience(science, ...point);
   const result = scenarioOn ? route?.scenarioRoute : route?.baseline;
   function downloadSession() {
     const payload = serializeSession(
@@ -370,6 +405,10 @@ export default function ResearchWorkspace(p: Props) {
             id: "nasa/nisar/comparison/manifest.json",
             sha256: p.nisarComparisonHash,
           },
+          ...nisarScienceManifest.outputs.map(file => ({ id: `nasa/nisar/${file.path}`, sha256: file.sha256 })),
+          { id: "nasa/nisar/science/manifest.json", sha256: p.nisarScienceHash },
+          { id: "nasa/nisar/manifest.json", sha256: p.nisarManifestHash },
+          { id: "network/routing-threshold.json", sha256: p.thresholdHash },
         ],
         view: {
           ...mapView.current,
@@ -378,6 +417,7 @@ export default function ResearchWorkspace(p: Props) {
           layers: { radar, roadNetwork: roads, crossSection: profileOpen },
           radarSource,
           nisarDisplay,
+          nisarPolarization,
         },
         surfacePreview: parameters,
         requestedRoute: origin
@@ -425,9 +465,14 @@ export default function ResearchWorkspace(p: Props) {
                 setRadarSource(event.target.value as RadarSource)
               }
             >
+              <option value="nisar-science">NISAR γ⁰ · 2026</option>
               <option value="sentinel-1">Sentinel-1 · 2024</option>
-              <option value="nisar">NISAR L-band · 2026</option>
+              <option value="nisar">NISAR browse context</option>
             </select>
+            {radarSource === "nisar-science" && <>
+              <select aria-label="NISAR polarization" value={nisarPolarization} onChange={event => setNisarPolarization(event.target.value as NisarPolarization)}><option value="HH">HHHH · HH</option><option value="HV">HVHV · HV</option></select>
+              <select aria-label="NISAR science display" value={nisarDisplay} onChange={event => setNisarDisplay(event.target.value as NisarDisplay)}><option value="pair">Swipe pair</option><option value="difference">12-day Δγ⁰ dB</option></select>
+            </>}
             <label>
               <input
                 type="checkbox"
@@ -440,13 +485,13 @@ export default function ResearchWorkspace(p: Props) {
               <input
                 type="checkbox"
                 checked={roads}
-                disabled={radarSource === "nisar"}
+                disabled={radarSource !== "sentinel-1"}
                 onChange={(e) => setRoads(e.target.checked)}
               />{" "}
               Road network
             </label>
             <span>
-              {radarSource === "nisar"
+              {radarSource === "nisar-science" ? "L-band · calibrated dB" : radarSource === "nisar"
                 ? "12-day pair · RGB browse"
                 : "Orbit 32 · 30 m grid"}
             </span>
@@ -459,6 +504,8 @@ export default function ResearchWorkspace(p: Props) {
           </div>
           <BasinMap
             rasters={rasters}
+            science={science}
+            nisarPolarization={nisarPolarization}
             radarSource={radarSource}
             nisarDisplay={nisarDisplay}
             route={routeStatus === "ready" ? route : null}
@@ -485,19 +532,18 @@ export default function ResearchWorkspace(p: Props) {
             <span>
               {point[0].toFixed(5)}° E · {point[1].toFixed(5)}° N
             </span>
-            {radarSource === "sentinel-1" ? (
+            {radarSource !== "nisar" ? (
               <>
                 <span>
-                  VV{" "}
+                  C VV{" "}
                   <strong>
                     {number(before)} → {number(after)} dB
                   </strong>
                 </span>
                 <span>
-                  ΔVV{" "}
+                  {science ? `L ${nisarPolarization} ` : "ΔVV "}
                   <strong>
-                    {delta !== null && delta > 0 ? "+" : ""}
-                    {number(delta)} dB
+                    {science ? `${number(nisarSample[nisarPolarization].before)} → ${number(nisarSample[nisarPolarization].after)} dB · Δ ${number(nisarSample[nisarPolarization].delta)} dB` : `${delta !== null && delta > 0 ? "+" : ""}${number(delta)} dB`}
                   </strong>
                 </span>
                 <span>
@@ -540,6 +586,7 @@ export default function ResearchWorkspace(p: Props) {
               Map layer unavailable: {mapError}
             </div>
           )}
+          {!science && <div className="map-status" role="status">{scienceError || "Loading calibrated NISAR HH/HV rasters…"}{scienceError && <button onClick={() => setLoadAttempt(value => value + 1)}>Retry NISAR data</button>}</div>}
           {radarSource === "nisar" && !browsePair && (
             <div className="map-status" role="status">
               {browseError || "Loading aligned NISAR browse cells…"}
@@ -560,6 +607,7 @@ export default function ResearchWorkspace(p: Props) {
               onDisplay={setNisarDisplay}
             />
           )}
+          {profileOpen && radarSource === "nisar-science" && <NisarScienceAnalysis sentinel={sentinelSample} nisar={nisarSample} elevation={elevation} science={science} rasters={rasters} transect={p.transect} activeIndex={activeIndex} onSelect={sample} polarization={nisarPolarization} distribution={nisarScienceManifest.change.statistics[nisarPolarization]} />}
           {profileOpen && radarSource === "sentinel-1" && (
             <section className="profile-strip" aria-label="River cross-section">
               <div className="profile-heading">
@@ -891,11 +939,7 @@ export default function ResearchWorkspace(p: Props) {
           </section>
           <section className="pixel-panel">
             <div className="panel-heading">
-              <h2>
-                {radarSource === "nisar"
-                  ? "Inspect NISAR coordinate"
-                  : "Selected raster cell"}
-              </h2>
+              <h2>Selected coordinate · γ⁰ / dB</h2>
               <span>WGS 84</span>
             </div>
             <form
@@ -933,43 +977,8 @@ export default function ResearchWorkspace(p: Props) {
               </label>
               <button>Inspect</button>
             </form>
-            {radarSource === "sentinel-1" ? (
-              <>
-                <dl className="pixel-values">
-                  <div>
-                    <dt>10 Jul · γ⁰ VV</dt>
-                    <dd>{number(before)} dB</dd>
-                  </div>
-                  <div>
-                    <dt>3 Aug · γ⁰ VV</dt>
-                    <dd>{number(after)} dB</dd>
-                  </div>
-                  <div>
-                    <dt>VV change</dt>
-                    <dd>
-                      {delta !== null && delta > 0 ? "+" : ""}
-                      {number(delta)} dB
-                    </dd>
-                  </div>
-                  <div>
-                    <dt>{scenarioOn ? "DSM / adjusted" : "DSM / preview"}</dt>
-                    <dd>
-                      {number(elevation)} / {number(adjusted)} m
-                    </dd>
-                  </div>
-                </dl>
-                <p className="panel-note">
-                  Surface heights: EGM2008. Radar change is not a flood-depth
-                  measurement.
-                </p>
-              </>
-            ) : (
-              <p className="panel-note">
-                RGB display codes and the common-area distribution appear below
-                the map. The 2026 NISAR pair is independent of the 2024 event
-                and the water scenario.
-              </p>
-            )}
+            <BackscatterTable sentinel={sentinelSample} nisar={nisarSample} elevation={elevation} />
+            <p className="panel-note">{scenarioOn ? "Scenario-adjusted" : "Preview"} DSM: {number(adjusted)} m EGM2008. Dashes indicate masked or unavailable samples. The 2024 and 2026 pairs are separate observations.</p>
           </section>
           <div className="workspace-footer">
             <span>

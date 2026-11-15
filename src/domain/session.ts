@@ -16,8 +16,9 @@ export type SessionState = {
     selectedCoordinate: Coordinate | null;
     transectIndex: number | null;
     layers: { radar: boolean; roadNetwork: boolean; crossSection: boolean };
-    radarSource?: "sentinel-1" | "nisar";
+    radarSource?: "sentinel-1" | "nisar" | "nisar-science";
     nisarDisplay?: "pair" | "difference";
+    nisarPolarization?: "HH" | "HV";
   };
   surfacePreview: ScenarioParameters;
   requestedRoute: RouteRequest | null;
@@ -70,7 +71,7 @@ export function serializeSession(
   const layers = state.view.layers;
   if (
     state.view.radarSource !== undefined &&
-    !["sentinel-1", "nisar"].includes(state.view.radarSource)
+    !["sentinel-1", "nisar", "nisar-science"].includes(state.view.radarSource)
   )
     throw new RangeError("Unknown radar source.");
   if (
@@ -78,6 +79,8 @@ export function serializeSession(
     !["pair", "difference"].includes(state.view.nisarDisplay)
   )
     throw new RangeError("Unknown NISAR display.");
+  if (state.view.nisarPolarization !== undefined && !["HH", "HV"].includes(state.view.nisarPolarization))
+    throw new RangeError("Unknown NISAR polarization.");
   if (
     !layers ||
     typeof layers.radar !== "boolean" ||

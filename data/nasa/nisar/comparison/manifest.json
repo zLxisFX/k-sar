@@ -2479,8 +2479,8 @@
   },
   "sourceManifest": {
     "path": "manifest.json",
-    "bytes": 8546,
-    "sha256": "b0c0115acf7cc3164692be0ea2c48ad763a711eeae6b84f89a4ec7a641dcc68a"
+    "bytes": 10073,
+    "sha256": "bd608fb215760f911f395465b0e2db4e73bf0cada7afae80dccf019419892e6e"
   },
   "sourceFootprints": {
     "path": "footprints.geojson",

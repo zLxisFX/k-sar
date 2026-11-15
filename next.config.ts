@@ -2,6 +2,12 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
+  headers() {
+    return ["/Project_K-SAR_2026_Final.pdf", "/Project_K-SAR_2026_Deck.pdf"].map((source) => ({
+      source,
+      headers: [{ key: "Cache-Control", value: "public, max-age=0, must-revalidate" }],
+    }));
+  },
   outputFileTracingIncludes: {
     "/api/route": ["./data/network/graph.json.gz", "./data/network/hospitals.geojson", "./data/network/manifest.json"],
   },

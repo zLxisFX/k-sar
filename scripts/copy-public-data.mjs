@@ -7,9 +7,10 @@ const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const source = join(root, "data");
 const destination = join(root, "public/data");
 const json = async (path) => JSON.parse(await readFile(join(source, path), "utf8"));
-const [radar, network, nasa, comparison] = await Promise.all([
+const [radar, network, nasa, comparison, science] = await Promise.all([
   json("sentinel-1/manifest.json"), json("network/manifest.json"), json("nasa/nisar/manifest.json"),
   json("nasa/nisar/comparison/manifest.json"),
+  json("nasa/nisar/science/manifest.json"),
 ]);
 const comparisonAssets = [
   ...comparison.records.flatMap((record) => [record.kml, record.aligned]),
@@ -19,6 +20,8 @@ const comparisonAssets = [
 const files = new Set([
   "NOTICE.txt", "transect/reference.json", "network/routing-threshold.json",
   "nasa/nisar/comparison/manifest.json",
+  "nasa/nisar/science/manifest.json",
+  ...science.outputs.map((file) => `nasa/nisar/${file.path}`),
   ...comparisonAssets.map((file) => `nasa/nisar/${file.path}`),
   "sentinel-1/manifest.json", "sentinel-1/source-sar-items.json", "sentinel-1/source-raster-sha256.json",
   "sentinel-1/source-raster-manifest.json", "sentinel-1/source-dem-catalog.json",
@@ -32,6 +35,8 @@ const files = new Set([
   ...nasa.records.flatMap((record) => [`nasa/nisar/${record.metadata.path}`, `nasa/nisar/${record.browse.path}`]),
 ]);
 const expectedHashes = new Map([
+  [`nasa/nisar/${nasa.science.path}`, nasa.science.sha256],
+  ...science.outputs.map((file) => [`nasa/nisar/${file.path}`, file.sha256]),
   ...comparisonAssets.map((file) => [`nasa/nisar/${file.path}`, file.sha256]),
   ...radar.files.map((file) => [`sentinel-1/${file.file}`, file.sha256]),
   ...network.files.map((file) => [`network/${file.path}`, file.sha256]),

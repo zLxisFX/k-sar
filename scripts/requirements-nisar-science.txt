@@ -1,0 +1,7 @@
+h5py==3.16.0
+numpy==2.5.4
+Pillow==13.0.0
+remfile==0.1.16
+requests==2.34.2
+rasterio==1.5.2
+pyproj==3.8.0

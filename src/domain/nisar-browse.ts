@@ -21,7 +21,7 @@ export type BrowseSample = {
   column: number;
   row: number;
 };
-export type RadarSource = "sentinel-1" | "nisar";
+export type RadarSource = "sentinel-1" | "nisar" | "nisar-science";
 export type NisarDisplay = "pair" | "difference";
 
 export function displayBrightness(rgb: readonly number[]): number {

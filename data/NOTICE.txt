@@ -71,3 +71,20 @@ of rendered RGB display codes. These derivatives are not calibrated GCOV science
 rasters, quantitative backscatter change, flood detections or observations of
 July 2024 Carina. The comparison manifest binds inputs and outputs by SHA-256
 and records processing limitations. No NASA, ISRO or ASF endorsement is implied.
+
+NISAR CALIBRATED GCOV SUBSETS
+science/ contains HH/HV subsets of the same October 21 and November 2, 2026
+NISAR L2 GCOV products, DOI 10.5067/NIL2GCOV-V1. NASA-ISRO NISAR mission;
+L-SAR products processed by NASA JPL and distributed by NASA ASF DAAC.
+The retained native HDF5 ranges supply calibrated gamma-naught linear power
+and quality flags. Derivatives apply per-polarization quality screening,
+area-weighted linear-power reprojection to the existing Sentinel-1 grid,
+10 log10 conversion and later-minus-earlier dB differences. No cross-sensor
+physical-change subtraction or flood classification is performed.
+
+The science manifest records source URLs, dataset paths, provider whole-file
+MD5 metadata, partial transfer counts, processing and derivative SHA-256 hashes.
+Complete source HDF5 files were not downloaded or locally checksum-verified.
+These data and derivatives retain their source attribution and are not relicensed
+as original Apache-2.0 code. See data/nasa/nisar/README.md for reproduction and
+quality limits. No NASA, ISRO or ASF endorsement is implied.

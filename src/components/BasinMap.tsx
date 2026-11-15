@@ -1,5 +1,5 @@
 "use client";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import * as maplibregl from "maplibre-gl";
 import type {
   Map as MapInstance,
@@ -20,6 +20,10 @@ import type { DecodedRaster } from "@/domain/raster";
 import rasterManifest from "@data/sentinel-1/manifest.json";
 import nisarComparison from "@data/nasa/nisar/comparison/manifest.json";
 import type { RadarSource, NisarDisplay } from "@/domain/nisar-browse";
+import { radarRgba } from "@/domain/nisar-science";
+import type { NisarPolarization, NisarSciencePair } from "@/domain/nisar-science";
+import { tippingBottleneck } from "@/domain/routing-bottleneck";
+import BottleneckOverlay from "./BottleneckOverlay";
 
 const EMPTY: FeatureCollection = { type: "FeatureCollection", features: [] };
 type MapCoordinate = [number, number];
@@ -89,6 +93,8 @@ function mapStyle(): StyleSpecification {
 }
 type Props = {
   rasters: RasterSet | null;
+  science: NisarSciencePair | null;
+  nisarPolarization: NisarPolarization;
   radarSource: RadarSource;
   nisarDisplay: NisarDisplay;
   route: RouteResponse | null;
@@ -115,7 +121,27 @@ export default function BasinMap(p: Props) {
     latest = useRef(p);
   const [ready, setReady] = useState(false),
     [curtain, setCurtain] = useState(50);
+  const bottleneck = useMemo(
+    () => p.radarSource === "sentinel-1" ? tippingBottleneck(p.route) : null,
+    [p.route, p.radarSource],
+  );
   latest.current = p;
+  const scienceImages = useMemo(() => {
+    if (!p.science) return null;
+    const band = p.nisarPolarization === "HH" ? 0 : 1;
+    const range: [number, number] = band === 0 ? [-25, 10] : [-35, 0];
+    return [p.science.after, p.science.before, p.science.change].map((raster, index) => {
+      const canvas = document.createElement("canvas");
+      canvas.width = raster.width;
+      canvas.height = raster.height;
+      const context = canvas.getContext("2d");
+      if (!context) throw new Error("Calibrated radar rendering unavailable");
+      const pixels = context.createImageData(raster.width, raster.height);
+      pixels.data.set(radarRgba(raster, band, index === 2 ? [-6, 6] : range, index === 2));
+      context.putImageData(pixels, 0, 0);
+      return canvas.toDataURL("image/png");
+    });
+  }, [p.science, p.nisarPolarization]);
   const curtainRef = useRef(curtain);
   curtainRef.current = curtain;
   useEffect(() => {
@@ -455,7 +481,7 @@ export default function BasinMap(p: Props) {
     };
   }, [p.transect]);
   useEffect(() => {
-    if (!ready || (p.radarSource === "sentinel-1" && !p.rasters)) return;
+    if (!ready || (p.radarSource === "sentinel-1" && !p.rasters) || (p.radarSource === "nisar-science" && !scienceImages)) return;
     const bounds = nisarComparison.grid.boundsWgs84;
     const nisarCorners: typeof rasterCorners = [
       [bounds.west, bounds.north],
@@ -475,7 +501,9 @@ export default function BasinMap(p: Props) {
                 nisarComparison.records[0].aligned.path,
               ]
           ).map((path) => `/data/nasa/nisar/${path}`)
-        : [rasterImage(p.rasters!.post), rasterImage(p.rasters!.baseline)];
+        : p.radarSource === "nisar-science"
+          ? p.nisarDisplay === "difference" ? [scienceImages![2], scienceImages![2]] : scienceImages!.slice(0, 2)
+          : [rasterImage(p.rasters!.post), rasterImage(p.rasters!.baseline)];
     maps.current.forEach((map, index) => {
       (map.getSource("radar") as ImageSource).updateImage({
         url: images[index],
@@ -483,7 +511,7 @@ export default function BasinMap(p: Props) {
       });
       map.setPaintProperty("radar", "raster-resampling", "nearest");
     });
-  }, [ready, p.rasters, p.radarSource, p.nisarDisplay]);
+  }, [ready, p.rasters, p.radarSource, p.nisarDisplay, scienceImages]);
   useEffect(() => {
     if (!ready) return;
     const controller = new AbortController();
@@ -546,7 +574,7 @@ export default function BasinMap(p: Props) {
       map.setLayoutProperty(
         "radar",
         "visibility",
-        p.radar && (p.rasters || p.radarSource === "nisar")
+        p.radar && (p.radarSource === "nisar" || (p.radarSource === "nisar-science" ? p.science : p.rasters))
           ? "visible"
           : "none",
       );
@@ -572,10 +600,10 @@ export default function BasinMap(p: Props) {
       map.setPaintProperty(
         "radar",
         "raster-opacity",
-        p.radarSource === "nisar" ? 1 : 0.8,
+        p.radarSource === "sentinel-1" ? 0.8 : 1,
       );
     });
-  }, [ready, p.radar, p.roads, p.rasters, p.radarSource]);
+  }, [ready, p.radar, p.roads, p.rasters, p.science, p.radarSource]);
   useEffect(() => {
     if (!ready || !p.rasters) return;
     const url =
@@ -710,6 +738,9 @@ export default function BasinMap(p: Props) {
     coordinates.forEach((coordinate) =>
       bounds.extend([coordinate[0], coordinate[1]]),
     );
+    bottleneck?.edges.forEach((edge) => edge.coordinates.forEach((coordinate) =>
+      bounds.extend([coordinate[0], coordinate[1]]),
+    ));
     for (const sample of [
       p.transect.samples[0],
       p.transect.samples[p.transect.samples.length - 1],
@@ -722,7 +753,7 @@ export default function BasinMap(p: Props) {
       maxZoom: 14.5,
     });
     return true;
-  }, [p.route, p.transect]);
+  }, [p.route, p.transect, bottleneck]);
   useEffect(() => {
     if (
       !ready ||
@@ -734,6 +765,7 @@ export default function BasinMap(p: Props) {
   }, [ready, p.autoFitToken, fitRoute]);
   return (
     <div className="map-frame" data-map-ready={ready}>
+      {ready && bottleneck && <BottleneckOverlay maps={maps.current} bottleneck={bottleneck} />}
       <div ref={lower} className="map-canvas" />
       <div
         ref={upper}
@@ -741,12 +773,12 @@ export default function BasinMap(p: Props) {
         style={{ clipPath: `inset(0 ${100 - curtain}% 0 0)` }}
       />
       {p.radar &&
-        !(p.radarSource === "nisar" && p.nisarDisplay === "difference") && (
+        !(p.radarSource !== "sentinel-1" && p.nisarDisplay === "difference") && (
           <>
             <div className="map-date before">
-              {p.radarSource === "nisar" ? (
+              {p.radarSource !== "sentinel-1" ? (
                 <>
-                  21 Oct 2026 <span>NISAR RGB browse</span>
+                  21 Oct 2026 <span>{p.radarSource === "nisar" ? "NISAR RGB browse" : `NISAR γ⁰ ${p.nisarPolarization} / dB`}</span>
                 </>
               ) : (
                 <>
@@ -755,9 +787,9 @@ export default function BasinMap(p: Props) {
               )}
             </div>
             <div className="map-date after">
-              {p.radarSource === "nisar" ? (
+              {p.radarSource !== "sentinel-1" ? (
                 <>
-                  2 Nov 2026 <span>NISAR RGB browse</span>
+                  2 Nov 2026 <span>{p.radarSource === "nisar" ? "NISAR RGB browse" : `NISAR γ⁰ ${p.nisarPolarization} / dB`}</span>
                 </>
               ) : (
                 <>
@@ -815,6 +847,12 @@ export default function BasinMap(p: Props) {
         </button>
       </div>
       <div className="map-legend" aria-label="Map legend">
+        {p.radar && p.radarSource === "nisar-science" && <div className="radar-legend">
+          <span>{p.nisarDisplay === "difference" ? `12-day Δγ⁰ ${p.nisarPolarization} / dB` : `Calibrated γ⁰ ${p.nisarPolarization} / dB`}</span>
+          <div className={p.nisarDisplay === "difference" ? "nisar-difference-ramp" : "radar-ramp"} />
+          <div className="ramp-values"><span>{p.nisarDisplay === "difference" ? "≤ −6" : p.nisarPolarization === "HH" ? "≤ −25" : "≤ −35"}</span>{p.nisarDisplay === "difference" && <span>0</span>}<span>{p.nisarDisplay === "difference" ? "≥ +6" : p.nisarPolarization === "HH" ? "≥ +10" : "≥ 0"}</span></div>
+          <span>Shade clipped · readouts retain full values</span>
+        </div>}
         {p.radar && p.radarSource === "sentinel-1" && (
           <div className="radar-legend">
             <span>γ⁰ VV / dB</span>

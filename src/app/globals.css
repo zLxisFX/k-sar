@@ -57,6 +57,36 @@
     -1px 0 #fff,
     0 -1px #fff;
 }
+.bottleneck-label {
+  z-index: 3;
+  display: block;
+  width: max-content;
+  max-width: 225px;
+  padding: 7px 9px;
+  border: 1px solid #b9b6a6;
+  border-left: 4px solid #80581c;
+  background: #fffef5;
+  color: #26332e;
+  box-shadow: 0 2px 5px #26332e26;
+  font-size: 11px;
+  line-height: 1.4;
+  text-decoration: none;
+  font-variant-numeric: tabular-nums;
+}
+.bottleneck-label strong,
+.bottleneck-label span {
+  display: block;
+}
+.bottleneck-label strong {
+  font-size: 12px;
+}
+.bottleneck-label.excluded {
+  border-left-color: #923f35;
+}
+.bottleneck-label:focus-visible {
+  outline: 2px solid #246f78;
+  outline-offset: 2px;
+}
 .transect-endpoint {
   width: 23px;
   height: 23px;
@@ -344,6 +374,93 @@ h3 {
 }
 .nisar-method-link {
   font-size: 11px;
+}
+.science-analysis {
+  flex-shrink: 0;
+  border-top: 1px solid var(--rule);
+  background: #fffef7;
+  padding: 12px 18px 9px;
+}
+.science-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.science-heading p, .science-chart h3, .science-distribution-summary, .science-scope, .science-dsm, .radar-profile-legend {
+  font-size: 11px;
+  line-height: 1.4;
+}
+.science-heading p {
+  color: var(--muted);
+  margin-top: 3px;
+}
+.science-analysis-grid {
+  display: grid;
+  grid-template-columns: minmax(300px, .8fr) minmax(360px, 1fr);
+  gap: 28px;
+  margin: 9px 0 4px;
+}
+.backscatter-values table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+}
+.backscatter-values th {
+  font-weight: 500;
+  text-align: left;
+}
+.backscatter-values td, .backscatter-values th {
+  padding: 3px 4px;
+}
+.backscatter-values td, .backscatter-values th:not(:first-child) {
+  text-align: right;
+  white-space: nowrap;
+}
+.backscatter-values .sensor-dates {
+  color: var(--muted);
+  border-bottom: 1px solid var(--rule);
+}
+.backscatter-values .sensor-dates:not(:first-child) th {
+  padding-top: 7px;
+}
+.science-dsm {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 6px;
+  padding: 0 4px;
+}
+.science-dsm strong { font-weight: 500; }
+.radar-profile svg, .science-histogram {
+  width: 100%;
+  height: 132px;
+  display: block;
+  font-size: 10px;
+  fill: var(--muted);
+  touch-action: none;
+}
+.radar-profile-legend {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+.radar-profile-legend span:first-child { color: #64776e; }
+.radar-profile-legend span:last-child { color: #1c6875; }
+.science-scope {
+  color: var(--muted);
+  margin-top: 5px;
+}
+.science-scope a { white-space: nowrap; }
+.pixel-panel .backscatter-values { margin-top: 12px; }
+@media (max-width: 1200px) {
+  .science-analysis-grid { gap: 16px; grid-template-columns: minmax(250px, .8fr) minmax(260px, 1fr); }
+  .science-heading { gap: 8px; }
+  .science-heading .nisar-display-buttons button { padding: 4px; }
+}
+@media (max-width: 700px) {
+  .science-analysis-grid { grid-template-columns: 1fr; gap: 12px; }
+  .science-heading { align-items: start; flex-direction: column; }
 }
 .nisar-difference-ramp {
   height: 7px;

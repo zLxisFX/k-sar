@@ -1,0 +1,239 @@
+{
+  "conceptId": "G4408731464-ASF",
+  "acquisitionStart": "2026-11-02T21:30:32.000000Z",
+  "source": {
+    "url": "https://nisar.asf.earthdatacloud.nasa.gov/NISAR/NISAR_L2_GCOV_V1/NISAR_L2_PR_GCOV_034_140_A_009_4005_DHDH_A_20261102T213032_20261102T213106_P05036_N_F_J_001/NISAR_L2_PR_GCOV_034_140_A_009_4005_DHDH_A_20261102T213032_20261102T213106_P05036_N_F_J_001.h5",
+    "granuleUr": "NISAR_L2_PR_GCOV_034_140_A_009_4005_DHDH_A_20261102T213032_20261102T213106_P05036_N_F_J_001",
+    "wholeFileBytes": 5276434432,
+    "providerChecksum": {
+      "Value": "3ad47d3ea9eaaf27263c73662e5036c9",
+      "Algorithm": "MD5"
+    },
+    "wholeFileChecksumLocallyVerified": false,
+    "wholeFileDownloaded": false,
+    "httpRangeBytesRead": 81264640,
+    "httpRangeRequests": 46,
+    "providerHttpDate": "Sun, 15 Nov 2026 07:17:13 GMT",
+    "retrievedAt": "2026-11-15T07:17:13+00:00",
+    "timestampBasis": "NASA HTTPS response Date; workstation clock not used"
+  },
+  "identification": {
+    "productType": "GCOV",
+    "productVersion": "1.0.20",
+    "absoluteOrbitNumber": 6640,
+    "trackNumber": 140,
+    "frameNumber": 9,
+    "zeroDopplerStartTime": "2026-11-02T21:30:32.000000000",
+    "zeroDopplerEndTime": "2026-11-02T21:31:06.999342105",
+    "radarBand": "L",
+    "orbitPassDirection": "Ascending"
+  },
+  "nativeGrid": {
+    "crs": "EPSG:32651",
+    "width": 33840,
+    "height": 33120,
+    "transform": [
+      10.0,
+      0.0,
+      20160.0,
+      0.0,
+      -10.0,
+      1807200.0
+    ],
+    "pixelSizeMeters": [
+      10.0,
+      10.0
+    ],
+    "pixelCoordinateConvention": "center vectors; transform describes outer edges",
+    "projectionAttributes": {
+      "description": "Product map grid projection: EPSG code, with additional projection information as HDF5 Attributes",
+      "ellipsoid": "WGS84",
+      "epsg_code": 32651,
+      "false_easting": 500000.0,
+      "false_northing": 0.0,
+      "grid_mapping_name": "transverse_mercator",
+      "inverse_flattening": 298.257223563,
+      "latitude_of_projection_origin": 0.0,
+      "longitude_of_central_meridian": 123.0,
+      "longitude_of_projection_origin": 0.0,
+      "scale_factor_at_central_meridian": 0.9996,
+      "semi_major_axis": 6378137.0,
+      "spatial_ref": "PROJCS[\"WGS 84 / UTM zone 51N\",GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0,AUTHORITY[\"EPSG\",\"8901\"]],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AUTHORITY[\"EPSG\",\"4326\"]],PROJECTION[\"Transverse_Mercator\"],PARAMETER[\"latitude_of_origin\",0],PARAMETER[\"central_meridian\",123],PARAMETER[\"scale_factor\",0.9996],PARAMETER[\"false_easting\",500000],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH],AUTHORITY[\"EPSG\",\"32651\"]]",
+      "utm_zone_number": 51
+    }
+  },
+  "window": {
+    "columnStart": 25670,
+    "columnEndExclusive": 28184,
+    "rowStart": 17435,
+    "rowEndExclusive": 20345,
+    "width": 2514,
+    "height": 2910,
+    "transform": [
+      10.0,
+      0.0,
+      276860.0,
+      0.0,
+      -10.0,
+      1632850.0
+    ],
+    "targetNativeBounds": [
+      276907.891731595,
+      1603796.247815814,
+      301953.4998083327,
+      1632807.0402678738
+    ],
+    "fullTargetExtentSupported": true
+  },
+  "datasets": {
+    "HHHH": {
+      "path": "/science/LSAR/GCOV/grids/frequencyA/HHHH",
+      "dtype": "float32",
+      "shape": [
+        33120,
+        33840
+      ],
+      "chunks": [
+        512,
+        512
+      ],
+      "storageFillValue": 0.0,
+      "attributes": {
+        "DIMENSION_LIST": [
+          [
+            "HDF5 dimension reference"
+          ],
+          [
+            "HDF5 dimension reference"
+          ]
+        ],
+        "_FillValue": "NaN",
+        "description": "Covariance between HH and HH",
+        "grid_mapping": "projection",
+        "long_name": "Geocoded polarimetric covariance term HHHH",
+        "max_value": 80207.6171875,
+        "mean_value": 0.1313450187444687,
+        "min_value": 4.722362518805312e-06,
+        "sample_stddev": 6.087254047393799,
+        "units": "1",
+        "valid_min": 0.0
+      }
+    },
+    "HVHV": {
+      "path": "/science/LSAR/GCOV/grids/frequencyA/HVHV",
+      "dtype": "float32",
+      "shape": [
+        33120,
+        33840
+      ],
+      "chunks": [
+        512,
+        512
+      ],
+      "storageFillValue": 0.0,
+      "attributes": {
+        "DIMENSION_LIST": [
+          [
+            "HDF5 dimension reference"
+          ],
+          [
+            "HDF5 dimension reference"
+          ]
+        ],
+        "_FillValue": "NaN",
+        "description": "Covariance between HV and HV",
+        "grid_mapping": "projection",
+        "long_name": "Geocoded polarimetric covariance term HVHV",
+        "max_value": 24865.197265625,
+        "mean_value": 0.026626382023096085,
+        "min_value": 5.774666078650625e-07,
+        "sample_stddev": 1.4195263385772705,
+        "units": "1",
+        "valid_min": 0.0
+      }
+    },
+    "mask": {
+      "path": "/science/LSAR/GCOV/grids/frequencyA/mask",
+      "dtype": "uint8",
+      "shape": [
+        33120,
+        33840
+      ],
+      "chunks": [
+        512,
+        512
+      ],
+      "storageFillValue": 0,
+      "attributes": {
+        "DIMENSION_LIST": [
+          [
+            "HDF5 dimension reference"
+          ],
+          [
+            "HDF5 dimension reference"
+          ]
+        ],
+        "_FillValue": 255,
+        "description": "Mask indicating the subswath number associated with valid GCOV samples. A GCOV sample is only considered valid if it is generated from fully-focused radar samples. If at least one radar sample in the averaging set is partially focused or invalid, the corresponding mask pixel will contain the value 0. GCOV pixels outside of the radar acquisition extent are filled with the value 255",
+        "grid_mapping": "projection",
+        "long_name": "Valid samples subswath mask",
+        "valid_min": 0
+      }
+    },
+    "inputDataExceptionMask": {
+      "path": "/science/LSAR/GCOV/grids/frequencyA/inputDataExceptionMask",
+      "dtype": "uint16",
+      "shape": [
+        33120,
+        33840
+      ],
+      "chunks": [
+        512,
+        512
+      ],
+      "storageFillValue": 0,
+      "attributes": {
+        "DIMENSION_LIST": [
+          [
+            "HDF5 dimension reference"
+          ],
+          [
+            "HDF5 dimension reference"
+          ]
+        ],
+        "_FillValue": 65535,
+        "description": "Bitwise OR of input data exception codes for each image pixel (0: no anomaly, 2: NISAR LSAR qFSP-H1 sample slip). Also includes OR of validity mask bits, where each bit is set on for fully-focused data or off for partially focused or missing data (256:HH, 512:HV, 1024:VH, 2048:VV, 4096:LH, 8192:LV, 16384:RH, 32768:RV)",
+        "grid_mapping": "projection",
+        "raw_valid_pulse_fraction_hh": 1.0,
+        "raw_valid_pulse_fraction_hv": 1.0,
+        "rslc_valid_pixel_fraction_hh": 0.9707221579100553,
+        "rslc_valid_pixel_fraction_hv": 0.9707221579100553,
+        "valid_min": 0
+      }
+    }
+  },
+  "qualityCounts": {
+    "HH": {
+      "nativeWindowPixels": 7315740,
+      "nativeValidPixels": 7315730,
+      "subswathInvalidOrOutside": 10,
+      "inputExceptionOrFill": 0,
+      "polarizationValidityBitMissing": 0,
+      "nonpositiveOrNonfinitePower": 10,
+      "targetValidPixels": 852287,
+      "targetExcludedPixels": 5,
+      "reasonCountsOverlap": true
+    },
+    "HV": {
+      "nativeWindowPixels": 7315740,
+      "nativeValidPixels": 7315730,
+      "subswathInvalidOrOutside": 10,
+      "inputExceptionOrFill": 0,
+      "polarizationValidityBitMissing": 0,
+      "nonpositiveOrNonfinitePower": 10,
+      "targetValidPixels": 852287,
+      "targetExcludedPixels": 5,
+      "reasonCountsOverlap": true
+    }
+  }
+}

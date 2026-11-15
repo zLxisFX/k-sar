@@ -95,6 +95,16 @@ test("all independent map-layer and profile visibility combinations survive expo
   }
 });
 
+test("calibrated NISAR channel and display selection survive session export", () => {
+  for (const nisarPolarization of ["HH", "HV"] as const) {
+    for (const nisarDisplay of ["pair", "difference"] as const) {
+      const view = { ...state.view, radarSource: "nisar-science" as const, nisarPolarization, nisarDisplay };
+      assert.deepEqual(JSON.parse(serializeSession({ ...state, view }, timestamp)).view, view);
+    }
+  }
+  assert.throws(() => serializeSession({ ...state, view: { ...state.view, nisarPolarization: "VV" as "HH" } }, timestamp), /polarization/);
+});
+
 test("missing or malformed preview and layer settings cannot produce an incomplete session", () => {
   for (const key of ["radar", "roadNetwork", "crossSection"] as const) {
     for (const invalid of ["false", 0, 1, null, undefined]) {

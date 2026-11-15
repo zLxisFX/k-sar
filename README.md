@@ -2,13 +2,13 @@
 
 A map workspace for radar comparison, surface-elevation scenarios and hospital-path calculations in the Marikina–Pasig basin, Philippines. Built for the 2026 NASA Space Apps Challenge (*Dancing with the SARs*).
 
-[Open the workspace](https://k-sar.vercel.app) · [Source code](https://github.com/zLxisFX/k-sar) · [Seven-slide presentation](https://k-sar.vercel.app/Project_K-SAR_2026_Final.pdf)
+[Open the workspace](https://k-sar.vercel.app) · [Source code](https://github.com/zLxisFX/k-sar) · [Seven-slide presentation](https://k-sar.vercel.app/Project_K-SAR_2026_Deck.pdf)
 
 At an assumed **11.6 m EGM2008 water surface**, the Tumana-to-Amang network path is **27.876 km** with the original DSM. Lowering that surface model uniformly by **0.390 m** changes the result to **no path to the selected hospital anchor**. K-SAR lets you reproduce that comparison, inspect the additional excluded roads and trace the calculation to its source files.
 
-The workspace combines quantitative Sentinel-1 radar samples, a Copernicus DSM, an OpenStreetMap directed graph and two NASA–ISRO NISAR browse observations. Radar observations, rendered browse comparisons and parameterized surface scenarios have separate units and processing records.
+The workspace combines Sentinel-1 C-band radar, calibrated NASA–ISRO NISAR L-band observations, a Copernicus DSM and an OpenStreetMap directed graph. The 2024 and 2026 radar pairs retain their own dates, polarizations and processing records. The routing model uses an assumed water surface and lowering scenario; radar change does not supply its water depth.
 
-![K-SAR map workspace with radar curtain, route and surface controls, and Marikina River profile.](docs/workstation.png)
+![K-SAR calibrated NISAR workspace with radar curtain, pixel values and within-pair change distribution.](docs/workstation.png)
 
 ## Reproduce the routing comparison
 
@@ -35,15 +35,13 @@ The 10 m scenario has 55,136 depth-closed directed edges without lowering and 56
 
 ### Exact threshold in this graph
 
-An independent directed breadth-first search finds a maximum connected cutoff of **11.612146377563477 m DSM elevation**. Under the strict depth rule, the original surface remains connected through a water level of **11.912146377563477 m**; with 0.390 m lowering it remains connected through **11.522146377563477 m**. The same-water contrast interval is **(11.522146377563477, 11.912146377563477] m**, approximately 11.522–11.912 m.
-
-These digits reproduce the stored samples and floating-point calculation; they are not physical elevation precision. The [threshold analysis](data/network/routing-threshold.json) records the separating directed edge, full geometry, graph hashes and 301 comparisons at 0.05 m steps. It verifies connected and disconnected results at adjacent representable water values. At the threshold, the selected-pair cut crosses an E. Rodriguez Highway edge between OSM nodes 596838287 and 596838267.
+Independent directed breadth-first search places the model’s last-connected water levels at approximately **11.91 m without lowering** and **11.52 m with 0.390 m lowering**. The stored analysis preserves the exact floating-point boundaries and strict-closure equality behavior. These thresholds describe the sampled DSM graph, not surveyed elevation accuracy. The [threshold analysis](data/network/routing-threshold.json) records the separating directed edge, full geometry, graph hashes and 301 comparisons at 0.05 m steps. It verifies connected and disconnected results at adjacent representable water values. The selected graph cut crosses **E. Rodriguez Highway directed edge 84300**, from OSM node 596838287 to 596838267. Its sampled minimum DSM value is **11.612146 m**. This is a reproducible raster/graph calculation, not surveyed road-deck precision or a verified physical choke point.
 
 These calculations screen graph connectivity using an assumed water surface and a DSM. They do not establish observed flooding, road passability, hospital operation or isolation from every hospital.
 
 ## Run locally
 
-Use Node.js 26.x and npm for the application. Data checks and NISAR comparison regeneration also use Python 3.11 or later, NumPy and Pillow. The npm lockfile pins package versions.
+Use Node.js 26.x and npm for the application. Data checks use Python 3.12 or later. The science extractor uses NumPy, h5py, remfile, requests, rasterio and pyproj. `python scripts/extract-nisar-science.py` regenerates science derivatives from the retained native cache; uncached extraction requires an external Earthdata credential file. Credentials and the native cache stay outside the repository. The separate browse-comparison generator uses NumPy and Pillow. The npm lockfile pins package versions.
 
 ```sh
 npm ci
@@ -53,7 +51,7 @@ npm run dev
 Open <http://127.0.0.1:3000>. To check and build:
 
 ```sh
-python -m pip install numpy Pillow
+python -m pip install -r scripts/requirements-nisar-science.txt
 npm run typecheck
 npm test
 npm run build
@@ -69,34 +67,40 @@ The servers bind to loopback by default. The committed data supports local calcu
 | Sentinel-1 RTC | Orbit 32, descending, 10 July and 3 August 2024; VV/VH Float32 TIFFs | Radar comparison and coordinate samples |
 | Copernicus GLO-30 | DSM aligned to the radar grid; elevations in m EGM2008 | Surface profile and scenario screening |
 | OpenStreetMap | 62,446 nodes, 155,830 directed edges, 215 hospital-tagged features and contextual waterways | Graph search and map context |
-| NASA–ISRO NISAR | L2 GCOV catalog records, original browse PNGs, provider KML bounds and footprints for 21 October and 2 November 2026 | Aligned browse comparison, display-code differences and provenance |
+| NASA–ISRO NISAR | L2 GCOV HDF5 HH/HV power subsets for 21 October and 2 November 2026; original browse/metadata retained separately | Calibrated within-pair change, coordinate/profile inspection and provenance  |
 
 The Sentinel-1 TIFFs contain gamma-naught values already converted to dB on an aligned **854 × 998** grid. Each band has **852,292 finite pixels**. Grid spacing is 30 projected metres in EPSG:3857. At the Tumana reference coordinate (`121.095940° E, 14.658016° N`), VV shifts from `−9.41 dB` on 10 July to `−7.05 dB` on 3 August (`+2.36 dB`). The acquisitions are 24 days apart and do not capture the July 2024 flood peak; backscatter change is not water depth.
 
-The NISAR pair shares ascending track 140 and frame 009, twelve days apart. Original browse files are checked against provider PNG checksums. These October–November 2026 observations do not depict the July 2024 Carina event. Quantitative GCOV HDF5 pixels have not been downloaded or analyzed.
+The NISAR pair shares ascending track 140 and frame 009, twelve days apart. Its October–November 2026 observations are separate from the July 2024 Carina context. The calibrated methods and source identities are documented below; the original browse files remain unchanged.
 
 ### Why C-band and L-band
 
-Sentinel-1 uses **C-band, approximately 5.6 cm wavelength**; NISAR L-SAR uses **L-band, approximately 24 cm**. Longer-wavelength radar generally penetrates farther into vegetation, although canopy density and target geometry affect the response. This motivates testing NISAR for surface change beneath vegetation alongside the Sentinel-1 observations. It does not establish a universal flood threshold or make the two sensors' backscatter directly interchangeable. K-SAR compares quantitative Sentinel-1 values and rendered NISAR browse codes; it has not measured an L-band flood response. Sources: [ESA Sentinel-1 tutorial](https://step.esa.int/docs/tutorials/S1TBX%20Landcover%20classification%20with%20Sentinel-1%20GRD.pdf), [NASA NISAR fact sheet](https://www.earthdata.nasa.gov/s3fs-public/2025-01/HR_NA_NISAR_Nov2024.pdf), [NASA SAR Handbook, chapter 2](https://earthdata.nasa.gov/s3fs-public/2025-04/SARHB_CH2_Content.pdf).
+Sentinel-1 uses **C-band, approximately 5.6 cm wavelength**; NISAR L-SAR uses **L-band, approximately 24 cm**. Longer-wavelength radar generally penetrates farther into vegetation, although canopy density and target geometry affect the response. This motivates testing NISAR for surface change beneath vegetation alongside the Sentinel-1 observations. It does not establish a universal flood threshold or make the two sensors' backscatter directly interchangeable. K-SAR compares each sensor within its own date pair. It does not treat different wavelengths, polarizations or years as interchangeable measurements, and no flood response has been independently classified for the NISAR pair. Sources: [ESA Sentinel-1 tutorial](https://step.esa.int/docs/tutorials/S1TBX%20Landcover%20classification%20with%20Sentinel-1%20GRD.pdf), [NASA NISAR fact sheet](https://www.earthdata.nasa.gov/s3fs-public/2025-01/HR_NA_NISAR_Nov2024.pdf), [NASA SAR Handbook, chapter 2](https://earthdata.nasa.gov/s3fs-public/2025-04/SARHB_CH2_Content.pdf).
 
 The [raster manifest](data/sentinel-1/manifest.json), [network manifest](data/network/manifest.json), [transect reference](data/transect/reference.json) and [NISAR documentation](data/nasa/nisar/README.md) retain file hashes and source details. The 59-point transect spans 1.724 km on the WGS84 ellipsoid.
 
-### NISAR browse comparison
+### Calibrated NISAR comparison
 
-The provider's linked KML files place both 1,990 × 1,960 browse images on the same geographic grid, despite their different catalog footprints. Nearest-neighbor sampling maps them to a **62 × 145 grid at 200 projected metres in EPSG:3857**. The output adds no spatial detail to the roughly 170 m provider browse samples.
+The NASA–ISRO NISAR pair covers **21 October and 2 November 2026**, ascending track **140**, frame **009**. The quantitative layers come from the actual L2 GCOV HDF5 **HHHH** and **HVHV** diagonal covariance datasets, representing HH and HV gamma-naught power. The retained science manifest records the source granules, metadata attributes, extraction bounds, processing choices and output hashes. The source metadata reports GCOV product version 1.0.20. Authenticated HTTP-range reads extracted the required native windows; the complete HDF5 files were not downloaded. Provider whole-file MD5 values remain metadata and were not locally verified. Retained output SHA-256 values identify the actual published subsets and derivatives.
 
-The common mask retains **8,784 of 8,990 cells**: each sampled location has nonzero R, G and B values and opaque transparency in both images, and its center falls within both catalog footprints and the study bounds. This is a browse-coverage mask, not the GCOV science-quality mask.
+The analysis uses **854 × 998 cells in EPSG:3857 at 30 projected metres** with **852,283 of 852,292** common valid cells. A source sample must have subswath mask 1–5, zero low-eight exception bits, a non-fill exception mask, its polarization-validity bit (HH 256 or HV 512), and positive finite power. The target cell requires complete valid contributing support within the documented numerical tolerance. Nine target cells are excluded from the common comparison. No additional noise-floor subtraction or layover/shadow classification is applied. Missing or invalid samples remain missing. The source products have identical 10 m EPSG:32651 grids. GDAL area-weighted resampling maps their actual power samples onto the existing Sentinel-1 output grid; independent ground-control accuracy is not established.
 
-The difference layer subtracts the earlier rounded weighted RGB display code from the later code:
+Where the output aggregates source samples, it averages valid **linear power before conversion to dB**. Per-channel change is:
 
 ```text
-display_code = floor((2126R + 7152G + 722B + 5000) / 10000)
-difference_DN = display_code_2026-11-02 − display_code_2026-10-21
+gamma0_dB = 10 × log10(gamma0_power)
+delta_dB = gamma0_dB_2026-11-02 − gamma0_dB_2026-10-21
 ```
 
-Across the common cells, the difference ranges from **−44 to +37 DN**, with a median of **0 DN** and mean absolute difference of **1.3784 DN**. These are rendered display codes, not gamma-naught, dB or a flood measurement. The provider renderer normalizes images after display processing; the actual products' stretch parameters have not been verified. A zero-shift texture-correlation check is recorded as a diagnostic, not independent positional validation.
+Across **852,283 common valid cells per polarization**, mean/median change is **+0.024/+0.022 dB for HH** and **-0.028/-0.019 dB for HV**. The HH 5th–95th percentile range is -1.796 to +1.863 dB; HV is -1.807 to +1.718 dB. The retained histograms cover all common cells, including the more extreme tails. These summaries do not establish physical stability or a cause of change.
 
-The [comparison manifest](data/nasa/nisar/comparison/manifest.json) records grid bounds, source KML hashes, the mask, signed differences, distributions, processing references and limitations. The original PNGs and metadata remain unchanged.
+At the Tumana reference coordinate, HH changes from **-7.04 to -8.16 dB** (-1.12 dB), and HV from **-17.44 to -18.59 dB** (-1.15 dB). These are the 2026 pair's sampled values, separate from the 2024 Sentinel-1 VV values.
+
+The map offers the same-date-pair curtain and signed HH or HV change. The browser profile reads all 59 coordinates from the actual rasters: Sentinel-1 VV and VH on both 2024 dates, NISAR HH and HV on both 2026 dates, and the DSM in metres EGM2008. Radar values remain gamma-naught dB. Dataset-specific validity is retained. The separate common-mask statistics cover 852,283 cells where all eight radar bands are valid. The C-band and L-band curves are **independent observations from different periods**. Their absolute levels must not be subtracted as a same-event sensor comparison.
+
+These values quantify backscatter change. They do not, by themselves, classify flooding, prove a ground–trunk scattering mechanism, measure displacement or show that a surface stayed physically unchanged. Geometry, speckle, moisture and vegetation can affect radar returns. No independent flood labels or field measurements are supplied for the 2026 pair.
+
+The [science manifest](data/nasa/nisar/science/manifest.json) is the quantitative record. The unchanged provider browse PNGs, KML overlays and [earlier display-code comparison](data/nasa/nisar/comparison/manifest.json) remain available as a separately labeled visualization reference. Browse display codes are not used as calibrated radar values.
 
 ## Calculations
 
@@ -149,6 +153,7 @@ node scripts/analyze-routing-threshold.ts
 node scripts/analyze-routing-threshold.ts --check
 python scripts/import-nisar.py --verify
 python scripts/build-nisar-comparison.py
+python scripts/extract-nisar-science.py
 npm run benchmark:routing
 ```
 
@@ -177,7 +182,7 @@ The repository began on 14 November 2026 and reuses Sentinel-1, DSM, transect an
 
 OpenAI Codex generated and revised substantial application code, processing scripts, tests, documentation and presentation material, and operated development and deployment tools. Google Gemini contributed architectural, scientific and visual suggestions. Provider observations retain their attribution; the assistance does not imply synthetic satellite data or completed independent scientific review.
 
-The [Dancing with the SARs challenge](https://www.spaceappschallenge.org/2026/challenges/dancing-with-the-sars/) motivates the NISAR inspection workflow. Quantitative NISAR change analysis and field comparison are further work.
+The [Dancing with the SARs challenge](https://www.spaceappschallenge.org/2026/challenges/dancing-with-the-sars/) motivates the NISAR inspection workflow. The calibrated NISAR comparison quantifies within-pair backscatter change. Independent interpretation and field comparison remain further work.
 
 Original software is licensed under [Apache License 2.0](LICENSE). Third-party data and dependencies retain their own licenses.
 
@@ -209,7 +214,7 @@ These are 17 file identities, not 17 independent scientific datasets. They inclu
 
 ### Derived analysis identities
 
-The session also identifies the two provider KML files and six derived NISAR comparison files below. The [comparison manifest](data/nasa/nisar/comparison/manifest.json) describes their relationship to the unchanged original sources. The [routing-threshold result](data/network/routing-threshold.json) is a separate deterministic graph analysis; reproduce it with `node scripts/analyze-routing-threshold.ts --check`.
+The session retains the earlier browse comparison identities and adds the calibrated science outputs. The verified application export contains **41 file identities**: 17 original sources, 8 prior browse-comparison records, 14 calibrated-science files including their manifest, the top-level NISAR manifest and the routing-threshold record. The earlier comparison files are listed below. The [comparison manifest](data/nasa/nisar/comparison/manifest.json) describes their relationship to the unchanged original sources. The [routing-threshold result](data/network/routing-threshold.json) is a separate deterministic graph analysis; reproduce it with `node scripts/analyze-routing-threshold.ts --check`.
 
 | File | Bytes | SHA-256 |
 |---|---:|---|
@@ -220,5 +225,25 @@ The session also identifies the two provider KML files and six derived NISAR com
 | `nasa/nisar/comparison/common-mask.png` | 117 | `31535cbf122f6da3a52d8a97ea8865b13b985b2436bad05a11c21797df42353a` |
 | `nasa/nisar/comparison/difference.png` | 8,979 | `050e6d013b135ff8be1b3771509d7388106f1ba0e7d1e0366d04c60251de4d6e` |
 | `nasa/nisar/comparison/difference.i16` | 17,980 | `2d20ccd38f640625eb2297dcb5c2668c63f006d38a0c300a1aef2d013da5650d` |
-| `nasa/nisar/comparison/manifest.json` | 49,764 | `73975e1fd216e297e76ce843740c7d5531a8f29de3537906ba5023d99865d3a1` |
+| `nasa/nisar/comparison/manifest.json` | 49,765 | `b9063807a55f4ff247a25d5d4097d6e8f8b4194503fc2d384dfdf60d9f5bc43d` |
 | `network/routing-threshold.json` | 236,822 | `f107f93170da5b14d7a64d583b134141a358762e9d61e6ecdf34a26af91fec92` |
+
+### Calibrated science identities
+
+| File | Bytes | SHA-256 |
+|---|---:|---|
+| `nasa/nisar/science/2026-10-21-linear.tif` | 5,711,590 | `a24bb67c1b5a40f4690c86d36ca8b81ccb96c25bbc5a54989ca74cc1de041c27` |
+| `nasa/nisar/science/2026-10-21-db.tif` | 5,743,874 | `f828af5b021bec0938a97a44f03a79c6159da7be3bc11c5c40c00e477843f20a` |
+| `nasa/nisar/science/2026-10-21-valid.tif` | 10,598 | `d0717d189320882c14a88e3393e27c6ad9de580800342fed4e7049656f0c7026` |
+| `nasa/nisar/science/2026-10-21-metadata.json` | 8,148 | `47a0f7a890017705c8f7eb362e9984be8f177e7d30acd34ee224657f8d8e45df` |
+| `nasa/nisar/science/2026-11-02-linear.tif` | 5,713,454 | `3d51d0087e5f24fecadee4e8f604a6485bb65af795353fb07f90115bad02de55` |
+| `nasa/nisar/science/2026-11-02-db.tif` | 5,747,944 | `39191ec2967c2c18193aed48f281f2d95bef3c4cf19c649e0d38bc65c9a34e18` |
+| `nasa/nisar/science/2026-11-02-valid.tif` | 10,552 | `156241905a8d088f6bf45ea3a57466d7d572e6b224ddac3b272441fe4dbbb58b` |
+| `nasa/nisar/science/2026-11-02-metadata.json` | 8,149 | `b2a0e6230c4915d193130a6d00339dc0eaf71c36b79fe05907683fba54dfe3e8` |
+| `nasa/nisar/science/change-db.tif` | 6,173,172 | `9ec5811e33c43237ee9c52880d22b35fab0d5835652852dc3c5c90342a69a558` |
+| `nasa/nisar/science/common-valid.tif` | 10,626 | `4ca5dc3f0bf696a29d27b04aa11dfeef56f5e33a70ffb3698dd85151826c7d0a` |
+| `nasa/nisar/science/transect.json` | 54,618 | `d2559d1d154319a78f9d6e22f8d5c44115f5de7c227796b1304324dae82a2a27` |
+| `nasa/nisar/science/multi-frequency.json` | 46,352 | `ac15975345287bd86d2376c0a16a0b782faca9ab9027a2b63bc239d17647bee6` |
+| `nasa/nisar/science/multi-frequency-valid.tif` | 6,474 | `2cb1fc8f1d8279389f1b503db0ba7d913b0b72d96b354ddf9106b4fec0c17315` |
+| `nasa/nisar/science/manifest.json` | 42,140 | `048e0c06384df025ed1a9b7618375c649d2ab9e36d235c3c81ccc87c351376d5` |
+| `nasa/nisar/manifest.json` | 10,073 | `bd608fb215760f911f395465b0e2db4e73bf0cada7afae80dccf019419892e6e` |

@@ -337,10 +337,22 @@ def import_bundle(output: Path) -> dict:
 
 def verify_bundle(output: Path) -> dict:
     manifest = json.loads((output / "manifest.json").read_bytes())
-    require(manifest["scope"] == "catalog-and-browse-reference", "Incorrect evidence scope")
-    require(manifest["scienceRasterDownloaded"] is False and manifest["quantitativeAnalysisPerformed"] is False,
-            "Reference bundle must not claim science-pixel analysis")
-    require(manifest["coRegistered"] is False, "Browse images must not claim pixel co-registration")
+    if manifest["scope"] == "calibrated-science-subsets-and-browse-reference":
+        require(manifest["scienceRasterDownloaded"] is True and manifest["quantitativeAnalysisPerformed"] is True,
+                "Science subset evidence flags differ")
+        science_file = manifest["science"]
+        science_path = (output / science_file["path"]).resolve()
+        require(science_path.is_relative_to(output.resolve()), "Science manifest path escapes output directory")
+        science_bytes = science_path.read_bytes()
+        require(len(science_bytes) == science_file["bytes"] and sha256(science_bytes) == science_file["sha256"],
+                "Science manifest integrity failed")
+        require(manifest["wholeScienceFilesDownloaded"] is False and science_file["wholeFileChecksumsLocallyVerified"] is False,
+                "Partial extraction must not claim complete HDF5 verification")
+    else:
+        require(manifest["scope"] == "catalog-and-browse-reference", "Incorrect evidence scope")
+        require(manifest["scienceRasterDownloaded"] is False and manifest["quantitativeAnalysisPerformed"] is False,
+                "Reference bundle must not claim science-pixel analysis")
+    require(manifest["coRegistered"] is False, "Independent registration accuracy must not be asserted")
     require(manifest["discoveryBounds"] == DISCOVERY_BOUNDS, "Unexpected study AOI")
     collection_record = manifest["collection"]["metadata"]
     require(collection_record["path"] == f"raw/{COLLECTION_ID}.umm.json", "Unexpected collection file path")
@@ -389,7 +401,8 @@ def verify_bundle(output: Path) -> dict:
                 and feature["properties"]["acquisitionStart"] == record["acquisitionStart"], "Footprint provenance differs")
     require([f["geometry"] for f in features] == expected_features, "Footprints differ from raw CMR coordinates")
     return {"status": "verified", "records": len(normalized), "intervalDays": manifest["intervalDays"],
-            "providerPngMd5Verified": True, "sha256Verified": True, "quantitativeAnalysisPerformed": False}
+            "providerPngMd5Verified": True, "sha256Verified": True,
+            "verificationScope": "Retained catalog, browse and linked science manifest identities; science array validation is separate"}
 
 
 def main() -> None:

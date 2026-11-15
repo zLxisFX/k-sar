@@ -130,11 +130,10 @@ export default function NisarReference({
       </div>
       <p className="evidence-note">
         The original provider images below retain their full scene extents.
-        Select NISAR L-band in the main map to swipe their aligned common-area
-        subset and inspect RGB display changes. Alignment uses the provider KML
-        geometry and both catalog footprints. Display brightness is not
-        calibrated backscatter. These 2026 acquisitions do not observe the July
-        2024 Carina event.
+        Select NISAR γ⁰ in the main map for calibrated HH/HV science rasters,
+        or NISAR browse context for the provider-rendered regional comparison.
+        Browse brightness is separate from the HDF5 gamma-naught measurements.
+        These 2026 acquisitions do not observe the July 2024 Carina event.
       </p>
       <div className="source-links">
         <span>NASA JPL / NASA ASF DAAC · provider-rendered GCOV browse</span>

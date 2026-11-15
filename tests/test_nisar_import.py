@@ -86,12 +86,15 @@ class NisarReferenceTests(unittest.TestCase):
         for path in DATA.rglob("*.json"):
             self.assertIsNone(credential.search(path.read_text(encoding="utf-8")), str(path))
 
-    def test_differing_footprints_and_metadata_only_scope_are_explicit(self):
+    def test_differing_footprints_and_science_subset_scope_are_explicit(self):
         geometries = json.loads((DATA / "footprints.geojson").read_bytes())["features"]
         self.assertNotEqual(geometries[0]["geometry"], geometries[1]["geometry"])
         self.assertFalse(self.manifest["coRegistered"])
-        self.assertFalse(self.manifest["scienceRasterDownloaded"])
-        self.assertFalse(self.manifest["quantitativeAnalysisPerformed"])
+        self.assertTrue(self.manifest["scienceRasterDownloaded"])
+        self.assertTrue(self.manifest["quantitativeAnalysisPerformed"])
+        self.assertFalse(self.manifest["wholeScienceFilesDownloaded"])
+        self.assertFalse(self.manifest["science"]["wholeFileChecksumsLocallyVerified"])
+        self.assertEqual(self.manifest["science"]["path"], "science/manifest.json")
 
     def test_server_and_skewed_host_clocks_remain_distinguishable(self):
         for record in self.manifest["records"]:

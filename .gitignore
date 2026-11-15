@@ -16,3 +16,7 @@ __pycache__/
 /public/data/
 
 .vercel
+.netrc
+_netrc
+earthdata-token.txt
+*earthdata*credentials*
